@@ -1,0 +1,12 @@
+{
+  "hash": "64738622cb05f2d5fe853d8d642e3dd5",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"test\"\nauthor: \"Eileen Murphy\"\nformat: html\ndate: \"2025-01-03\"\ncategories: [news, code, analysis]\n---\n\n\n## Quarto\n\nThis is so cool.\n\nNeed to install python environment here...geez\n\nhw\n\nQuarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.\n\n## Running Code\n\nWhen you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n::: {#7ecb9819 .cell execution_count=1}\n``` {.python .cell-code}\n1 + 1\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n2\n```\n:::\n:::\n\n\nYou can add options to executable code like this\n\n::: {#b22ffe33 .cell execution_count=2}\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n4\n```\n:::\n:::\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

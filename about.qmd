@@ -1,0 +1,31 @@
+---
+title: "Eileen P. Murphy"
+subtitle: "Practical Data Scientist | LLMs | AI Explorer"
+image: "godata_look.jpg"
+about:
+  template: trestles
+  links:
+    - text: "Bluesky![](bluesky-icon.png){height=1.5em}"
+      href: https://bsky.app/profile/godata.bsky.social/
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/eileen-p-m-1948464/
+    - icon: github
+      text: Github
+      href: https://github.com/murphy99/
+    - text: "![](hf-logo.png){height=1.4em}"
+      href: https://huggingface.co/GoData/
+---
+
+## About the Blog ##
+
+This blog centers on the exploration of data discovery and practical data science for implementing the use of machine learning, dashboards, LLMs, LLM Apps  by using existing open source tools such as but not limited to R, Python, DuckDB, SQLite, MongoDB, Hadoop, and Spark. 
+
+GoData.ca mission is to explore and replicate already available research and implement actual use cases for implementation.
+
+Eileen Murphy is the owner and contributor to GoData.ca blog.
+
+
+
+
+

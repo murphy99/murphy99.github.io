@@ -1,0 +1,26 @@
+# options specified here will apply to all posts in this folder
+
+# freeze computational output
+freeze: true
+
+# Enable banner style title blocks
+title-block-banner: false
+
+author: 'Eileen Murphy'
+
+# Table of content settings
+#toc: true
+#toc-depth: 3
+
+page-layout: article
+
+#format:
+#  html:
+#    include-after-body: ../Footer.html
+
+#comments: 
+  #utterances: 
+    #repo:  AlbertRapp/blogComments 
+
+  
+  

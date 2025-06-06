@@ -1,0 +1,18 @@
+Version: 1.0
+ProjectId: 294f1aa2-ef8d-4b93-b891-a06a94d606ae
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: XeLaTeX
+
+PythonType: virtualenv
+PythonVersion: 3.12.6
+PythonPath: ~/.virtualenvs/godata/bin/python

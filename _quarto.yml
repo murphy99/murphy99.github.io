@@ -1,0 +1,41 @@
+project:
+  type: website
+
+
+website:
+  page-footer:
+    center:
+      - text: "About"
+        href: about.qmd
+      - text: "Feedback"
+        href: license.qmd
+      - text: "Coffee"
+        href: trademark.qmd
+  title: "GoData.ca"
+  site-url: Godata.ca
+  #description: "GoData Blog"
+  navbar:
+    logo: "avatar-chien01-clipart-md.png"
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/murphy99
+      #- icon: bluesky
+      #  href: https://bsky.app/profile/godata.bsky.social
+      - icon: huggingface
+        href: https://godata-fables-beta.hf.space/
+      - icon: rss
+        href: index.xml
+    
+format:
+  html:
+    theme: flatly
+    footer: dark
+    css: styles.css
+    
+#filters:
+  #- shinylive
+
+editor: visual
+
+

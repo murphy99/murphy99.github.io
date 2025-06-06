@@ -1,0 +1,16 @@
+{
+  "hash": "95d805eed79f087384f922eaa9ad25d4",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"test\"\nformat: html\njupyter: python3\nfilters:\n  - gradio\n---\n\n::: {#8c18c42b .cell execution_count=1}\n``` {.python .cell-code}\nimport gradio as gr\n\ndef greet(name):\n    return f\"Hello {name}!\"\n\n\ndemo = gr.Interface(\n    fn=greet,\n    inputs=\"textbox\",\n    outputs=\"textbox\",\n    live=True\n)\n\ndemo.launch()\n\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n* Running on local URL:  http://127.0.0.1:7861\n* To create a public link, set `share=True` in `launch()`.\n```\n:::\n\n::: {.cell-output .cell-output-display}\n```{=html}\n<div><iframe src=\"http://127.0.0.1:7861/\" width=\"100%\" height=\"500\" allow=\"autoplay; camera; microphone; clipboard-read; clipboard-write;\" frameborder=\"0\" allowfullscreen></iframe></div>\n```\n:::\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n\n```\n:::\n:::\n\n\n::: {#57d82ed3 .cell execution_count=2}\n``` {.python .cell-code}\nimport gradio as gr\ndef greet(query):\n    \n    query_engine = index.as_query_engine()\n    response = query_engine.query(query)\n    strresponse = str(response)\n    return(f\"{response}\")\n    \n# Uncomment the lines below to run locally\n\ndemo2=gr.Interface(fn=greet, \ninputs=\"text\", \noutputs=\"text\", \nlive=True)\n\ndemo2.launch()\n\n#demo = gr.Interface(fn=greet, inputs=\"text\", outputs=\"text\")\n#demo.launch(share=True)   \n```\n\n::: {.cell-output .cell-output-stdout}\n```\n* Running on local URL:  http://127.0.0.1:7862\n* To create a public link, set `share=True` in `launch()`.\n```\n:::\n\n::: {.cell-output .cell-output-display}\n```{=html}\n<div><iframe src=\"http://127.0.0.1:7862/\" width=\"100%\" height=\"500\" allow=\"autoplay; camera; microphone; clipboard-read; clipboard-write;\" frameborder=\"0\" allowfullscreen></iframe></div>\n```\n:::\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\n\n```\n:::\n:::\n\n\nThe `echo: false` option disables the printing of code (only output is displayed).\n\n",
+    "supporting": [
+      "test_files"
+    ],
+    "filters": [],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js\" integrity=\"sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==\" crossorigin=\"anonymous\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js\" integrity=\"sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==\" crossorigin=\"anonymous\" data-relocate-top=\"true\"></script>\n<script type=\"application/javascript\">define('jquery', [],function() {return window.jQuery;})</script>\n"
+      ]
+    }
+  }
+}
