@@ -1,3 +1,12 @@
 /.quarto/
 .Rproj.user
 *.Rhistory
+posts/LLM_Demo/secrets
+.Renviron
+.Renviron0
+_extensions/
+venv/
+posts/LLM_Demo/venv
+id_rsa
+id_rsa.pub
+
