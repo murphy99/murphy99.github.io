@@ -1,0 +1,9 @@
+/* css styles */
+.quarto-title-block .quarto-header {
+  background-image: url(avatar-chien01-clipart-md.png);
+  background-size: 300px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 10px;
+  background-origin: content-box;
+}

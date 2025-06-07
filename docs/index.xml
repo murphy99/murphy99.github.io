@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>GoData.ca</title>
+<link>Godata.ca/</link>
+<atom:link href="Godata.ca/index.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.6.39</generator>
+<lastBuildDate>Tue, 03 Jun 2025 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Easily Build Private Small LLMs</title>
+  <dc:creator>Eileen Murphy</dc:creator>
+  <link>Godata.ca/posts/LLM_Demo/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Private LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who are always on deadliine, can respond quickly to new regulations or court hearing decisions speeding up the time to digest the new material and be the first to respond without risk of exposing their material to the world.</p>
+<p>Deployed on Hugging Face the Private LLM contains documents of publicly available Fables from around the world. With a simple interface, you can query about Aesop or Grimms Fairy tales. Query fables that exists in other parts of the world. Of course this is a demo and the documents are public, but if you clone the LLM demo, then run it locally - you will have your own localized LLM. This LLM is ideal if you want to combine copyrighted material that the larger LLMs may not have been trained on. You may have clients that are risk adverse about having any propietary documents even on a secured server. It’s also great as a demo if you would like to show what LLMs can do, and most importantly what their limitations are.</p>
+<p>So, lets get started:</p>
+<p>Setting up reticulate</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(reticulate, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">quietly =</span> T)</span>
+<span id="cb1-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#suppressPackageStartupMessages(library("reticulate"))</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">options</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">reticulate.repl.quiet =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#use_virtualenv("r-reticulate")</span></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#use_python("/usr/local/bin/python3")</span></span></code></pre></div>
+</div>
+<p>Going to try using pyenv go_llm</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#library(reticulate)</span></span>
+<span id="cb2-2">reticulate<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">py_config</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>python:         /Users/Eileen/.virtualenvs/godata/bin/python
+libpython:      /Users/Eileen/.pyenv/versions/3.12.6/lib/libpython3.12.dylib
+pythonhome:     /Users/Eileen/.virtualenvs/godata:/Users/Eileen/.virtualenvs/godata
+virtualenv:     /Users/Eileen/.virtualenvs/godata/bin/activate_this.py
+version:        3.12.6 (main, Sep 26 2024, 09:29:53) [Clang 15.0.0 (clang-1500.3.9.4)]
+numpy:          /Users/Eileen/.virtualenvs/godata/lib/python3.12/site-packages/numpy
+numpy_version:  2.2.2
+
+NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
+</div>
+</div>
+<p>Python packages required</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"></span>
+<span id="cb4-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Install core components</span></span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install llama-index-core </span></span>
+<span id="cb4-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install python-dotenv </span></span>
+<span id="cb4-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install duckdb </span></span>
+<span id="cb4-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install gradio</span></span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Install integrations</span></span>
+<span id="cb4-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install llama-index-llms-openai</span></span>
+<span id="cb4-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install llama-index-embeddings-openai</span></span>
+<span id="cb4-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip3 install llama_index.vector_stores.duckdb</span></span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"></span>
+<span id="cb5-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Install integrations</span></span>
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip install llama-index-llms-openai</span></span>
+<span id="cb5-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip install llama-index-embeddings-openai</span></span>
+<span id="cb5-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#pip install dotenv</span></span>
+<span id="cb5-6"></span>
+<span id="cb5-7"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> duckdb</span>
+<span id="cb5-8"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> dotenv <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> load_dotenv</span>
+<span id="cb5-9"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb5-10"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> openai</span>
+<span id="cb5-11"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.llms.openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAI</span>
+<span id="cb5-12"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.embeddings.openai <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> OpenAIEmbedding</span>
+<span id="cb5-13"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.core <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> VectorStoreIndex, SimpleDirectoryReader</span>
+<span id="cb5-14"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> textwrap</span>
+<span id="cb5-15"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> gradio <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> gr</span></code></pre></div>
+</div>
+<p>This LLM creates a vector store, that we need to make sure is deleted from any previous runs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1">file_path <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'persist/my_vector_store.duckdb'</span></span>
+<span id="cb6-2"></span>
+<span id="cb6-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Check if file exists</span></span>
+<span id="cb6-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> os.path.exists(file_path):</span>
+<span id="cb6-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#Delete the file</span></span>
+<span id="cb6-6">  os.remove(file_path)</span>
+<span id="cb6-7">  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"File deleted successfully"</span>)</span>
+<span id="cb6-8"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span>:</span>
+<span id="cb6-9">  <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"File doesn't exist - first run - it's all good"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>File deleted successfully</code></pre>
+</div>
+</div>
+<p>Next we go get the openai key, if we don’t already have one and set up the environment so that we are able to access the openai indexing capability using llama indexing provided by Meta open source.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> dotenv <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> load_dotenv</span>
+<span id="cb8-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> os</span>
+<span id="cb8-3"></span>
+<span id="cb8-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#load_dotenv('config/.env')  # relative to current working directory</span></span>
+<span id="cb8-5"></span>
+<span id="cb8-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Or, using pathlib for robust path handling</span></span>
+<span id="cb8-7"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> pathlib <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> Path</span>
+<span id="cb8-8">load_dotenv(Path(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'secrets'</span>) <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'.env'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"></span>
+<span id="cb10-2">api_key <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> os.getenv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"OPENAI_API_KEY"</span>)</span></code></pre></div>
+</div>
+<p>Here we import the indexing packages to store the indexing in DuckDB.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"></span>
+<span id="cb11-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.core <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> VectorStoreIndex, SimpleDirectoryReader</span>
+<span id="cb11-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.vector_stores.duckdb <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> DuckDBVectorStore</span>
+<span id="cb11-4"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">from</span> llama_index.core <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> StorageContext</span>
+<span id="cb11-5"></span>
+<span id="cb11-6">vector_store <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> DuckDBVectorStore(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"my_vector_store.duckdb"</span>, persist_dir<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"./persist/"</span>)</span>
+<span id="cb11-7">documents <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> SimpleDirectoryReader(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"/Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/PDFs/"</span>).load_data()</span></code></pre></div>
+</div>
+<p>This is where storage_context points to your indexed PDFs in the storage you specified above</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1">storage_context <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> StorageContext.from_defaults(vector_store<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>vector_store)</span>
+<span id="cb12-2">index <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> VectorStoreIndex.from_documents(documents, storage_context<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>storage_context)</span></code></pre></div>
+</div>
+<p>This is a basic interface so that you can query anything about the PDFs you stored.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Create a custom theme with blue as the primary color</span></span>
+<span id="cb13-2">theme <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> gr.themes.Default()  </span>
+<span id="cb13-3"></span>
+<span id="cb13-4"></span>
+<span id="cb13-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">def</span> greet(query):</span>
+<span id="cb13-6">    </span>
+<span id="cb13-7">    query_engine <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> index.as_query_engine()</span>
+<span id="cb13-8">    response <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> query_engine.query(query)</span>
+<span id="cb13-9">    strresponse <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>(response)</span>
+<span id="cb13-10">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#return(gradio.Markdown(strresponse))</span></span>
+<span id="cb13-11">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#return(textwrap.fill(str(response), 80))</span></span>
+<span id="cb13-12">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">return</span>(<span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">f"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">{</span>response<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">}</span><span class="ss" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span>)</span>
+<span id="cb13-13">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#display(Markdown(f"&lt;b&gt;{response}&lt;/b&gt;")</span></span>
+<span id="cb13-14">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#return "Hello " + query + "!"</span></span>
+<span id="cb13-15"></span>
+<span id="cb13-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#demo = gr.Interface(fn=greet, inputs="text", outputs="text")</span></span>
+<span id="cb13-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#demo.launch(share=True)   </span></span></code></pre></div>
+</div>
+<p>This is output, you can now query the public PDFs here on Hugging Face to see how it works. This output is similar but not generated from the code above. There is a seperate script generating the LLM on Hugging Face that you can access by cloning the repository at https://huggingface.co/spaces/GoData/Fables-beta/tree/main.</p>
+<p>This is from: https://huggingface.co/spaces/GoData/Fables-beta</p>
+<iframe width="780" height="500" src="https://godata-fables-beta.hf.space/" title="Quarto Documentation"></iframe>
+
+
+</section>
+
+ ]]></description>
+  <category>LLMs</category>
+  <category>Python</category>
+  <category>OpenAI</category>
+  <category>Hugging Face</category>
+  <guid>Godata.ca/posts/LLM_Demo/</guid>
+  <pubDate>Tue, 03 Jun 2025 04:00:00 GMT</pubDate>
+  <media:content url="Godata.ca/posts/LLM_Demo/llm_fables.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Welcome</title>
+  <dc:creator>Eileen Murphy</dc:creator>
+  <link>Godata.ca/posts/Welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="quarto" class="level2">
+<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
+<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+</section>
+<section id="running-code" class="level2">
+<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
+<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+</div>
+<p>You can add options to executable code like this</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Quarto</category>
+  <guid>Godata.ca/posts/Welcome/</guid>
+  <pubDate>Sun, 01 Jun 2025 04:00:00 GMT</pubDate>
+  <media:content url="Godata.ca/posts/Welcome/welcome.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>
