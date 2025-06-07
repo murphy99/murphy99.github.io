@@ -91,8 +91,14 @@ Next we go get the openai key, if we don't already have one and set up the envir
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Loads variables from .env
+#load_dotenv('config/.env')  # relative to current working directory
+
+# Or, using pathlib for robust path handling
+from pathlib import Path
+load_dotenv(Path('secrets') / '.env')
+
 api_key = os.getenv("OPENAI_API_KEY")
+
 
 ```
 
