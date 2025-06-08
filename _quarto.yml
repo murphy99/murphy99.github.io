@@ -8,10 +8,10 @@ website:
     center:
       - text: "About"
         href: about.qmd
-      - text: "Feedback"
-        href: license.qmd
-      - text: "Coffee"
-        href: trademark.qmd
+      #- text: "Feedback"
+     #   href: #
+      #- text: "Coffee"
+       # href: #
   title: "GoData.ca"
   site-url: Godata.ca
   #description: "GoData Blog"
@@ -33,6 +33,8 @@ format:
     theme: flatly
     footer: dark
     css: styles.css
+    include-in-header: gtm_code_head.html
+    include-before-body: gtm_code_body.html
     
 #filters:
   #- shinylive

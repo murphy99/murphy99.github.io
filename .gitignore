@@ -9,4 +9,6 @@ venv/
 posts/LLM_Demo/venv
 id_rsa
 id_rsa.pub
+posts/LLM_Demo/persist/my_vector_store.duckdb
+
 
