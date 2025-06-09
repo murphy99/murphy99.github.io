@@ -38,9 +38,8 @@ format:
     comments:
       utterances:
          repo: "murphy99/murphy99.github.io"
+         issue-term: pathname
          
-
-
     
 #filters:
   #- shinylive
