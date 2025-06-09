@@ -34,7 +34,14 @@ format:
     footer: dark
     css: styles.css
     include-in-header: gtm_code_head.html
-    include-before-body: gtm_code_body.html
+    #include-before-body: gtm_code_body.html
+    #include-after-body: Comments.html
+    comments:
+      utterances:
+         repo: murphy99.github.io
+         
+
+
     
 #filters:
   #- shinylive
