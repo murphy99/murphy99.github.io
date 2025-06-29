@@ -13,6 +13,7 @@ website:
        # href: #
   title: "GoData.ca"
   site-url: Godata.ca
+  #feed: true
   #description: "GoData Blog"
   navbar:
     logo: "avatar-chien01-clipart-md.png"

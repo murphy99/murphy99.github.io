@@ -1,29 +1,36 @@
-
 ---
-title: "Welcome"
+title: "Welcome" 
 format: html
 image: welcome.jpg
-date: "2025-06-01"
+date: "2025-06-02"
 categories: [Quarto]
----
+lightbox: false 
+draft: true
+--- 
 
-## Quarto
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-## Running Code
+This blog is using Quarto. The YAML and the structure of the directories were puzzling to me at first. The directory for each blog entry, YAML configuration files for global and local document settings. The seperation between source and rendered files is a game changer because you can have a zippity site rendered in just html and javascript and another layer of source files used to render and maintain the site. Once you get the hang of it, it's fun to work on.
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+### Quarto, a publishing pipeline
 
-```{r}
-1 + 1
-```
+As I was warming up to Quarto - I stumbled on was a book on how to self publish on Amazon using Quarto to generate from text to Kindle format. Software to replace Word? Now, my interest was piqued.
 
-You can add options to executable code like this 
+But, while impressive isn't perfect quite yet. While Quarto has a Jupyter python kernal for your notebooks, some of the outputs such as Gridio sends output to the console instead of the terminal. While this is a flaw, I believe the fix - if it hasn't been solved will be soon.
 
-```{r}
-#| echo: false
-2 * 2
-```
+If you are Jupyter notebook and want them working with Quarto right away, Jeremy Howard  has an excellent site to get you going with having the best both worlds of integrating Jupyter notebooks and the publishing bells and whistles used in Quarto. 
 
-The `echo: false` option disables the printing of code (only output is displayed).
+I could not ignore Quarto, any longer.
+
+
+https://www.fast.ai/posts/2022-08-25-jupyter-git.html
+https://www.fast.ai/posts/2022-07-28-nbdev2.html#our-new-secret-weapon-for-productivity
+
+https://nbdev.fast.ai/getting_started.html
+
+think python
+
+
+
+
+
