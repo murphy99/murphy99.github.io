@@ -32,28 +32,7 @@
     "href": "index.html",
     "title": "GoData.ca",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nEasily Build Private Small LLMs\n\n\n\n\n\n\nLLMs\n\n\nPython\n\n\nOpenAI\n\n\nHugging Face\n\n\n\n\n\n\n\n\n\nJun 3, 2025\n\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome\n\n\n\n\n\n\nQuarto\n\n\n\n\n\n\n\n\n\nJun 1, 2025\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "posts/Welcome/index.html",
-    "href": "posts/Welcome/index.html",
-    "title": "Welcome",
-    "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "posts/Welcome/index.html#quarto",
-    "href": "posts/Welcome/index.html#quarto",
-    "title": "Welcome",
-    "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "posts/Welcome/index.html#running-code",
-    "href": "posts/Welcome/index.html#running-code",
-    "title": "Welcome",
-    "section": "Running Code",
-    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n\n\n\n\n\n\n\n\n\n\nRSS Feeds\n\n\n\n\n\n\nR\n\n\nJavascript\n\n\ntidyRSS\n\n\n\n\n\n\n\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nEasily Build Private Small LLMs\n\n\n\n\n\n\nLLMs\n\n\nPython\n\n\nOpenAI\n\n\nHugging Face\n\n\n\n\n\n\n\n\n\nJun 3, 2025\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/LLM_Demo/index.html",
@@ -75,5 +54,26 @@
     "title": "Eileen P. Murphy",
     "section": "",
     "text": "This blog centers on the exploration of data discovery and practical data science for implementing the use of machine learning, dashboards, LLMs, LLM Apps by using existing open source tools such as but not limited to R, Python, DuckDB, SQLite, MongoDB, Hadoop, and Spark.\nGoData.ca mission is to explore and replicate already available research and implement actual use cases for implementation.\nEileen Murphy is the owner and contributor to GoData.ca blog."
+  },
+  {
+    "objectID": "posts/RSS_Reader/index.html",
+    "href": "posts/RSS_Reader/index.html",
+    "title": "RSS Feeds",
+    "section": "",
+    "text": "RSS Readers may not be in fashion but I believe they are on the comeback. Inspired by an article from InfoWorld(Machlis 2022), with some slight modifications, I created an rss feed to list many the research publications. The list of research papers can look overwhelming, but can be refined or filtered using the search boxes.\n\nlibrary(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.2     ✔ tibble    3.3.0\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(dplyr)\nlibrary(DT)\nlibrary(purrr)\nlibrary(stringr)\nlibrary(lubridate)\nlibrary(tidyRSS)\n\n\nmy_feed_data &lt;- tidyfeed(\"https://rss.arxiv.org/rss/cs.LG\", parse_dates = TRUE) |&gt;\n  select(feed_pub_date,item_title, item_link, item_description)\n\nGET request successful. Parsing...\n\n\n\nmy_feed_data_summary &lt;- my_feed_data |&gt;\n  select(item_title, feed_pub_date, item_link,\n         item_description) \n\n\n#changed item_title to item_desc\nmy_rss_feed &lt;- my_feed_data_summary |&gt; mutate(\n    item_title = str_glue(\"&lt;a target='_blank' title='{item_title}' href='{item_link}' rel='noopener'&gt;{item_title}&lt;/a&gt;\")\n)\n\n\nmy_rss_feed_table &lt;- my_rss_feed |&gt; select(-item_link)\n#my_feed_data_summary\n\n\n\nDT::datatable(my_rss_feed_table, filter = 'top', escape = FALSE, rownames = FALSE,\n  options = list(\n  search = list(regex = TRUE, caseInsensitive = TRUE),  \n  pageLength = 10,\n  lengthMenu = c(10, 25, 50, 100, 200),\n  autowidth = TRUE,\n  columnDefs = list(list(width = '80%', targets = list(2)))\n  )\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nMachlis, Sharon. 2022. “How to Create Your Own RSS Reader with r _ InfoWorld.” InfoWorld, December. https://www.infoworld.com/article/2337738/how-to-create-your-own-rss-reader-with-r.html."
+  },
+  {
+    "objectID": "posts/RSS_Reader/index.html#references",
+    "href": "posts/RSS_Reader/index.html#references",
+    "title": "RSS Feeds",
+    "section": "References",
+    "text": "References"
+  },
+  {
+    "objectID": "posts/Welcome/index.html",
+    "href": "posts/Welcome/index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "This blog is using Quarto. The YAML and the structure of the directories were puzzling to me at first. The directory for each blog entry, YAML configuration files for global and local document settings. The seperation between source and rendered files is a game changer because you can have a zippity site rendered in just html and javascript and another layer of source files used to render and maintain the site. Once you get the hang of it, it’s fun to work on.\n\nQuarto, a publishing pipeline\nAs I was warming up to Quarto - I stumbled on was a book on how to self publish on Amazon using Quarto to generate from text to Kindle format. Software to replace Word? Now, my interest was piqued.\nBut, while impressive isn’t perfect quite yet. While Quarto has a Jupyter python kernal for your notebooks, some of the outputs such as Gridio sends output to the console instead of the terminal. While this is a flaw, I believe the fix - if it hasn’t been solved will be soon.\nIf you are Jupyter notebook and want them working with Quarto right away, Jeremy Howard has an excellent site to get you going with having the best both worlds of integrating Jupyter notebooks and the publishing bells and whistles used in Quarto.\nI could not ignore Quarto, any longer.\nhttps://www.fast.ai/posts/2022-08-25-jupyter-git.html https://www.fast.ai/posts/2022-07-28-nbdev2.html#our-new-secret-weapon-for-productivity\nhttps://nbdev.fast.ai/getting_started.html\nthink python"
   }
 ]
