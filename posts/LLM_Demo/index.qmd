@@ -1,5 +1,5 @@
 ---
-title: "Easily Build Private Small LLMs"
+title: "Easily Build Customized LLMs"
 image: llm_fables.jpg
 date: "2025-06-03"
 categories: [LLMs, Python, OpenAI, Hugging Face]
@@ -10,7 +10,7 @@ categories: [LLMs, Python, OpenAI, Hugging Face]
 
 # Introduction
 
-Private LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who are always on deadliine, can respond quickly to new regulations or court hearing decisions speeding up the time to digest the new material and be the first to respond without risk of exposing their material to the world.
+Customized LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who are always on deadliine, can respond quickly to new regulations or court hearing decisions speeding up the time to digest the new material and be the first to respond without risk of exposing their material to the world.
 
 Deployed on Hugging Face the Private LLM contains documents of publicly available Fables from around the world. With a simple interface, you can query about Aesop or Grimms Fairy tales. Query fables that exists in other parts of the world. Of course this is a demo and the documents are public, but if you clone the LLM demo, then run it locally - you will have your own localized LLM. This LLM is ideal if you want to combine copyrighted material that the larger LLMs may not have been trained on. You may have clients that are risk adverse about having any propietary documents even on a secured server. It's also great as a demo if you would like to show what LLMs can do, and most importantly what their limitations are.
 

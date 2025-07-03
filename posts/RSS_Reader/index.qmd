@@ -1,0 +1,84 @@
+---
+title: "RSS Feeds"
+format: 
+  html
+bibliography: References/export.bib  
+bibliographystyle: apa
+image: RssReader.jpg  
+embed-resources: true
+editor: source
+categories: [R, Javascript, tidyRSS]
+execute: 
+  echo: true
+  warning: true
+  message: true
+  freeze: false
+---
+
+RSS Readers may not be in fashion but I believe they are on the comeback. Inspired by an article from InfoWorld[@Machlis2022], with some slight modifications, I created an rss feed to list many the research publications. The list of research papers can look overwhelming, but can be refined or filtered using the search boxes.
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(DT)
+library(purrr)
+library(stringr)
+library(lubridate)
+library(tidyRSS)
+```
+
+
+
+```{r}
+my_feed_data <- tidyfeed("https://rss.arxiv.org/rss/cs.LG") |>
+  select(feed_pub_date,item_title, item_link, item_description)
+
+
+```
+
+
+```{r}
+my_feed_data_summary <- my_feed_data |>
+  select(item_title, feed_pub_date, item_link,
+         item_description) 
+
+```
+
+
+
+```{r}
+#changed item_title to item_desc
+my_rss_feed <- my_feed_data_summary |> mutate(
+    item_title = str_glue("<a target='_blank' title='{item_title}' href='{item_link}' rel='noopener'>{item_title}</a>")
+)
+```
+
+
+
+```{r}
+my_rss_feed_table <- my_rss_feed |> select(-item_link)
+#my_feed_data_summary
+```
+
+:::{.column-page}
+
+```{r}
+DT::datatable(my_rss_feed_table, filter = 'top', escape = FALSE, rownames = FALSE,
+  options = list(
+  search = list(regex = TRUE, caseInsensitive = TRUE),  
+  pageLength = 10,
+  lengthMenu = c(10, 25, 50, 100, 200),
+  autowidth = TRUE,
+  columnDefs = list(list(width = '80%', targets = list(2)))
+  )
+)
+```
+
+:::
+
+### References
+
+
+
+
+

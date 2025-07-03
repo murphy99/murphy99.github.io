@@ -9,7 +9,7 @@
 <meta name="author" content="Eileen Murphy">
 <meta name="dcterms.date" content="2025-06-03">
 
-<title>Easily Build Private Small LLMs – GoData.ca</title>
+<title>Easily Build Customized LLMs – GoData.ca</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Easily Build Private Small LLMs</h1>
+<h1 class="title">Easily Build Customized LLMs</h1>
   <div class="quarto-categories">
     <div class="quarto-category">LLMs</div>
     <div class="quarto-category">Python</div>
@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>Private LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who are always on deadliine, can respond quickly to new regulations or court hearing decisions speeding up the time to digest the new material and be the first to respond without risk of exposing their material to the world.</p>
+<p>Customized LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who are always on deadliine, can respond quickly to new regulations or court hearing decisions speeding up the time to digest the new material and be the first to respond without risk of exposing their material to the world.</p>
 <p>Deployed on Hugging Face the Private LLM contains documents of publicly available Fables from around the world. With a simple interface, you can query about Aesop or Grimms Fairy tales. Query fables that exists in other parts of the world. Of course this is a demo and the documents are public, but if you clone the LLM demo, then run it locally - you will have your own localized LLM. This LLM is ideal if you want to combine copyrighted material that the larger LLMs may not have been trained on. You may have clients that are risk adverse about having any propietary documents even on a secured server. It’s also great as a demo if you would like to show what LLMs can do, and most importantly what their limitations are.</p>
 <p>So, lets get started:</p>
 <p>Setting up reticulate</p>
@@ -225,15 +225,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(reticulate)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>reticulate<span class="sc">::</span><span class="fu">py_config</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>python:         /Users/Eileen/.virtualenvs/godata/bin/python
+<pre><code>python:         /Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/venv/bin/python
 libpython:      /Users/Eileen/.pyenv/versions/3.12.6/lib/libpython3.12.dylib
-pythonhome:     /Users/Eileen/.virtualenvs/godata:/Users/Eileen/.virtualenvs/godata
-virtualenv:     /Users/Eileen/.virtualenvs/godata/bin/activate_this.py
+pythonhome:     /Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/venv:/Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/venv
+virtualenv:     /Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/venv/bin/activate_this.py
 version:        3.12.6 (main, Sep 26 2024, 09:29:53) [Clang 15.0.0 (clang-1500.3.9.4)]
-numpy:          /Users/Eileen/.virtualenvs/godata/lib/python3.12/site-packages/numpy
-numpy_version:  2.2.2
+numpy:          /Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/venv/lib/python3.12/site-packages/numpy
+numpy_version:  2.2.6
 
-NOTE: Python version was forced by VIRTUAL_ENV</code></pre>
+NOTE: Python version was forced by './venv' existing in the current working directory</code></pre>
 </div>
 </div>
 <p>Python packages required</p>
