@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/RSS_Reader/rss_reader_table.html",
       "/posts/RSS_Reader/index.html",
       "/posts/LLM_Demo/index.html"
     ]
