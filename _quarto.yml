@@ -17,6 +17,13 @@ website:
   #description: "GoData Blog"
   navbar:
     logo: "avatar-chien01-clipart-md.png"
+    
+    left:
+      - text: "Recent Pubs"
+        menu:
+          - text: "arXiv"
+            href: posts/RSS_Reader/Most_Recent_Papers.qmd
+          
     right:
       - about.qmd
       - icon: github
@@ -41,6 +48,8 @@ format:
          repo: "murphy99/murphy99.github.io"
          issue-term: pathname
          
+#listing:
+  #contents: "posts/*/index.qmd"         
     
 #filters:
   #- shinylive

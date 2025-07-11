@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Eileen P. Murphy – GoData.ca</title>
+<title>GoData.ca</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,9 +30,12 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
@@ -65,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-reading-time','listing-title','listing-description','listing-categories','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
 <!-- Google tag (gtag.js) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GXSZ4CKR04"></script>
 <script>
@@ -75,14 +107,43 @@ ul.task-list li input[type="checkbox"] {
   gtag('config', 'G-GXSZ4CKR04');
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="GoData.ca" href="index.xml" data-external="1"></head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -98,22 +159,9 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-recent-pubs" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Recent Pubs</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-recent-pubs">    
-        <li>
-    <a class="dropdown-item" href="./posts/RSS_Reader/Most_Recent_Papers.html">
- <span class="dropdown-text">arXiv</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="./about.html"> 
 <span class="menu-text">Eileen P. Murphy</span></a>
   </li>  
   <li class="nav-item compact">
@@ -139,52 +187,150 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="SHVnZ2luZyUyMEZhY2U=">Hugging Face <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SmF2YXNjcmlwdA==">Javascript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcw==">LLMs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T3BlbkFJ">OpenAI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGlkeVJTUw==">tidyRSS <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="godata_look.jpg" class="about-image
-  rounded " style="width: 20em;">
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Eileen P. Murphy</h1>
-<p class="subtitle lead">Practical Data Scientist | LLMs | AI Explorer</p>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header>
-    <div class="about-links">
-  <a href="https://bsky.app/profile/godata.bsky.social/" class="about-link" rel="" target="">
-     <span class="about-link-text">Bluesky<img src="bluesky-icon.png" style="height:1.5em"></span>
-  </a>
-  <a href="https://www.linkedin.com/in/eileen-p-m-1948464/" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text">LinkedIn</span>
-  </a>
-  <a href="https://github.com/murphy99/" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-  <a href="https://huggingface.co/GoData/" class="about-link" rel="" target="">
-     <span class="about-link-text"><img src="hf-logo.png" style="height:1.4em"></span>
-  </a>
-</div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<section id="about-the-blog" class="level2">
-<h2 data-anchor-id="about-the-blog">About the Blog</h2>
-<p>This blog centers on the exploration of data discovery and practical data science for implementing the use of machine learning, dashboards, LLMs, LLM Apps by using existing open source tools such as but not limited to R, Python, DuckDB, SQLite, MongoDB, Hadoop, and Spark.</p>
-<p>GoData.ca mission is to explore and replicate already available research and implement actual use cases for implementation.</p>
-<p>Eileen Murphy is the owner and contributor to GoData.ca blog.</p>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
-</section>
-</main></div>
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+   <div class="input-group input-group-sm quarto-listing-sort">
+     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
+     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
+       <option value="" disabled="" selected="" hidden="">Order By</option>
+       <option value="index" data-direction="asc">Default</option>
+         <option value="listing-title" data-direction="asc">
+          Title
+        </option>
+         <option value="listing-date-sort" data-direction="asc">
+          Date - Oldest
+        </option>
+         <option value="listing-date-sort" data-direction="desc">
+          Date - Newest
+        </option>
+     </select>
+  </div>
 </div>
- <!-- /main -->
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1751999378124" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
+<div class="thumbnail">
+<p><a href="./posts/Query_chat/QueryChat.html" class="no-external"></a></p><a href="./posts/Query_chat/QueryChat.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/Query_chat/QueryChat.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/Query_chat/QueryChat.html" class="no-external">QueryChat</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/Query_chat/QueryChat.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/Query_chat/QueryChat.html" class="no-external"></a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./posts/Query_chat/QueryChat.html" class="no-external"></a></p><a href="./posts/Query_chat/QueryChat.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="UiUyQ0phdmFzY3JpcHQlMkN0aWR5UlNT" data-listing-file-modified-sort="1751569428437" data-listing-reading-time-sort="1" data-listing-word-count-sort="150">
+<div class="thumbnail">
+<p><a href="./posts/RSS_Reader/index.html" class="no-external"></a></p><a href="./posts/RSS_Reader/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/RSS_Reader/RssReader.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/RSS_Reader/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/RSS_Reader/index.html" class="no-external">RSS Feeds</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/RSS_Reader/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('SmF2YXNjcmlwdA=='); return false;">
+Javascript
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('dGlkeVJTUw=='); return false;">
+tidyRSS
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/RSS_Reader/index.html" class="no-external">RSS Readers may not be in fashion but I believe they are on the comeback. Inspired by an article from InfoWorld<span class="citation" data-cites="Machlis2022">(Machlis 2022)</span>, with some slight modifications, I created an…</a>
+</div>
+</div>
+<div class="metadata">
+<p><a href="./posts/RSS_Reader/index.html" class="no-external"></a></p><a href="./posts/RSS_Reader/index.html" class="no-external">
+<div class="listing-reading-time">
+1 min
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="TExNcyUyQ1B5dGhvbiUyQ09wZW5BSSUyQ0h1Z2dpbmclMjBGYWNl" data-listing-date-sort="1748923200000" data-listing-file-modified-sort="1751221901453" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="638">
+<div class="thumbnail">
+<p><a href="./posts/LLM_Demo/index.html" class="no-external"></a></p><a href="./posts/LLM_Demo/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/LLM_Demo/llm_fables.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/LLM_Demo/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/LLM_Demo/index.html" class="no-external">Easily Build Customized LLMs</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/LLM_Demo/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('TExNcw=='); return false;">
+LLMs
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">
+Python
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('T3BlbkFJ'); return false;">
+OpenAI
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('SHVnZ2luZyUyMEZhY2U='); return false;">
+Hugging Face
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/LLM_Demo/index.html" class="no-external">Customized LLMs can be created to enable you to have full control of your own propiertary PDFs or text files stored locally with just a few lines of code. Journalists who…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/LLM_Demo/index.html" class="no-external">
+<div class="listing-date">
+Jun 3, 2025
+</div>
+<div class="listing-reading-time">
+4 min
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -205,6 +351,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
