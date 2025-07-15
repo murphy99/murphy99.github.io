@@ -1,0 +1,183 @@
+---
+title: "Converting Shiny Apps to ShinyLive"
+date: "2025-07-13"
+format: 
+  html:
+    embed-resources: false
+filters:
+  - shinylive
+image: openart-image_shinylive.png
+bibliography: References/export.bib  
+bibliographystyle: apa
+categories: [R, Shinylive, KMeans]
+---
+
+
+
+## Introduction
+
+Shiny Apps - can be converted to Shinylive using Quarto in just a few lines of code. If the Shiny app isn't too complex, we can provide a serverless interactive experience using just an html website. The Shiny App that we converted is one of Posit's simple Shiny Apps in its gallery[@Posit2014]. ShinyLive allows a more frictionless way to share your app without having to use a hosted server by running on its own html page served to the client. The html is rendered in quarto to automatically download the needed assets to the client and it can run from their own pc or mac. 
+
+The Shiny App that we chose is the KMeans model using the Iris dataset, provides a way to convert a Shiny App, but it's also a handy tool to deploy on our website. There were just 2 things we had to change and that was using the {shinylive-r} instead of {r} and to change ui to using fluidPage from the bslib library to ensure app resizes well to different devices. You'll notice that older shiny apps don't resize well, and this is why. 
+
+## KMeans
+
+KMeans is an unsupervised machine learning algorithm used to group similar data together without already predefined classifications. All the points are clustered around a centroid that represents the mean of all points within the cluster. The number of centroids are referred to as "K values" and represents the number groups within all the data ponts.  The goal is to minimize the euclidean distance between the data point and the its centroid mean, maximize the separation between clusters, and minimize total squared distance between each point and it's assigned centriod.
+
+In order to find the optimal K values, you need to run through and iterative process. This KMeans model uses Shinylive to be able to iterate quickly between K values to visually see the best grouping or at least to narrow down the K values to calculate the optimal number of categories.
+
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 500
+library(shiny)
+library(bslib)
+
+vars <- setdiff(names(iris), "Species")
+
+ui <- fluidPage(
+  titlePanel('Iris k-means clustering'),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('xcol', 'X Variable', vars),
+      selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]),
+      numericInput('clusters', 'Cluster count', 3, min = 1, max = 9)
+    ),
+    mainPanel(
+      plotOutput('plot1')
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  selectedData <- reactive({
+    iris[, c(input$xcol, input$ycol)]
+  })
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+  output$plot1 <- renderPlot({
+    palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+              "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+## Deployment
+
+We can take a shiny app and convert it to shiny live that enables the application to run on just the client's browser from an html page.
+
+#### Install required packages
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#install.packages("shiny")
+#install.packages("shinylive")
+```
+:::
+
+
+
+####  Update Quarto Extension 
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#quarto add quarto-ext/shinylive
+```
+:::
+
+
+
+
+#### Verify you can retrieve the shinylive assets
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#shinylive::assets_info()
+```
+:::
+
+
+
+
+### YAML (Remove comments and add to your Yaml) :
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+#---
+#format: 
+  #html:
+    #embed-resources: false
+#filters:
+  #- shinylive
+#---
+```
+:::
+
+
+
+
+### Source Code: 
+
+```{{shinylive-r}}
+#| standalone: true
+#| viewerHeight: 500
+library(shiny)
+library(bslib)
+
+vars <- setdiff(names(iris), "Species")
+
+ui <- fluidPage(
+  titlePanel('Iris k-means clustering'),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput('xcol', 'X Variable', vars),
+      selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]),
+      numericInput('clusters', 'Cluster count', 3, min = 1, max = 9)
+    ),
+    mainPanel(
+      plotOutput('plot1')
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  selectedData <- reactive({
+    iris[, c(input$xcol, input$ycol)]
+  })
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+  output$plot1 <- renderPlot({
+    palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
+              "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
+    par(mar = c(5.1, 4.1, 0, 1))
+    plot(selectedData(),
+         col = clusters()$cluster,
+         pch = 20, cex = 3)
+    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+

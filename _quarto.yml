@@ -48,6 +48,10 @@ format:
          repo: "murphy99/murphy99.github.io"
          issue-term: pathname
          
+output:
+  html_document:
+    self_contained: false         
+         
 #listing:
   #contents: "posts/*/index.qmd"         
     

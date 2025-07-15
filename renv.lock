@@ -1006,18 +1006,6 @@
       ],
       "Hash": "05ce1ed077e8c97fbb3ec1cb078f1159"
     },
-    "pak": {
-      "Package": "pak",
-      "Version": "0.9.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "tools",
-        "utils"
-      ],
-      "Hash": "e4d8ebf0ea80af486caf4209c924ddf9"
-    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.10.2",
