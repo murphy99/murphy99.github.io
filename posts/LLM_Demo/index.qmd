@@ -1,6 +1,6 @@
 ---
 title: "Easily Build Customized LLMs"
-image: llm_fables.jpg
+image: LLM_Fables.jpg
 date: "2025-06-03"
 embed-resources: true
 categories: [LLMs, Python, OpenAI, Hugging Face]
@@ -166,10 +166,8 @@ def greet(query):
 #demo.launch(share=True)   
 ```
 
-This is output, you can now query the public PDFs here on Hugging Face to see how it works. This output is similar but not generated from the code above. There is a seperate script generating the LLM on Hugging Face that you can access by cloning the repository at https://huggingface.co/spaces/GoData/Fables-beta/tree/main.
+# Deployment
 
-This is from: https://huggingface.co/spaces/GoData/Fables-beta
+On Hugging Face:
 
-```{=html}
-<iframe width="780" height="500" src="https://godata-fables-beta.hf.space/" title="Quarto Documentation"></iframe>
-```
+[This is what it looks like](https://huggingface.co/spaces/GoData/Fables-beta)

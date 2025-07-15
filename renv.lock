@@ -1006,6 +1006,18 @@
       ],
       "Hash": "05ce1ed077e8c97fbb3ec1cb078f1159"
     },
+    "pak": {
+      "Package": "pak",
+      "Version": "0.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "tools",
+        "utils"
+      ],
+      "Hash": "e4d8ebf0ea80af486caf4209c924ddf9"
+    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.10.2",
@@ -1369,7 +1381,7 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.11.0",
+      "Version": "1.11.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1398,7 +1410,7 @@
         "withr",
         "xtable"
       ],
-      "Hash": "011db3556755012e632ed99d083d7d75"
+      "Hash": "1c1a2437351984ff592639ae28cda09e"
     },
     "sourcetools": {
       "Package": "sourcetools",
