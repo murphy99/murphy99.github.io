@@ -823,7 +823,17 @@ font-style: inherit;">#demo.launch(share=True)   </span></span></code></pre></di
   <category>Hugging Face</category>
   <guid>Godata.ca/posts/LLM_Demo/</guid>
   <pubDate>Tue, 03 Jun 2025 04:00:00 GMT</pubDate>
-  <media:content url="Godata.ca/posts/LLM_Demo/LLM_Fables.jpg" medium="image" type="image/jpeg"/>
+  <media:content url="Godata.ca/posts/LLM_Demo/images/LLM_Fables.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title></title>
+  <dc:creator>Eileen Murphy</dc:creator>
+  <link>Godata.ca/posts/Welcome/</link>
+  <description><![CDATA[ undefined ]]></description>
+  <category>Quarto</category>
+  <guid>Godata.ca/posts/Welcome/</guid>
+  <pubDate>Mon, 02 Jun 2025 04:00:00 GMT</pubDate>
+  <media:content url="Godata.ca/posts/Welcome/welcome.jpg" medium="image" type="image/jpeg"/>
 </item>
 </channel>
 </rss>
