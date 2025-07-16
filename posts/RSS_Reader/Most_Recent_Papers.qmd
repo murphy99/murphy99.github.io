@@ -4,7 +4,6 @@ format: html
 draft: False
 ---
 
-
 ```{r echo=FALSE }
 # Define a function named 'add_numbers' that takes two arguments
 most_recent <- function(source) {
@@ -37,9 +36,7 @@ my_rss_feed_table <- my_rss_feed |> select(-item_link)
 }
 ```
 
-
-:::{.column-page}
-
+::: column-page
 ```{r echo=FALSE}
 DT::datatable(suppressMessages(most_recent("https://rss.arxiv.org/rss/cs.LG")), filter = 'top', escape = FALSE, rownames = FALSE,
  options = list(
@@ -51,7 +48,4 @@ DT::datatable(suppressMessages(most_recent("https://rss.arxiv.org/rss/cs.LG")), 
   )
 )
 ```
-
-
-
-
+:::

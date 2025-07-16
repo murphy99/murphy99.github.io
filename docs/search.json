@@ -124,5 +124,12 @@
     "title": "Converting Shiny Apps to ShinyLive",
     "section": "Deployment",
     "text": "Deployment\nWe can take a shiny app and convert it to shiny live that enables the application to run on just the client’s browser from an html page.\n\nInstall required packages\n\n#install.packages(\"shiny\")\n#install.packages(\"shinylive\")\n\n\n\nUpdate Quarto Extension\n\n#quarto add quarto-ext/shinylive\n\n\n\nVerify you can retrieve the shinylive assets\n\n#shinylive::assets_info()\n\n\n\nYAML (Remove comments and add to your Yaml) :\n\n#---\n#format: \n  #html:\n    #embed-resources: false\n#filters:\n  #- shinylive\n#---\n\n\n\nSource Code:\n```{shinylive-r}\n#| standalone: true\n#| viewerHeight: 500\nlibrary(shiny)\nlibrary(bslib)\n\nvars &lt;- setdiff(names(iris), \"Species\")\n\nui &lt;- fluidPage(\n  titlePanel('Iris k-means clustering'),\n  sidebarLayout(\n    sidebarPanel(\n      selectInput('xcol', 'X Variable', vars),\n      selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]),\n      numericInput('clusters', 'Cluster count', 3, min = 1, max = 9)\n    ),\n    mainPanel(\n      plotOutput('plot1')\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  selectedData &lt;- reactive({\n    iris[, c(input$xcol, input$ycol)]\n  })\n  clusters &lt;- reactive({\n    kmeans(selectedData(), input$clusters)\n  })\n  output$plot1 &lt;- renderPlot({\n    palette(c(\"#E41A1C\", \"#377EB8\", \"#4DAF4A\", \"#984EA3\",\n              \"#FF7F00\", \"#FFFF33\", \"#A65628\", \"#F781BF\", \"#999999\"))\n    par(mar = c(5.1, 4.1, 0, 1))\n    plot(selectedData(),\n         col = clusters()$cluster,\n         pch = 20, cex = 3)\n    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)\n  })\n}\n\nshinyApp(ui = ui, server = server)\n```"
+  },
+  {
+    "objectID": "posts/RSS_Reader/Most_Recent_Papers.html",
+    "href": "posts/RSS_Reader/Most_Recent_Papers.html",
+    "title": "Recent arXiv Research Papers (Updated M-F)",
+    "section": "",
+    "text": ":"
   }
 ]

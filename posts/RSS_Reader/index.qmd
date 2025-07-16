@@ -1,5 +1,6 @@
 ---
 title: "RSS Feeds"
+date: "2025-06-30"
 format: 
   html
 bibliography: References/export.bib  
