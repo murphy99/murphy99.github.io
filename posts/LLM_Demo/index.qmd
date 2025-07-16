@@ -3,6 +3,8 @@ title: "Easily Build Customized LLMs"
 image: LLM_Fables.jpg
 date: "2025-06-03"
 embed-resources: true
+resources:
+  - "images"
 categories: [LLMs, Python, OpenAI, Hugging Face]
 #jupyter: python3
 #filters:
