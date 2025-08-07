@@ -1,7 +1,9 @@
 project:
   type: website
   output-dir: docs
-
+freeze: auto
+filters:
+  - shinylive
 website:
   page-footer:
     center:
@@ -16,7 +18,7 @@ website:
   #feed: true
   #description: "GoData Blog"
   navbar:
-    logo: "avatar-chien01-clipart-md.png"
+#   logo: "avatar-chien01-clipart-md.png"
     
     left:
       - text: "Recent Pubs"
@@ -37,6 +39,7 @@ website:
     
 format:
   html:
+    embed-resources: false
     theme: flatly
     footer: dark
     css: styles.css
@@ -50,14 +53,13 @@ format:
          
 output:
   html_document:
-    self_contained: false         
+    self_contained: true
+    
          
 #listing:
-  #contents: "posts/*/index.qmd"         
+  #contents: "posts/*/index.*"         
     
-#filters:
-  #- shinylive
 
-editor: visual
+editor: source
 
 

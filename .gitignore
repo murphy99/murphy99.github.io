@@ -1,3 +1,5 @@
+persist/
+storage/
 Blog.Rproj
 .Rhistory
 .RData
@@ -6,6 +8,7 @@ Blog.Rproj
 *.Rhistory
 .Rhistory
 posts/LLM_Demo/secrets
+posts/LLM_api/secrets
 .Renviron
 .Renviron0
 _extensions/
@@ -15,6 +18,14 @@ id_rsa
 id_rsa.pub
 posts/LLM_Demo/persist/my_vector_store.duckdb
 /.quarto/
+cron_test.log
+.Renviron
+id_rsa
+id_rsa.pub
+venv/
+posts/LLM_Demo/.env
+posts/LLM_Demo/venv
+
 
 
 

@@ -1,6 +1,3 @@
-library(shiny)
-library(bslib)
-
 vars <- setdiff(names(iris), "Species")
 
 ui <- fluidPage(

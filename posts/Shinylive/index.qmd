@@ -1,6 +1,6 @@
 ---
 title: "Converting Shiny Apps to ShinyLive"
-date: "2025-07-13"
+date: "2025-06-30"
 format: 
   html:
     embed-resources: false
@@ -24,12 +24,27 @@ KMeans is an unsupervised machine learning algorithm used to group similar data 
 
 In order to find the optimal K values, you need to run through and iterative process. This KMeans model uses Shinylive to be able to iterate quickly between K values to visually see the best grouping or at least to narrow down the K values to calculate the optimal number of categories.
 
+```{r}
+#install.packages("shiny")
+#install.packages("shinylive")
+library(shiny)
+library(shinylive)
+library(bslib)
+
+```
+
+####  Update Quarto Extension 
+
+
+Run this in terminal:
+quarto add quarto-ext/shinylive
+
+
 
 ```{shinylive-r}
 #| standalone: true
 #| viewerHeight: 500
-library(shiny)
-library(bslib)
+
 
 vars <- setdiff(names(iris), "Species")
 
@@ -74,29 +89,21 @@ We can take a shiny app and convert it to shiny live that enables the applicatio
 
 #### Install required packages
 
-```{r}
-#install.packages("shiny")
-#install.packages("shinylive")
 
-```
 
-####  Update Quarto Extension 
 
-```{r}
-#quarto add quarto-ext/shinylive
-```
 
 
 #### Verify you can retrieve the shinylive assets
 
 ```{r}
-#shinylive::assets_info()
+shinylive::assets_info()
 ```
 
 
 ### YAML (Remove comments and add to your Yaml) :
 
-```{r}
+
 #---
 #format: 
   #html:
@@ -104,50 +111,6 @@ We can take a shiny app and convert it to shiny live that enables the applicatio
 #filters:
   #- shinylive
 #---
-```
 
 
-### Source Code: 
 
-```{{shinylive-r}}
-#| standalone: true
-#| viewerHeight: 500
-library(shiny)
-library(bslib)
-
-vars <- setdiff(names(iris), "Species")
-
-ui <- fluidPage(
-  titlePanel('Iris k-means clustering'),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput('xcol', 'X Variable', vars),
-      selectInput('ycol', 'Y Variable', vars, selected = vars[[2]]),
-      numericInput('clusters', 'Cluster count', 3, min = 1, max = 9)
-    ),
-    mainPanel(
-      plotOutput('plot1')
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  selectedData <- reactive({
-    iris[, c(input$xcol, input$ycol)]
-  })
-  clusters <- reactive({
-    kmeans(selectedData(), input$clusters)
-  })
-  output$plot1 <- renderPlot({
-    palette(c("#E41A1C", "#377EB8", "#4DAF4A", "#984EA3",
-              "#FF7F00", "#FFFF33", "#A65628", "#F781BF", "#999999"))
-    par(mar = c(5.1, 4.1, 0, 1))
-    plot(selectedData(),
-         col = clusters()$cluster,
-         pch = 20, cex = 3)
-    points(clusters()$centers, pch = 4, cex = 4, lwd = 4)
-  })
-}
-
-shinyApp(ui = ui, server = server)
-```

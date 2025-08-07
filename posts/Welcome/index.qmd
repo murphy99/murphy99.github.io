@@ -5,6 +5,8 @@ image: welcome.jpg
 date: "2025-06-02"
 categories: [Quarto]
 lightbox: false 
+execute:
+  freeze: true 
 draft: True
 --- 
 

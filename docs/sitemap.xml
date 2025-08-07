@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>Godata.ca/posts/Shinylive/index.html</loc>
+    <lastmod>2025-08-07T04:35:07.826Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/index.html</loc>
+    <lastmod>2025-07-27T18:33:07.355Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/RSS_Reader/index0.html</loc>
+    <lastmod>2025-07-27T15:55:58.879Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/RSS_Reader/Most_Recent_Papers.html</loc>
+    <lastmod>2025-07-30T09:35:31.063Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/RSS_Reader/index.html</loc>
+    <lastmod>2025-08-07T04:34:06.339Z</lastmod>
+  </url>
+  <url>
     <loc>Godata.ca/walkthrough.html</loc>
     <lastmod>2025-02-10T18:25:27.576Z</lastmod>
   </url>
@@ -9,35 +29,15 @@
     <lastmod>2025-06-03T20:13:37.820Z</lastmod>
   </url>
   <url>
-    <loc>Godata.ca/posts/RSS_Reader/Most_Recent_Papers.html</loc>
-    <lastmod>2025-07-16T13:37:35.753Z</lastmod>
+    <loc>Godata.ca/posts/Welcome/index.html</loc>
+    <lastmod>2025-07-25T13:16:27.634Z</lastmod>
   </url>
   <url>
     <loc>Godata.ca/posts/LLM_Demo/index.html</loc>
-    <lastmod>2025-07-16T14:14:17.352Z</lastmod>
+    <lastmod>2025-08-07T05:00:35.432Z</lastmod>
   </url>
   <url>
-    <loc>Godata.ca/posts/Shinylive/index.html</loc>
-    <lastmod>2025-07-15T21:02:56.496Z</lastmod>
-  </url>
-  <url>
-    <loc>Godata.ca/posts/RSS_Reader/index.html</loc>
-    <lastmod>2025-07-14T20:46:12.733Z</lastmod>
-  </url>
-  <url>
-    <loc>Godata.ca/index.html</loc>
-    <lastmod>2025-07-15T16:50:55.618Z</lastmod>
-  </url>
-  <url>
-    <loc>Godata.ca/shinylive.html</loc>
-    <lastmod>2025-07-14T10:10:27.917Z</lastmod>
-  </url>
-  <url>
-    <loc>Godata.ca/posts/Shinylive/index.knit.html</loc>
-    <lastmod>2025-07-15T21:03:07.692Z</lastmod>
-  </url>
-  <url>
-    <loc>Godata.ca/posts/Query_chat/QueryChat.html</loc>
-    <lastmod>2025-07-16T15:28:32.167Z</lastmod>
+    <loc>Godata.ca/posts/RSS_Reader/Most_Recent_Papers.knit.html</loc>
+    <lastmod>2025-07-30T09:35:45.918Z</lastmod>
   </url>
 </urlset>
