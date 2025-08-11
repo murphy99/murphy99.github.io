@@ -11,7 +11,6 @@ posts/LLM_Demo/secrets
 posts/LLM_api/secrets
 .Renviron
 .Renviron0
-_extensions/
 venv/
 posts/LLM_Demo/venv
 id_rsa
