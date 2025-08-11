@@ -348,7 +348,7 @@ This share link expires in 1 week. For free permanent hosting and GPU upgrades, 
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Shiny Apps - can be converted to Shinylive using Quarto in just a few lines of code. If the Shiny app isn’t too complex, we can provide a serverless interactive experience using just an html website. The Shiny App that we converted is one of Posit’s simple Shiny Apps in its gallery<span class="citation" data-cites="Posit2014">(Posit 2014)</span>. ShinyLive allows a more frictionless way to share your app without having to use a hosted server by running on its own html page served to the client. The html is rendered in quarto to automatically download the needed assets to the client and it can run from their own pc or mac.</p>
+<p>Shiny Apps - can be converted to Shinylive using Quarto in just a few lines of code. If the Shiny app isn’t too complex, we can provide a serverless interactive experience using just an html website. The Shiny App that we converted is one of Posit’s simple Shiny Apps in its gallery <span class="citation" data-cites="Posit2014">(Posit 2014)</span>. ShinyLive allows a more frictionless way to share your app without having to use a hosted server by running on its own html page served to the client. The html is rendered in quarto to automatically download the needed assets to the client and it can run from their own pc or mac.</p>
 <p>The Shiny App that we chose is the KMeans model using the Iris dataset, provides a way to convert a Shiny App, but it’s also a handy tool to deploy on our website. There were just 2 things we had to change and that was using the {shinylive-r} instead of {r} and to change ui to using fluidPage from the bslib library to ensure app resizes well to different devices. You’ll notice that older shiny apps don’t resize well, and this is why.</p>
 </section>
 <section id="kmeans" class="level2">
@@ -431,41 +431,12 @@ shinyApp(ui = ui, server = server)</code></pre>
 <section id="deployment" class="level2">
 <h2 class="anchored" data-anchor-id="deployment">Deployment</h2>
 <p>We can take a shiny app and convert it to shiny live that enables the application to run on just the client’s browser from an html page.</p>
-<section id="install-required-packages" class="level4">
-<h4 class="anchored" data-anchor-id="install-required-packages">Install required packages</h4>
-</section>
 <section id="verify-you-can-retrieve-the-shinylive-assets" class="level4">
 <h4 class="anchored" data-anchor-id="verify-you-can-retrieve-the-shinylive-assets">Verify you can retrieve the shinylive assets</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">shinylive<span class="sc" style="color: #5E5E5E;
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">assets_info</span>()</span></code></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>shinylive R package version: 0.3.0</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>shinylive web assets version: 0.9.1</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Local cached shinylive asset dir:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>→ '/Users/Eileen/Library/Caches/shinylive'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code></code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installed assets:</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>• '/Users/Eileen/Library/Caches/shinylive/shinylive-0.9.1'</code></pre>
-</div>
+font-style: inherit;">#shinylive::assets_info()</span></span></code></pre></div>
 </div>
 </section>
 <section id="yaml-remove-comments-and-add-to-your-yaml" class="level3">
