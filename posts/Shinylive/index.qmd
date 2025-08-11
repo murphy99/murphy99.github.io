@@ -14,7 +14,7 @@ categories: [R, Shinylive, KMeans]
 
 ## Introduction
 
-Shiny Apps - can be converted to Shinylive using Quarto in just a few lines of code. If the Shiny app isn't too complex, we can provide a serverless interactive experience using just an html website. The Shiny App that we converted is one of Posit's simple Shiny Apps in its gallery[@Posit2014]. ShinyLive allows a more frictionless way to share your app without having to use a hosted server by running on its own html page served to the client. The html is rendered in quarto to automatically download the needed assets to the client and it can run from their own pc or mac. 
+Shiny Apps - can be converted to Shinylive using Quarto in just a few lines of code. If the Shiny app isn't too complex, we can provide a serverless interactive experience using just an html website. The Shiny App that we converted is one of Posit's simple Shiny Apps in its gallery [@Posit2014]. ShinyLive allows a more frictionless way to share your app without having to use a hosted server by running on its own html page served to the client. The html is rendered in quarto to automatically download the needed assets to the client and it can run from their own pc or mac. 
 
 The Shiny App that we chose is the KMeans model using the Iris dataset, provides a way to convert a Shiny App, but it's also a handy tool to deploy on our website. There were just 2 things we had to change and that was using the {shinylive-r} instead of {r} and to change ui to using fluidPage from the bslib library to ensure app resizes well to different devices. You'll notice that older shiny apps don't resize well, and this is why. 
 
@@ -87,17 +87,12 @@ shinyApp(ui = ui, server = server)
 
 We can take a shiny app and convert it to shiny live that enables the application to run on just the client's browser from an html page.
 
-#### Install required packages
-
-
-
-
 
 
 #### Verify you can retrieve the shinylive assets
 
 ```{r}
-shinylive::assets_info()
+#shinylive::assets_info()
 ```
 
 
