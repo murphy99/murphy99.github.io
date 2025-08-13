@@ -1,5 +1,12 @@
 # Get the most recent papers function
 
+# Required Libraries
+
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(dplyr))
+library(DT)
+library(tidyRSS)
+
 most_recent <- function(source) {
   
   site=source
@@ -20,6 +27,11 @@ most_recent <- function(source) {
   #my_feed_data_summary
   
   
-  return(my_rss_feed_table)  # Explicit return is optional, but good practice
-  
+  return(my_rss_feed_table)  
+}
+
+
+tryCatch <- function(my_rss_feed_table) {
+  result <- paste(nrow(my_rss_feed_table),"\n")
+  print(result)
 }

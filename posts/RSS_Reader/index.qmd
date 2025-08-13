@@ -16,82 +16,82 @@ execute:
   freeze: false
 ---
 
-RSS Readers may not be in fashion but I believe they are on the comeback. Inspired by an article from InfoWorld[@Machlis2022], with some slight modifications, I created an rss feed to list many the research publications. The list of research papers can look overwhelming, but can be refined or filtered using the search boxes.
+::: columns
+
+::: {.column width="30%"}
+
+![](RssReader.jpg)
+:::
+
+
+::: {.column width="5%"}
+
+:::
+
+::: {.column width="65%"}
+
+There are more research papers being published than we could ever consume. This RSS Reader gathers the arXiv papers published today and allows us to search through by keywords. 
+
+Inspired by an article from InfoWorld [@Machlis2022]. Future feads will include more research papers from platforms into a database allowing for a more thorough historical search.
+
+:::
+:::
+
+
+```{r setup, include=TRUE}
+# setup includes libraries and functions
+
+source("RSS_functions.R",chdir=T)
+```
+
+#### Content of RSS_functions.R script
 
 ```{r}
-library(tidyverse)
-library(dplyr)
-library(DT)
-library(purrr)
-library(stringr)
-library(lubridate)
-library(tidyRSS)
+
+# get path to script
+pathway <- here::here("posts","RSS_Reader", "RSS_functions.R")
+
+# generate output of lines from script
+
+lines <- readLines(pathway, warn=FALSE)
+cat(lines, sep = "\n")
+
 ```
 
 
+Getting feed for arXiv and checking the number of results. There are no papers on weekends
 
-```{r}
+```{r, include=TRUE}
 
-flag=0
+flag=0 #Set Error flag to False
 
 my_feed <- "https://rss.arxiv.org/rss/cs.LG"
 
-result <- tryCatch(
-  {
-    my_feed_data <- tidyfeed(my_feed)
-    cat("Number of items:", nrow(my_feed_data), "\n")
-    my_feed_data |> 
-      select(feed_pub_date, item_title, item_link, item_description)
-  },
-  error = function(e) {
-    cat("Error caught:", e$message, "\n")
-    NULL  # return NULL on errorde
-  }
-)
 
-if (is.null(result) || nrow(result) == 0) {
-  flag=1
-  cat("Sorry, no papers published today\n")
-} else {
-  print(result)
-}
+# Call functins in RSS_functions.R
+initial_results <- most_recent(my_feed) # Records Retreived
+result <- tryCatch(initial_results) # Catch error if no results
 
+#paste("tryCatch: ", result) #Shows result of retrieval
+
+# Sets flag = 1 when no records retrieved
+
+if (is.null(result)) {
+  flag=1 # Sets Error flag = True
+  cat("Sorry, no papers published today\n") 
+} else {paste("Records Retrieved:", result)}
 
 
 ```
 
-
-
-```{r}
-if (! flag) {
-  my_feed_data_summary <- my_feed_data |>
-    select(item_title, feed_pub_date, item_link,item_description) }
-
-```
-
-
-
-```{r}
-if (! flag) {
-#changed item_title to item_desc
-my_rss_feed <- my_feed_data_summary |> mutate(
-    item_title = str_glue("<a target='_blank' title='{item_title}' href='{item_link}' rel='noopener'>{item_title}</a>")
-)}
-```
-
-
-
-```{r}
-if (! flag) {
-  my_rss_feed_table <- my_rss_feed |> select(-item_link)}
-#my_feed_data_summary
-```
 
 :::{.column-page}
 
+### Creating output using DT library
+
 ```{r}
 if (! flag) {
-  DT::datatable(my_rss_feed_table, filter = 'top', escape = FALSE, rownames = FALSE,
+  DT::datatable(initial_results, filter = 'top', escape = FALSE, rownames = FALSE,
     options = list(
     search = list(regex = TRUE, caseInsensitive = TRUE),  
     pageLength = 10,

@@ -1,0 +1,70 @@
+
+---
+title: "Recent arXiv Research Papers (Updated M-F)"
+format: html
+embed-resources: true
+draft: False
+---
+
+
+```{r setup, include=FALSE}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(dplyr))
+library(DT)
+library(tidyRSS)
+#source("RSS_functions.R", local = knitr::knit_global())
+source("RSS_functions.R")
+```
+
+
+
+```{r, include=FALSE}
+flag=0
+
+my_feed <- "https://rss.arxiv.org/rss/cs.LG"
+
+result <- tryCatch(
+    {
+      my_feed_data <- tidyfeed(my_feed)
+      cat("Number of items:", nrow(my_feed_data), "\n")
+      my_feed_data |> 
+        select(feed_pub_date, item_title, item_link, item_description)
+    },
+    error = function(e) {
+      cat("Error caught:", e$message, "\n")
+      NULL  # return NULL on errorde
+    }
+  )  
+  
+
+if (is.null(result) || nrow(result) == 0) {
+  flag=1
+  cat("Sorry, no papers published today\n")
+} 
+#else {
+ # print(result)
+#}
+
+```
+
+
+
+
+
+::: column-page
+
+```{r, echo=FALSE}
+## Call function most_recent from loaded functions in setup
+if (!flag) {
+  DT::datatable(suppressMessages(most_recent("https://rss.arxiv.org/rss/cs.LG")), filter = 'top', escape = FALSE, rownames = FALSE,
+    options = list(
+   search = list(regex = TRUE, caseInsensitive = TRUE),  
+   pageLength = 10,
+    lengthMenu = c(10, 25, 50, 100, 200),
+    autowidth = TRUE,
+    columnDefs = list(list(width = '80%', targets = list(2)))
+   )
+  )}
+```
+
+:::
