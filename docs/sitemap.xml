@@ -34,7 +34,7 @@
   </url>
   <url>
     <loc>Godata.ca/posts/LLM_Demo/index.html</loc>
-    <lastmod>2025-08-11T14:46:40.368Z</lastmod>
+    <lastmod>2025-08-18T16:11:21.815Z</lastmod>
   </url>
   <url>
     <loc>Godata.ca/posts/RSS_Reader/Most_Recent_Papers.knit.html</loc>
@@ -47,5 +47,13 @@
   <url>
     <loc>Godata.ca/posts/RSS_Reader/Most_Recent_Papers_2.html</loc>
     <lastmod>2025-08-12T22:27:21.043Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/pyspark/cafc_merge_data.html</loc>
+    <lastmod>2025-08-16T15:13:06.764Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/pyspark/index.html</loc>
+    <lastmod>2025-08-18T01:54:05.189Z</lastmod>
   </url>
 </urlset>

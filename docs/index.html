@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-date','listing-reading-time','listing-title','listing-description','listing-categories','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -203,7 +203,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="SmF2YXNjcmlwdA==">Javascript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SnVweXRlcg==">Jupyter <span class="quarto-category-count">(1)</span></div><div class="category" data-category="S01lYW5z">KMeans <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcw==">LLMs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T0JCQkE=">OBBBA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T1BFTkFJ">OPENAI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2hpbnlsaXZl">Shinylive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGlkeVJTUw==">tidyRSS <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="SmF2YXNjcmlwdA==">Javascript <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SnVweXRlcg==">Jupyter <span class="quarto-category-count">(1)</span></div><div class="category" data-category="S01lYW5z">KMeans <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TExNcw==">LLMs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T0JCQkE=">OBBBA <span class="quarto-category-count">(1)</span></div><div class="category" data-category="T1BFTkFJ">OPENAI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2hpbnlsaXZl">Shinylive <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dGlkeVJTUw==">tidyRSS <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -250,55 +250,40 @@ window.Quarto = {
   </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1755056077171">
-<div class="thumbnail"><a href="./posts/RSS_Reader/index.html" class="no-external">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/RSS_Reader/index.html" class="no-external"></a>
-</h3>
-<div class="delink listing-description"><a href="./posts/RSS_Reader/index.html" class="no-external">
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/RSS_Reader/index.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="UHl0aG9uJTJDT1BFTkFJJTJDTExNcyUyQ0p1cHl0ZXIlMkNPQkJCQQ==" data-listing-date-sort="1752552000000" data-listing-file-modified-sort="1754923600368" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="549">
+<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1755533490906">
 <div class="thumbnail"><a href="./posts/LLM_Demo/index.html" class="no-external">
 
-<img loading="lazy" src="./posts/LLM_Demo/llm_photo.png" class="thumbnail-image">
-
 </a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/LLM_Demo/index.html" class="no-external">Easily Build Customized LLMs</a>
+<a href="./posts/LLM_Demo/index.html" class="no-external"></a>
 </h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T1BFTkFJ'); return false;">OPENAI</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TExNcw=='); return false;">LLMs</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('SnVweXRlcg=='); return false;">Jupyter</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('T0JCQkE='); return false;">OBBBA</div>
-
-</div>
 <div class="delink listing-description"><a href="./posts/LLM_Demo/index.html" class="no-external">
-Whether you refer to the One Big Beautiful Bill or the One Big Bad Bill - this LLM demonstrates how to query the bill that is now law. Just how many unexposed nuggets buried…
 </a></div>
 </div>
 <div class="metadata">
 <a href="./posts/LLM_Demo/index.html" class="no-external">
-<div class="listing-date">
-Jul 15, 2025
+</a>
 </div>
-<div class="listing-reading-time">3 min</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1755482045189" data-listing-reading-time-sort="1" data-listing-word-count-sort="85">
+<div class="thumbnail"><a href="./posts/pyspark/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/pyspark/open_art_pipelines.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/pyspark/index.html" class="no-external">Data Pipelines with Pyspark</a>
+</h3>
+<div class="delink listing-description"><a href="./posts/pyspark/index.html" class="no-external">
+<pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="co">#| echo: true</span></span>
+<span id="cb1-2"><span class="op">%</span>run cafc_quarterly_fraud_data_pipeline.py</span></code></pre>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/pyspark/index.html" class="no-external">
+<div class="listing-reading-time">1 min</div>
 </a>
 </div>
 </div>
@@ -361,6 +346,42 @@ There are more research papers being published than we could ever consume. This 
 <a href="./posts/RSS_Reader/index.html" class="no-external">
 <div class="listing-date">
 Jun 15, 2025
+</div>
+<div class="listing-reading-time">2 min</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="UHl0aG9uJTJDT1BFTkFJJTJDTExNcyUyQ0p1cHl0ZXIlMkNPQkJCQQ==" data-listing-date-sort="1748923200000" data-listing-file-modified-sort="1755533481815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="332">
+<div class="thumbnail"><a href="./posts/LLM_Demo/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/LLM_Demo/llm_photo.png" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/LLM_Demo/index.html" class="no-external">Easily Build Customized LLMs</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('UHl0aG9u'); return false;">Python</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('T1BFTkFJ'); return false;">OPENAI</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('TExNcw=='); return false;">LLMs</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('SnVweXRlcg=='); return false;">Jupyter</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('T0JCQkE='); return false;">OBBBA</div>
+
+</div>
+<div class="delink listing-description"><a href="./posts/LLM_Demo/index.html" class="no-external">
+One of the use cases for localized LLMs is to help digest new bills, policies, and or court decisions in an efficient and expedient manner. Journalists frequently encounter…
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/LLM_Demo/index.html" class="no-external">
+<div class="listing-date">
+Jun 3, 2025
 </div>
 <div class="listing-reading-time">2 min</div>
 </a>
