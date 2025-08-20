@@ -15,7 +15,7 @@
     }
   },
   "quarto": {
-    "version": "1.6.39",
+    "version": "1.7.32",
     "engines": ["knitr", "markdown", "jupyter"]
   },
   "python": {
@@ -23,7 +23,7 @@
     "requires": null,
     "package_manager": {
       "name": "pip",
-      "version": "25.1.1",
+      "version": "25.2",
       "package_file": "requirements.txt"
     }
   },
@@ -280,42 +280,6 @@
         "Repository": "CRAN",
         "Date/Publication": "2025-07-02 16:40:02 UTC",
         "Built": "R 4.5.1; x86_64-apple-darwin20; 2025-07-17 19:17:42 UTC; unix"
-      }
-    },
-    "RcppTOML": {
-      "Source": "CRAN",
-      "Repository": "http://cran.rstudio.com",
-      "description": {
-        "Package": "RcppTOML",
-        "Type": "Package",
-        "Title": "'Rcpp' Bindings to Parser for \"Tom's Obvious Markup Language\"",
-        "Version": "0.2.3",
-        "Date": "2025-03-08",
-        "Authors@R": "c(person(\"Dirk\", \"Eddelbuettel\", role = c(\"aut\", \"cre\"), email = \"edd@debian.org\",\n                    comment = c(ORCID = \"0000-0001-6419-907X\")),\n             person(\"Mark\", \"Gillard\", role = \"aut\",\n                    comment = \"Author of 'toml++' header library\"))",
-        "Description": "The configuration format defined by 'TOML' (which expands to\n \"Tom's Obvious Markup Language\") specifies an excellent format\n (described at <https://toml.io/en/>) suitable for both human editing\n as well as the common uses of a machine-readable format. This package\n uses 'Rcpp' to connect to the 'toml++' parser written by Mark Gillard\n to R.",
-        "SystemRequirements": "A C++17 compiler",
-        "BugReports": "https://github.com/eddelbuettel/rcpptoml/issues",
-        "URL": "http://dirk.eddelbuettel.com/code/rcpp.toml.html",
-        "Imports": "Rcpp (>= 1.0.8)",
-        "Depends": "R (>= 3.3.0)",
-        "LinkingTo": "Rcpp",
-        "Suggests": "tinytest",
-        "License": "GPL (>= 2)",
-        "NeedsCompilation": "yes",
-        "Packaged": "2025-03-08 13:54:57 UTC; edd",
-        "Author": "Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>),\n  Mark Gillard [aut] (Author of 'toml++' header library)",
-        "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
-        "Repository": "CRAN",
-        "Date/Publication": "2025-03-08 14:30:06 UTC",
-        "Built": "R 4.5.0; x86_64-apple-darwin20; 2025-04-01 01:25:28 UTC; unix",
-        "Archs": "RcppTOML.so.dSYM",
-        "RemoteType": "standard",
-        "RemotePkgRef": "RcppTOML",
-        "RemoteRef": "RcppTOML",
-        "RemoteRepos": "http://cran.rstudio.com",
-        "RemoteReposName": "CRAN",
-        "RemotePkgPlatform": "x86_64-apple-darwin20",
-        "RemoteSha": "0.2.3"
       }
     },
     "anytime": {
@@ -704,6 +668,40 @@
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-apple-darwin20",
         "RemoteSha": "0.9.0"
+      }
+    },
+    "bsplus": {
+      "Source": "CRAN",
+      "Repository": "http://cran.rstudio.com",
+      "description": {
+        "Package": "bsplus",
+        "Type": "Package",
+        "Title": "Adds Functionality to the R Markdown + Shiny Bootstrap Framework",
+        "Version": "0.1.5",
+        "Authors@R": "c(\n    person(\n      given = \"Ian\",\n      family = \"Lyttle\",\n      email = \"ijlyttle@me.com\",\n      role = c(\"aut\", \"cre\"),\n      comment = c(ORCID = \"0000-0001-9962-4849\"),\n    ),\n    person(given = \"Alex\", family = \"Shum\", email = \"alex@ALShum.com\", role = c(\"ctb\")),\n    person(given = \"Emerson\", family = \"Berry\", email = \"berrye123@gmail.com\", role = c(\"ctb\"))\n  )",
+        "Description": "The Bootstrap framework lets you add some JavaScript functionality to your web site by\n  adding attributes to your HTML tags - Bootstrap takes care of the JavaScript\n  <https://getbootstrap.com/docs/3.3/javascript/>. If you are using R Markdown or Shiny, you can\n  use these functions to create collapsible sections, accordion panels, modals, tooltips,\n  popovers, and an accordion sidebar framework (not described at Bootstrap site).\n  Please note this package was designed for Bootstrap 3.3.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://ijlyttle.github.io/bsplus/,\nhttps://github.com/ijlyttle/bsplus",
+        "Depends": "R (>= 3.3.0)",
+        "Imports": "htmltools, magrittr, purrr, lubridate, stringr, rmarkdown,\nglue, jsonlite, methods",
+        "BugReports": "https://github.com/ijlyttle/bsplus/issues",
+        "RoxygenNote": "7.3.2",
+        "Encoding": "UTF-8",
+        "Suggests": "testthat, shiny, covr, knitr, markdown, withr, litedown",
+        "NeedsCompilation": "no",
+        "Packaged": "2025-04-06 11:54:20 UTC; ijlyttle",
+        "Author": "Ian Lyttle [aut, cre] (<https://orcid.org/0000-0001-9962-4849>),\n  Alex Shum [ctb],\n  Emerson Berry [ctb]",
+        "Maintainer": "Ian Lyttle <ijlyttle@me.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-04-06 12:20:01 UTC",
+        "Built": "R 4.5.0; ; 2025-04-06 14:27:19 UTC; unix",
+        "RemoteType": "standard",
+        "RemoteRef": "bsplus",
+        "RemotePkgRef": "bsplus",
+        "RemoteRepos": "http://cran.rstudio.com",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-apple-darwin20",
+        "RemoteSha": "0.1.5"
       }
     },
     "cachem": {
@@ -1224,34 +1222,40 @@
         "RemoteSha": "0.6.37"
       }
     },
-    "dotenv": {
+    "downloadthis": {
       "Source": "CRAN",
       "Repository": "http://cran.rstudio.com",
       "description": {
-        "Package": "dotenv",
-        "Title": "Load Environment Variables from '.env'",
-        "Version": "1.0.3",
-        "Authors@R": "c(person(\"Gábor\", \"Csárdi\", role = c(\"aut\", \"cre\", \"cph\"), email =\n    \"csardi.gabor@gmail.com\"))",
-        "Description": "Load configuration from a '.env' file, that is\n    in the current working directory, into environment variables.",
+        "Package": "downloadthis",
+        "Title": "Implement Download Buttons in 'rmarkdown'",
+        "Version": "0.5.0",
+        "Authors@R": "\n    c(\n        person(given = \"Felipe\",\n           family = \"Mattioni Maturana\",\n           role = c(\"aut\", \"cre\"),\n           email = \"felipe.mattioni@med.uni-tuebingen.de\",\n           comment = c(ORCID = \"0000-0002-4221-6104\")),\n        person(given = \"John\",\n           family = \"Coene\",\n           role = c(\"ctb\"),\n           email = \"jcoenep@gmail.com\")\n    )",
+        "Description": "Implement download buttons in HTML output from 'rmarkdown' without the need for 'runtime:shiny'.",
         "License": "MIT + file LICENSE",
-        "URL": "https://github.com/gaborcsardi/dotenv",
-        "BugReports": "https://github.com/gaborcsardi/dotenv/issues",
-        "RoxygenNote": "5.0.1.9000",
+        "URL": "https://github.com/fmmattioni/downloadthis",
+        "BugReports": "https://github.com/fmmattioni/downloadthis/issues",
         "Encoding": "UTF-8",
+        "Imports": "fs, readr, writexl, bsplus, mime, htmltools, magrittr, zip,\nggplot2, base64enc",
+        "RoxygenNote": "7.3.2",
+        "Suggests": "knitr, rmarkdown, testthat (>= 3.0.1), spelling, covr",
+        "VignetteBuilder": "knitr",
+        "Language": "en-US",
+        "Config/testthat/edition": "3",
+        "Config/testthat/parallel": "true",
         "NeedsCompilation": "no",
-        "Packaged": "2021-04-22 13:05:27 UTC; gaborcsardi",
-        "Author": "Gábor Csárdi [aut, cre, cph]",
-        "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
+        "Packaged": "2025-07-11 13:53:57 UTC; fmattioni",
+        "Author": "Felipe Mattioni Maturana [aut, cre] (ORCID:\n    <https://orcid.org/0000-0002-4221-6104>),\n  John Coene [ctb]",
+        "Maintainer": "Felipe Mattioni Maturana <felipe.mattioni@med.uni-tuebingen.de>",
         "Repository": "CRAN",
-        "Date/Publication": "2021-04-22 13:30:03 UTC",
-        "Built": "R 4.5.0; ; 2025-04-01 03:16:50 UTC; unix",
+        "Date/Publication": "2025-07-11 14:10:08 UTC",
+        "Built": "R 4.5.1; ; 2025-07-15 01:43:20 UTC; unix",
         "RemoteType": "standard",
-        "RemoteRef": "dotenv",
-        "RemotePkgRef": "dotenv",
+        "RemoteRef": "downloadthis",
+        "RemotePkgRef": "downloadthis",
         "RemoteRepos": "http://cran.rstudio.com",
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-apple-darwin20",
-        "RemoteSha": "1.0.3"
+        "RemoteSha": "0.5.0"
       }
     },
     "dplyr": {
@@ -1327,38 +1331,6 @@
         "RemoteReposName": "CRAN",
         "RemotePkgPlatform": "x86_64-apple-darwin20",
         "RemoteSha": "1.3.1"
-      }
-    },
-    "duckdb": {
-      "Source": "CRAN",
-      "Repository": "http://cran.rstudio.com",
-      "description": {
-        "Package": "duckdb",
-        "Title": "DBI Package for the DuckDB Database Management System",
-        "Version": "1.3.2",
-        "Authors@R": "c(\n    person(\"Hannes\", \"Mühleisen\", , \"hannes@cwi.nl\", role = \"aut\",\n           comment = c(ORCID = \"0000-0001-8552-0029\")),\n    person(\"Mark\", \"Raasveldt\", , \"mark.raasveldt@cwi.nl\", role = \"aut\",\n           comment = c(ORCID = \"0000-0001-5005-6844\")),\n    person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = \"cre\",\n           comment = c(ORCID = \"0000-0002-1416-3412\")),\n    person(\"Stichting DuckDB Foundation\", role = \"cph\"),\n    person(\"Apache Software Foundation\", role = \"cph\"),\n    person(\"PostgreSQL Global Development Group\", role = \"cph\"),\n    person(\"The Regents of the University of California\", role = \"cph\"),\n    person(\"Cameron Desrochers\", role = \"cph\"),\n    person(\"Victor Zverovich\", role = \"cph\"),\n    person(\"RAD Game Tools\", role = \"cph\"),\n    person(\"Valve Software\", role = \"cph\"),\n    person(\"Rich Geldreich\", role = \"cph\"),\n    person(\"Tenacious Software LLC\", role = \"cph\"),\n    person(\"The RE2 Authors\", role = \"cph\"),\n    person(\"Google Inc.\", role = \"cph\"),\n    person(\"Facebook Inc.\", role = \"cph\"),\n    person(\"Steven G. Johnson\", role = \"cph\"),\n    person(\"Jiahao Chen\", role = \"cph\"),\n    person(\"Tony Kelman\", role = \"cph\"),\n    person(\"Jonas Fonseca\", role = \"cph\"),\n    person(\"Lukas Fittl\", role = \"cph\"),\n    person(\"Salvatore Sanfilippo\", role = \"cph\"),\n    person(\"Art.sy, Inc.\", role = \"cph\"),\n    person(\"Oran Agra\", role = \"cph\"),\n    person(\"Redis Labs, Inc.\", role = \"cph\"),\n    person(\"Melissa O'Neill\", role = \"cph\"),\n    person(\"PCG Project contributors\", role = \"cph\")\n  )",
-        "Description": "The DuckDB project is an embedded analytical data management\n    system with support for the Structured Query Language (SQL). This\n    package includes all of DuckDB and an R Database Interface (DBI)\n    connector.",
-        "License": "MIT + file LICENSE",
-        "URL": "https://r.duckdb.org/, https://github.com/duckdb/duckdb-r",
-        "BugReports": "https://github.com/duckdb/duckdb-r/issues",
-        "Depends": "DBI, R (>= 4.1.0)",
-        "Imports": "methods, utils",
-        "Suggests": "adbcdrivermanager, arrow (>= 13.0.0), bit64, callr, clock,\nDBItest, dbplyr, dplyr, rlang, testthat, tibble, vctrs, withr",
-        "Config/build/compilation-database": "false",
-        "Config/build/never-clean": "true",
-        "Config/comment/compilation-database": "Generate manually with\npkgload:::generate_db() for faster pkgload::load_all()",
-        "Config/gha/extra-packages": "arrow=?ignore-before-r=4.2.0",
-        "Encoding": "UTF-8",
-        "RoxygenNote": "7.3.2.9000",
-        "SystemRequirements": "xz (for building from source)",
-        "Biarch": "true",
-        "NeedsCompilation": "yes",
-        "Packaged": "2025-07-09 14:25:12 UTC; kirill",
-        "Author": "Hannes Mühleisen [aut] (ORCID: <https://orcid.org/0000-0001-8552-0029>),\n  Mark Raasveldt [aut] (ORCID: <https://orcid.org/0000-0001-5005-6844>),\n  Kirill Müller [cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>),\n  Stichting DuckDB Foundation [cph],\n  Apache Software Foundation [cph],\n  PostgreSQL Global Development Group [cph],\n  The Regents of the University of California [cph],\n  Cameron Desrochers [cph],\n  Victor Zverovich [cph],\n  RAD Game Tools [cph],\n  Valve Software [cph],\n  Rich Geldreich [cph],\n  Tenacious Software LLC [cph],\n  The RE2 Authors [cph],\n  Google Inc. [cph],\n  Facebook Inc. [cph],\n  Steven G. Johnson [cph],\n  Jiahao Chen [cph],\n  Tony Kelman [cph],\n  Jonas Fonseca [cph],\n  Lukas Fittl [cph],\n  Salvatore Sanfilippo [cph],\n  Art.sy, Inc. [cph],\n  Oran Agra [cph],\n  Redis Labs, Inc. [cph],\n  Melissa O'Neill [cph],\n  PCG Project contributors [cph]",
-        "Maintainer": "Kirill Müller <kirill@cynkra.com>",
-        "Repository": "CRAN",
-        "Date/Publication": "2025-07-09 17:50:02 UTC",
-        "Built": "R 4.5.1; x86_64-apple-darwin20; 2025-07-09 20:17:19 UTC; unix"
       }
     },
     "evaluate": {
@@ -3120,35 +3092,6 @@
         "RemoteSha": "0.9.0"
       }
     },
-    "png": {
-      "Source": "CRAN",
-      "Repository": "http://cran.rstudio.com",
-      "description": {
-        "Package": "png",
-        "Version": "0.1-8",
-        "Title": "Read and write PNG images",
-        "Author": "Simon Urbanek <Simon.Urbanek@r-project.org>",
-        "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
-        "Depends": "R (>= 2.9.0)",
-        "Description": "This package provides an easy and simple way to read, write and display bitmap images stored in the PNG format. It can read and write both files and in-memory raw vectors.",
-        "License": "GPL-2 | GPL-3",
-        "SystemRequirements": "libpng",
-        "URL": "http://www.rforge.net/png/",
-        "NeedsCompilation": "yes",
-        "Packaged": "2022-11-29 09:42:31 UTC; rforge",
-        "Repository": "CRAN",
-        "Date/Publication": "2022-11-29 11:12:53 UTC",
-        "Built": "R 4.5.0; x86_64-apple-darwin20; 2025-04-01 01:07:19 UTC; unix",
-        "Archs": "png.so.dSYM",
-        "RemoteType": "standard",
-        "RemotePkgRef": "png",
-        "RemoteRef": "png",
-        "RemoteRepos": "http://cran.rstudio.com",
-        "RemoteReposName": "CRAN",
-        "RemotePkgPlatform": "x86_64-apple-darwin20",
-        "RemoteSha": "0.1-8"
-      }
-    },
     "prettyunits": {
       "Source": "CRAN",
       "Repository": "http://cran.rstudio.com",
@@ -3649,45 +3592,6 @@
         "RemoteSha": "2.1.1"
       }
     },
-    "reticulate": {
-      "Source": "CRAN",
-      "Repository": "http://cran.rstudio.com",
-      "description": {
-        "Package": "reticulate",
-        "Type": "Package",
-        "Title": "Interface to 'Python'",
-        "Version": "1.42.0",
-        "Authors@R": "c(\n  person(\"Tomasz\", \"Kalinowski\", role = c(\"ctb\", \"cre\"),\n         email = \"tomasz@posit.co\"),\n  person(\"Kevin\", \"Ushey\", role = c(\"aut\"),\n         email = \"kevin@posit.co\"),\n  person(\"JJ\", \"Allaire\", role = c(\"aut\"), email = \"jj@posit.co\"),\n  person(\"RStudio\", role = c(\"cph\", \"fnd\")),\n  person(\"Yuan\", \"Tang\", role = c(\"aut\", \"cph\"),\n         email = \"terrytangyuan@gmail.com\",\n         comment = c(ORCID = \"0000-0001-5243-233X\")),\n  person(\"Dirk\", \"Eddelbuettel\", role = c(\"ctb\", \"cph\"),\n         email = \"edd@debian.org\"),\n  person(\"Bryan\", \"Lewis\", role = c(\"ctb\", \"cph\"),\n         email = \"blewis@illposed.net\"),\n  person(\"Sigrid\", \"Keydana\", role = c(\"ctb\"),\n         email = \"sigrid@posit.co\"),\n  person(\"Ryan\", \"Hafen\", role = c(\"ctb\", \"cph\"),\n         email = \"rhafen@gmail.com\"),\n  person(\"Marcus\", \"Geelnard\", role = c(\"ctb\", \"cph\"),\n         comment = \"TinyThread library, http://tinythreadpp.bitsnbites.eu/\")\n  )",
-        "Description": "Interface to 'Python' modules, classes, and functions. When calling\n    into 'Python', R data types are automatically converted to their equivalent 'Python'\n    types. When values are returned from 'Python' to R they are converted back to R\n    types. Compatible with all versions of 'Python' >= 2.7.",
-        "License": "Apache License 2.0",
-        "URL": "https://rstudio.github.io/reticulate/,\nhttps://github.com/rstudio/reticulate",
-        "BugReports": "https://github.com/rstudio/reticulate/issues",
-        "SystemRequirements": "Python (>= 2.7.0)",
-        "Encoding": "UTF-8",
-        "Depends": "R (>= 3.5)",
-        "Imports": "Matrix, Rcpp (>= 1.0.7), RcppTOML, graphics, here, jsonlite,\nmethods, png, rappdirs, utils, rlang, withr",
-        "Suggests": "callr, knitr, glue, cli, rmarkdown, pillar, testthat",
-        "LinkingTo": "Rcpp",
-        "RoxygenNote": "7.3.2",
-        "VignetteBuilder": "knitr",
-        "Config/build/compilation-database": "true",
-        "NeedsCompilation": "yes",
-        "Packaged": "2025-03-25 17:06:29 UTC; tomasz",
-        "Author": "Tomasz Kalinowski [ctb, cre],\n  Kevin Ushey [aut],\n  JJ Allaire [aut],\n  RStudio [cph, fnd],\n  Yuan Tang [aut, cph] (<https://orcid.org/0000-0001-5243-233X>),\n  Dirk Eddelbuettel [ctb, cph],\n  Bryan Lewis [ctb, cph],\n  Sigrid Keydana [ctb],\n  Ryan Hafen [ctb, cph],\n  Marcus Geelnard [ctb, cph] (TinyThread library,\n    http://tinythreadpp.bitsnbites.eu/)",
-        "Maintainer": "Tomasz Kalinowski <tomasz@posit.co>",
-        "Repository": "CRAN",
-        "Date/Publication": "2025-03-25 20:40:01 UTC",
-        "Built": "R 4.5.0; x86_64-apple-darwin20; 2025-04-01 16:34:16 UTC; unix",
-        "Archs": "reticulate.so.dSYM",
-        "RemoteType": "standard",
-        "RemotePkgRef": "reticulate",
-        "RemoteRef": "reticulate",
-        "RemoteRepos": "http://cran.rstudio.com",
-        "RemoteReposName": "CRAN",
-        "RemotePkgPlatform": "x86_64-apple-darwin20",
-        "RemoteSha": "1.42.0"
-      }
-    },
     "rlang": {
       "Source": "CRAN",
       "Repository": "http://cran.rstudio.com",
@@ -4000,7 +3904,14 @@
         "Maintainer": "Winston Chang <winston@posit.co>",
         "Repository": "CRAN",
         "Date/Publication": "2025-07-03 06:20:02 UTC",
-        "Built": "R 4.5.1; ; 2025-07-17 19:18:31 UTC; unix"
+        "Built": "R 4.5.1; ; 2025-07-03 07:50:57 UTC; unix",
+        "RemoteType": "standard",
+        "RemotePkgRef": "shiny",
+        "RemoteRef": "shiny",
+        "RemoteRepos": "http://cran.rstudio.com",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-apple-darwin20",
+        "RemoteSha": "1.11.1"
       }
     },
     "shinylive": {
@@ -4797,6 +4708,41 @@
         "RemoteSha": "3.0.2"
       }
     },
+    "writexl": {
+      "Source": "CRAN",
+      "Repository": "http://cran.rstudio.com",
+      "description": {
+        "Package": "writexl",
+        "Type": "Package",
+        "Title": "Export Data Frames to Excel 'xlsx' Format",
+        "Version": "1.5.4",
+        "Authors@R": "c(\n    person(\"Jeroen\", \"Ooms\", ,\"jeroenooms@gmail.com\", role = c(\"aut\", \"cre\"),\n      comment = c(ORCID = \"0000-0002-4035-0289\")),\n    person(\"John McNamara\", role = \"cph\",\n      comment = \"Author of libxlsxwriter (see AUTHORS and COPYRIGHT files for details)\"))",
+        "Description": "Zero-dependency data frame to xlsx exporter based on 'libxlsxwriter'\n    <https://libxlsxwriter.github.io>. Fast and no Java or Excel required.",
+        "License": "BSD_2_clause + file LICENSE",
+        "Encoding": "UTF-8",
+        "URL": "https://ropensci.r-universe.dev/writexl\nhttps://docs.ropensci.org/writexl/",
+        "BugReports": "https://github.com/ropensci/writexl/issues",
+        "RoxygenNote": "7.0.2",
+        "Suggests": "spelling, readxl, nycflights13, testthat, bit64",
+        "Language": "en-US",
+        "SystemRequirements": "zlib",
+        "NeedsCompilation": "yes",
+        "Packaged": "2025-04-15 13:34:41 UTC; jeroen",
+        "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>),\n  John McNamara [cph] (Author of libxlsxwriter (see AUTHORS and COPYRIGHT\n    files for details))",
+        "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2025-04-15 14:40:03 UTC",
+        "Built": "R 4.5.0; x86_64-apple-darwin20; 2025-04-15 15:08:57 UTC; unix",
+        "Archs": "writexl.so.dSYM",
+        "RemoteType": "standard",
+        "RemoteRef": "writexl",
+        "RemotePkgRef": "writexl",
+        "RemoteRepos": "http://cran.rstudio.com",
+        "RemoteReposName": "CRAN",
+        "RemotePkgPlatform": "x86_64-apple-darwin20",
+        "RemoteSha": "1.5.4"
+      }
+    },
     "xfun": {
       "Source": "CRAN",
       "Repository": "http://cran.rstudio.com",
@@ -5103,11 +5049,65 @@
     "_freeze/murphy99.github.io/posts/post-with-code/index/execute-results/html.json": {
       "checksum": "38c6f74a3c32e8ff8f005e4b729e1e33"
     },
+    "_freeze/posts/LLM_Demo/index/execute-results/html.json": {
+      "checksum": "3075d463c66914cf0eb8c7f99964bdac"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css": {
+      "checksum": "81267100e462c21b3d6c0d5bf76a3417"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/bootstrap/bootstrap-icons.css": {
+      "checksum": "2318f137d201fbf51601fa0faba6bef7"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/bootstrap/bootstrap-icons.woff": {
+      "checksum": "1a51dfbe5467607389d603c02a77cd10"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/bootstrap/bootstrap.min.js": {
+      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/quarto.js": {
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "_freeze/posts/LLM_Demo/index/libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
     "_freeze/posts/LLM_Demo/test/execute-results/html.json": {
       "checksum": "af095b6dd45a1f7867c720f57ce9c2ba"
     },
     "_freeze/posts/post-with-code/index/execute-results/html.json": {
       "checksum": "c7ec5ce855b6e7923cacbfe2759cb8f3"
+    },
+    "_freeze/posts/pyspark/cafc_merge_data/execute-results/html.json": {
+      "checksum": "a9f25b216cef6254a1ac5dcc6ca453e9"
+    },
+    "_freeze/posts/pyspark/index/execute-results/html.json": {
+      "checksum": "78c3f34eb79ee3156a9c13a7e56a715d"
+    },
+    "_freeze/posts/RSS_Reader/Most_Recent_Papers_2/execute-results/html.json": {
+      "checksum": "b42e47e81412c3fa4ac602d4a8d84856"
+    },
+    "_freeze/posts/RSS_Reader/Most_Recent_Papers/execute-results/html.json": {
+      "checksum": "310d167910c720b0820420ab9aa9b2b1"
+    },
+    "_freeze/posts/Shinylive/index/execute-results/html.json": {
+      "checksum": "cf20c2e152419d01a7c840029565c58e"
     },
     "_freeze/posts/Test/index/execute-results/html.json": {
       "checksum": "49f14c7632ddbbe64dfafc6cd69c5922"
@@ -5142,6 +5142,15 @@
     "_freeze/site_libs/datatables-css-0.0.0/datatables-crosstalk.css": {
       "checksum": "d8b3c70e6451e656f1fa231e2bf97ced"
     },
+    "_freeze/site_libs/dt-core-1.13.6 2/css/jquery.dataTables.extra.css": {
+      "checksum": "704b5e060968ac06041f9b2d9ee545b5"
+    },
+    "_freeze/site_libs/dt-core-1.13.6 2/css/jquery.dataTables.min.css": {
+      "checksum": "e3621690205662b3f96746d73a0fe4b2"
+    },
+    "_freeze/site_libs/dt-core-1.13.6 2/js/jquery.dataTables.min.js": {
+      "checksum": "44e877882207ee93b9d9d17dd0e11c87"
+    },
     "_freeze/site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css": {
       "checksum": "704b5e060968ac06041f9b2d9ee545b5"
     },
@@ -5150,6 +5159,72 @@
     },
     "_freeze/site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js": {
       "checksum": "44e877882207ee93b9d9d17dd0e11c87"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/css/all.min.css": {
+      "checksum": "ff5785a3bf441a4d9b8576a52bf34f55"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/css/v4-shims.min.css": {
+      "checksum": "e297a64da78cde5971aeb3cf24095995"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/js/script.js": {
+      "checksum": "00ac54539ebd067618fac1c547a4fe16"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-brands-400.ttf": {
+      "checksum": "2f168c6c169839f3a2bdde3f0eab34b4"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-brands-400.woff2": {
+      "checksum": "e1a76a80640111ce9f35d1629e58e684"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-regular-400.ttf": {
+      "checksum": "1564b0c2e86c525600499dae390a1056"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-regular-400.woff2": {
+      "checksum": "26df30826e239a6c4a84c93e81b9a10d"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-solid-900.ttf": {
+      "checksum": "b73761d82a77f73006145848a00c515b"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-solid-900.woff2": {
+      "checksum": "2806e72bf18fa63187e4abf135d186de"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-v4compatibility.ttf": {
+      "checksum": "eeb5fef1fa853df298b53da303c6ffc3"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2 2/webfonts/fa-v4compatibility.woff2": {
+      "checksum": "482f55de92208191dfe507d21f6cb09f"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/css/all.min.css": {
+      "checksum": "ff5785a3bf441a4d9b8576a52bf34f55"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/css/v4-shims.min.css": {
+      "checksum": "e297a64da78cde5971aeb3cf24095995"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/js/script.js": {
+      "checksum": "00ac54539ebd067618fac1c547a4fe16"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-brands-400.ttf": {
+      "checksum": "2f168c6c169839f3a2bdde3f0eab34b4"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-brands-400.woff2": {
+      "checksum": "e1a76a80640111ce9f35d1629e58e684"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-regular-400.ttf": {
+      "checksum": "1564b0c2e86c525600499dae390a1056"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-regular-400.woff2": {
+      "checksum": "26df30826e239a6c4a84c93e81b9a10d"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-solid-900.ttf": {
+      "checksum": "b73761d82a77f73006145848a00c515b"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-solid-900.woff2": {
+      "checksum": "2806e72bf18fa63187e4abf135d186de"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-v4compatibility.ttf": {
+      "checksum": "eeb5fef1fa853df298b53da303c6ffc3"
+    },
+    "_freeze/site_libs/font-awesome-6.7.2/webfonts/fa-v4compatibility.woff2": {
+      "checksum": "482f55de92208191dfe507d21f6cb09f"
     },
     "_freeze/site_libs/htmltools-fill-0.5.8.1/fill.css": {
       "checksum": "0c307b2ce7a3fa7f260a0451457c809f"
@@ -5181,11 +5256,32 @@
     "_freeze/site_libs/nouislider-7.0.10/jquery.nouislider.min.js": {
       "checksum": "a11083b61e4d8795588e25496cd35515"
     },
+    "_freeze/site_libs/quarto-html 2/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "_freeze/site_libs/quarto-html 2/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "_freeze/site_libs/quarto-html 2/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
+    },
+    "_freeze/site_libs/quarto-html 2/quarto.js": {
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "_freeze/site_libs/quarto-html 2/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
+    },
+    "_freeze/site_libs/quarto-html 2/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "_freeze/site_libs/quarto-html 2/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
     "_freeze/site_libs/quarto-listing/list.min.js": {
       "checksum": "d9fe78988e4cf7a26ac9e06aca9ce679"
     },
     "_freeze/site_libs/quarto-listing/quarto-listing.js": {
-      "checksum": "1831b8c343851119e930ffe6c724e81c"
+      "checksum": "919f171782f2658435097266e834d316"
     },
     "_freeze/site_libs/selectize-0.12.0/selectize.bootstrap3.css": {
       "checksum": "573633e5eb0860d61ba2e59fd6b41389"
@@ -5193,17 +5289,74 @@
     "_freeze/site_libs/selectize-0.12.0/selectize.min.js": {
       "checksum": "146435eeda32f0e12bca8519f0da5ad9"
     },
+    "_freeze/site_libs/selectize-0.15.2 2/accessibility/js/selectize-plugin-a11y.js": {
+      "checksum": "23f8e6b343db2bfafc0879e557c233e0"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/accessibility/js/selectize-plugin-a11y.min.js": {
+      "checksum": "d9074cd11d34901f4d36336875b1dc7f"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/css/selectize.bootstrap3.css": {
+      "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/js/selectize.js": {
+      "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/js/selectize.min.js": {
+      "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/auto_position.scss": {
+      "checksum": "24bc21544d8ed080569a8d232cabcfdd"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/clear_button.scss": {
+      "checksum": "33ffd443eb4b43a997f53e52de69a5cb"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/drag_drop.scss": {
+      "checksum": "e91eff89dacb8133e364c08bbe94473f"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/dropdown_header.scss": {
+      "checksum": "6760319599c605d8a4facea40f86650e"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/optgroup_columns.scss": {
+      "checksum": "9c9fa1380e3c6e976c19e99b438b4729"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/plugins/remove_button.scss": {
+      "checksum": "aa98529e99aafdd7d41a9719eca1f3ad"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap3.scss": {
+      "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap4.scss": {
+      "checksum": "184afc969e37336892a848f03f38e815"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap5.scss": {
+      "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/selectize.default.scss": {
+      "checksum": "e6ea8f222779de308176c27443a0487f"
+    },
+    "_freeze/site_libs/selectize-0.15.2 2/scss/selectize.scss": {
+      "checksum": "3e4231b3721f8eb39678fab2ee238e87"
+    },
     "_freeze/site_libs/selectize-0.15.2/accessibility/js/selectize-plugin-a11y.js": {
       "checksum": "23f8e6b343db2bfafc0879e557c233e0"
     },
     "_freeze/site_libs/selectize-0.15.2/accessibility/js/selectize-plugin-a11y.min.js": {
       "checksum": "d9074cd11d34901f4d36336875b1dc7f"
     },
+    "_freeze/site_libs/selectize-0.15.2/css/selectize.bootstrap3 2.css": {
+      "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
+    },
     "_freeze/site_libs/selectize-0.15.2/css/selectize.bootstrap3.css": {
       "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
     },
+    "_freeze/site_libs/selectize-0.15.2/js/selectize 2.js": {
+      "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
     "_freeze/site_libs/selectize-0.15.2/js/selectize.js": {
       "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
+    "_freeze/site_libs/selectize-0.15.2/js/selectize.min 2.js": {
+      "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
     },
     "_freeze/site_libs/selectize-0.15.2/js/selectize.min.js": {
       "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
@@ -5226,14 +5379,29 @@
     "_freeze/site_libs/selectize-0.15.2/scss/plugins/remove_button.scss": {
       "checksum": "aa98529e99aafdd7d41a9719eca1f3ad"
     },
+    "_freeze/site_libs/selectize-0.15.2/scss/selectize 2.scss": {
+      "checksum": "3e4231b3721f8eb39678fab2ee238e87"
+    },
+    "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap3 2.scss": {
+      "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
     "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap3.scss": {
       "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
+    "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap4 2.scss": {
+      "checksum": "184afc969e37336892a848f03f38e815"
     },
     "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap4.scss": {
       "checksum": "184afc969e37336892a848f03f38e815"
     },
+    "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap5 2.scss": {
+      "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
     "_freeze/site_libs/selectize-0.15.2/scss/selectize.bootstrap5.scss": {
       "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
+    "_freeze/site_libs/selectize-0.15.2/scss/selectize.default 2.scss": {
+      "checksum": "e6ea8f222779de308176c27443a0487f"
     },
     "_freeze/site_libs/selectize-0.15.2/scss/selectize.default.scss": {
       "checksum": "e6ea8f222779de308176c27443a0487f"
@@ -5241,8 +5409,11 @@
     "_freeze/site_libs/selectize-0.15.2/scss/selectize.scss": {
       "checksum": "3e4231b3721f8eb39678fab2ee238e87"
     },
+    "_freeze/walkthrough/execute-results/html.json": {
+      "checksum": "8e73400ed34b58486e1cee3eeebedbc5"
+    },
     "_quarto.yml": {
-      "checksum": "a9b421b87cda031e96d3fb11da8224fc"
+      "checksum": "cc08c354fa8530414eb0cbc9c2649a59"
     },
     ".gradio/certificate.pem": {
       "checksum": "118ecd744d864b32ffdb48b2e29f1d7f"
@@ -5254,13 +5425,19 @@
       "checksum": "a840c5634992c13d4456d35e8005aad8"
     },
     ".Renviron": {
-      "checksum": "446285195057064e65d216d2e2d4f259"
+      "checksum": "62511599f7ae0fc39e9edf9cc17168a3"
     },
     ".Renviron0": {
       "checksum": "fd1aaffc092b9362fc0907826c017d0d"
     },
     ".Rprofile": {
-      "checksum": "80757d3fcd79b026af5170ece3a3d43b"
+      "checksum": "a406170979098d43c961b3b74cd2496b"
+    },
+    ".Rprofile.bak": {
+      "checksum": "57f9047cb06fdbef821b61f49e21406e"
+    },
+    ".vscode/settings.json": {
+      "checksum": "3652e4fdaddd72dc4ca5a3e898e3b9e7"
     },
     "about.qmd": {
       "checksum": "06fb07e5bf11b9ab87e2d97e3297a500"
@@ -5284,7 +5461,7 @@
       "checksum": "d41d8cd98f00b204e9800998ecf8427e"
     },
     "docs/about.html": {
-      "checksum": "796f9b8b1a5d6bdb2bf71df607e814c4"
+      "checksum": "6562b3383171de9f106350b4e66d6d17"
     },
     "docs/avatar-chien01-clipart-md.png": {
       "checksum": "0698ef4c5bdd2182048fa305e89ff8fb"
@@ -5299,94 +5476,109 @@
       "checksum": "cfa649417b1d011234a2363e0251a164"
     },
     "docs/index.html": {
-      "checksum": "b88a0041f4a074be9b5c392423439c44"
+      "checksum": "6546c103ad8cb93606677b30b690b112"
     },
     "docs/index.xml": {
-      "checksum": "44d2ec9fc6fd99656c2c080d64ec6ce5"
+      "checksum": "14f5fd240202fa31bb6ab8740607df20"
     },
     "docs/listings.json": {
-      "checksum": "f5529eee5a8a7131142b8e8f325c7392"
-    },
-    "docs/posts/Chatlas/chatlas.html": {
-      "checksum": "977b1c79ac9e973db03cbc853a451e90"
-    },
-    "docs/posts/LLM_api/elmer.html": {
-      "checksum": "ba2ac5f0740b0edade9211dcffb72332"
-    },
-    "docs/posts/LLM_api/index_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css": {
-      "checksum": "973236bd072d72a04ee9cd82dcc9cb29"
-    },
-    "docs/posts/LLM_api/index_files/libs/bootstrap/bootstrap-icons.css": {
-      "checksum": "2318f137d201fbf51601fa0faba6bef7"
-    },
-    "docs/posts/LLM_api/index_files/libs/bootstrap/bootstrap-icons.woff": {
-      "checksum": "1a51dfbe5467607389d603c02a77cd10"
-    },
-    "docs/posts/LLM_api/index_files/libs/bootstrap/bootstrap.min.js": {
-      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
-    },
-    "docs/posts/LLM_api/index_files/libs/clipboard/clipboard.min.js": {
-      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/anchor.min.js": {
-      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/popper.min.js": {
-      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css": {
-      "checksum": "e26003cea8cd680ca0c55a263523d882"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/quarto.js": {
-      "checksum": "b2cce65711e74956eb7b7aa2f4d3943f"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/tippy.css": {
-      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
-    },
-    "docs/posts/LLM_api/index_files/libs/quarto-html/tippy.umd.min.js": {
-      "checksum": "d828775275749701b48bd9d958814111"
-    },
-    "docs/posts/LLM_api/index.html": {
-      "checksum": "e8a92ad83731c3282f93fc0c69c85a1a"
-    },
-    "docs/posts/LLM_api/index.knit.html": {
-      "checksum": "e8a92ad83731c3282f93fc0c69c85a1a"
+      "checksum": "eecba222cc3c5fbcc1d9c08a1cebad10"
     },
     "docs/posts/LLM_Demo/images/LLM_Fables.jpg": {
       "checksum": "f249342312a2ef7ad9bba837bff940fc"
     },
+    "docs/posts/LLM_Demo/index 2.html": {
+      "checksum": "b12fc17f4b028cd6b9e870842b07051b"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css": {
+      "checksum": "81267100e462c21b3d6c0d5bf76a3417"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-icons.css": {
+      "checksum": "2318f137d201fbf51601fa0faba6bef7"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-icons.woff": {
+      "checksum": "1a51dfbe5467607389d603c02a77cd10"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/bootstrap/bootstrap.min.js": {
+      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/quarto.js": {
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "docs/posts/LLM_Demo/index_files/libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
     "docs/posts/LLM_Demo/index.html": {
-      "checksum": "db38ef207a2f94799e91da6bd7549af8"
+      "checksum": "12234d8da4703af8cb03676f31c184be"
     },
-    "docs/posts/LLM_Demo/LLM_Fables.jpg": {
-      "checksum": "f249342312a2ef7ad9bba837bff940fc"
+    "docs/posts/LLM_Demo/index.ipynb": {
+      "checksum": "c9883efbb25164b9144d21e6698990ec"
     },
-    "docs/posts/Query_chat/QueryChat.html": {
-      "checksum": "15d3e6b10f901fa3db88e1d7b8d322e4"
+    "docs/posts/LLM_Demo/index.qmd0": {
+      "checksum": "5870df991a01a57366ac6e03481af74e"
+    },
+    "docs/posts/LLM_Demo/index.quarto_ipynb": {
+      "checksum": "fbd8a2b077c8c1d0f64acc045db0ffb3"
+    },
+    "docs/posts/LLM_Demo/llm_photo.png": {
+      "checksum": "e2dbc0d27aee76735e2bc6dc4fa2ef0e"
+    },
+    "docs/posts/pyspark/index.html": {
+      "checksum": "af56db0800e0078e21e0c1eeb0e781e1"
+    },
+    "docs/posts/pyspark/open_art_pipelines.png": {
+      "checksum": "904877d287bd805bcbac74a8cc52ac74"
     },
     "docs/posts/RSS_Reader/index.html": {
-      "checksum": "bb2abb6fc33a8d0dfc09e95a93715d0f"
+      "checksum": "76d9e27753e92f46eca3abe4d6128625"
+    },
+    "docs/posts/RSS_Reader/index0.html0": {
+      "checksum": "5bd33d7d9431743c7535e1de56062782"
+    },
+    "docs/posts/RSS_Reader/Most_Recent_Papers_2.html": {
+      "checksum": "ac0d1ea28b485220acd84c518015b67a"
     },
     "docs/posts/RSS_Reader/Most_Recent_Papers.html": {
-      "checksum": "c67592b2fa90d3beaf6a57407c95dd4b"
+      "checksum": "42c53a0dbdf8b5de9553f888ed2adae9"
     },
-    "docs/posts/RSS_Reader/rss_reader_table.html": {
-      "checksum": "727fac4e7a954d79e46e0f44da2b99c8"
+    "docs/posts/RSS_Reader/Most_Recent_Papers.knit.html": {
+      "checksum": "bab4779d6edc61ce9c5d3daedb6b9e19"
     },
     "docs/posts/RSS_Reader/RssReader.jpg": {
       "checksum": "4958969444461931a6bac796299d1b72"
     },
-    "docs/posts/Shinylive/index.html": {
-      "checksum": "940755635542c64aa3b827e0098824d3"
+    "docs/posts/Shinylive/index 2.html": {
+      "checksum": "54b4c751c7d8eaa00c86941784924566"
     },
-    "docs/posts/Shinylive/index.knit.html": {
-      "checksum": "940755635542c64aa3b827e0098824d3"
+    "docs/posts/Shinylive/index.html": {
+      "checksum": "96ca03e238b540d978130c8eafd8fa7e"
+    },
+    "docs/posts/Shinylive/index.knit.md": {
+      "checksum": "6a06f38492063ee5b7416224454c6cf7"
     },
     "docs/posts/Shinylive/openart-image_shinylive.png": {
       "checksum": "82b09ae5cbc0a5be95d216725c6a48e4"
     },
     "docs/posts/Welcome/index.html": {
-      "checksum": "727fac4e7a954d79e46e0f44da2b99c8"
+      "checksum": "1ee056109d3c33253828ecb20d0e3ef6"
     },
     "docs/posts/Welcome/welcome.jpg": {
       "checksum": "378b0b736b319ba8bb26c9a62ad9b134"
@@ -5395,19 +5587,13 @@
       "checksum": "8710a429094d28f16a610edfb817447e"
     },
     "docs/search.json": {
-      "checksum": "0f13dd42f7260cda1f291acc7a2f7189"
+      "checksum": "14c6a449c4ee3c18aad260bf630e49b7"
     },
     "docs/shinylive-sw.js": {
       "checksum": "91385ac0faf01c29c38fab73bba9d083"
     },
-    "docs/shinylive.html": {
-      "checksum": "3116c22429a17c8e49aba306e572af19"
-    },
-    "docs/site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min 2.css": {
-      "checksum": "d1b12f2568ecbe55642fee6aa00bd082"
-    },
-    "docs/site_libs/bootstrap/bootstrap-d1b12f2568ecbe55642fee6aa00bd082.min.css": {
-      "checksum": "d1b12f2568ecbe55642fee6aa00bd082"
+    "docs/site_libs/bootstrap/bootstrap-6bdd2aebeb936dcddaa5f935a5de481c.min.css": {
+      "checksum": "6bdd2aebeb936dcddaa5f935a5de481c"
     },
     "docs/site_libs/bootstrap/bootstrap-icons.css": {
       "checksum": "2318f137d201fbf51601fa0faba6bef7"
@@ -5445,6 +5631,15 @@
     "docs/site_libs/datatables-css-0.0.0/datatables-crosstalk.css": {
       "checksum": "d8b3c70e6451e656f1fa231e2bf97ced"
     },
+    "docs/site_libs/dt-core-1.13.6 2/css/jquery.dataTables.extra.css": {
+      "checksum": "704b5e060968ac06041f9b2d9ee545b5"
+    },
+    "docs/site_libs/dt-core-1.13.6 2/css/jquery.dataTables.min.css": {
+      "checksum": "e3621690205662b3f96746d73a0fe4b2"
+    },
+    "docs/site_libs/dt-core-1.13.6 2/js/jquery.dataTables.min.js": {
+      "checksum": "44e877882207ee93b9d9d17dd0e11c87"
+    },
     "docs/site_libs/dt-core-1.13.6/css/jquery.dataTables.extra.css": {
       "checksum": "704b5e060968ac06041f9b2d9ee545b5"
     },
@@ -5453,6 +5648,72 @@
     },
     "docs/site_libs/dt-core-1.13.6/js/jquery.dataTables.min.js": {
       "checksum": "44e877882207ee93b9d9d17dd0e11c87"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/css/all.min.css": {
+      "checksum": "ff5785a3bf441a4d9b8576a52bf34f55"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/css/v4-shims.min.css": {
+      "checksum": "e297a64da78cde5971aeb3cf24095995"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/js/script.js": {
+      "checksum": "00ac54539ebd067618fac1c547a4fe16"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-brands-400.ttf": {
+      "checksum": "2f168c6c169839f3a2bdde3f0eab34b4"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-brands-400.woff2": {
+      "checksum": "e1a76a80640111ce9f35d1629e58e684"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-regular-400.ttf": {
+      "checksum": "1564b0c2e86c525600499dae390a1056"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-regular-400.woff2": {
+      "checksum": "26df30826e239a6c4a84c93e81b9a10d"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-solid-900.ttf": {
+      "checksum": "b73761d82a77f73006145848a00c515b"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-solid-900.woff2": {
+      "checksum": "2806e72bf18fa63187e4abf135d186de"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-v4compatibility.ttf": {
+      "checksum": "eeb5fef1fa853df298b53da303c6ffc3"
+    },
+    "docs/site_libs/font-awesome-6.7.2 2/webfonts/fa-v4compatibility.woff2": {
+      "checksum": "482f55de92208191dfe507d21f6cb09f"
+    },
+    "docs/site_libs/font-awesome-6.7.2/css/all.min.css": {
+      "checksum": "ff5785a3bf441a4d9b8576a52bf34f55"
+    },
+    "docs/site_libs/font-awesome-6.7.2/css/v4-shims.min.css": {
+      "checksum": "e297a64da78cde5971aeb3cf24095995"
+    },
+    "docs/site_libs/font-awesome-6.7.2/js/script.js": {
+      "checksum": "00ac54539ebd067618fac1c547a4fe16"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-brands-400.ttf": {
+      "checksum": "2f168c6c169839f3a2bdde3f0eab34b4"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-brands-400.woff2": {
+      "checksum": "e1a76a80640111ce9f35d1629e58e684"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-regular-400.ttf": {
+      "checksum": "1564b0c2e86c525600499dae390a1056"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-regular-400.woff2": {
+      "checksum": "26df30826e239a6c4a84c93e81b9a10d"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-solid-900.ttf": {
+      "checksum": "b73761d82a77f73006145848a00c515b"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-solid-900.woff2": {
+      "checksum": "2806e72bf18fa63187e4abf135d186de"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-v4compatibility.ttf": {
+      "checksum": "eeb5fef1fa853df298b53da303c6ffc3"
+    },
+    "docs/site_libs/font-awesome-6.7.2/webfonts/fa-v4compatibility.woff2": {
+      "checksum": "482f55de92208191dfe507d21f6cb09f"
     },
     "docs/site_libs/htmltools-fill-0.5.8.1/fill.css": {
       "checksum": "0c307b2ce7a3fa7f260a0451457c809f"
@@ -6228,17 +6489,41 @@
     "docs/site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css": {
       "checksum": "a66352fc1966c083966991ad27ed5800"
     },
+    "docs/site_libs/quarto-html 2/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "docs/site_libs/quarto-html 2/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "docs/site_libs/quarto-html 2/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
+    },
+    "docs/site_libs/quarto-html 2/quarto.js": {
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "docs/site_libs/quarto-html 2/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
+    },
+    "docs/site_libs/quarto-html 2/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "docs/site_libs/quarto-html 2/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
     "docs/site_libs/quarto-html/anchor.min.js": {
       "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
     },
     "docs/site_libs/quarto-html/popper.min.js": {
       "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
     },
-    "docs/site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css": {
-      "checksum": "e26003cea8cd680ca0c55a263523d882"
+    "docs/site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
     },
     "docs/site_libs/quarto-html/quarto.js": {
-      "checksum": "b2cce65711e74956eb7b7aa2f4d3943f"
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "docs/site_libs/quarto-html/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
     },
     "docs/site_libs/quarto-html/tippy.css": {
       "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
@@ -6250,7 +6535,7 @@
       "checksum": "d9fe78988e4cf7a26ac9e06aca9ce679"
     },
     "docs/site_libs/quarto-listing/quarto-listing.js": {
-      "checksum": "1831b8c343851119e930ffe6c724e81c"
+      "checksum": "919f171782f2658435097266e834d316"
     },
     "docs/site_libs/quarto-nav/headroom.min.js": {
       "checksum": "ace0360e576db9b6e7df48ac68ddbbf4"
@@ -6273,17 +6558,74 @@
     "docs/site_libs/selectize-0.12.0/selectize.min.js": {
       "checksum": "146435eeda32f0e12bca8519f0da5ad9"
     },
+    "docs/site_libs/selectize-0.15.2 2/accessibility/js/selectize-plugin-a11y.js": {
+      "checksum": "23f8e6b343db2bfafc0879e557c233e0"
+    },
+    "docs/site_libs/selectize-0.15.2 2/accessibility/js/selectize-plugin-a11y.min.js": {
+      "checksum": "d9074cd11d34901f4d36336875b1dc7f"
+    },
+    "docs/site_libs/selectize-0.15.2 2/css/selectize.bootstrap3.css": {
+      "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
+    },
+    "docs/site_libs/selectize-0.15.2 2/js/selectize.js": {
+      "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
+    "docs/site_libs/selectize-0.15.2 2/js/selectize.min.js": {
+      "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/auto_position.scss": {
+      "checksum": "24bc21544d8ed080569a8d232cabcfdd"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/clear_button.scss": {
+      "checksum": "33ffd443eb4b43a997f53e52de69a5cb"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/drag_drop.scss": {
+      "checksum": "e91eff89dacb8133e364c08bbe94473f"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/dropdown_header.scss": {
+      "checksum": "6760319599c605d8a4facea40f86650e"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/optgroup_columns.scss": {
+      "checksum": "9c9fa1380e3c6e976c19e99b438b4729"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/plugins/remove_button.scss": {
+      "checksum": "aa98529e99aafdd7d41a9719eca1f3ad"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap3.scss": {
+      "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap4.scss": {
+      "checksum": "184afc969e37336892a848f03f38e815"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/selectize.bootstrap5.scss": {
+      "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/selectize.default.scss": {
+      "checksum": "e6ea8f222779de308176c27443a0487f"
+    },
+    "docs/site_libs/selectize-0.15.2 2/scss/selectize.scss": {
+      "checksum": "3e4231b3721f8eb39678fab2ee238e87"
+    },
     "docs/site_libs/selectize-0.15.2/accessibility/js/selectize-plugin-a11y.js": {
       "checksum": "23f8e6b343db2bfafc0879e557c233e0"
     },
     "docs/site_libs/selectize-0.15.2/accessibility/js/selectize-plugin-a11y.min.js": {
       "checksum": "d9074cd11d34901f4d36336875b1dc7f"
     },
+    "docs/site_libs/selectize-0.15.2/css/selectize.bootstrap3 2.css": {
+      "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
+    },
     "docs/site_libs/selectize-0.15.2/css/selectize.bootstrap3.css": {
       "checksum": "1e4927e21c8fbe502e4a8e0af3687335"
     },
+    "docs/site_libs/selectize-0.15.2/js/selectize 2.js": {
+      "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
     "docs/site_libs/selectize-0.15.2/js/selectize.js": {
       "checksum": "de76b82b0a8c0a41b2de780894c77f6f"
+    },
+    "docs/site_libs/selectize-0.15.2/js/selectize.min 2.js": {
+      "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
     },
     "docs/site_libs/selectize-0.15.2/js/selectize.min.js": {
       "checksum": "841bf039b1428b7f157d3b5ffb7ab54f"
@@ -6306,14 +6648,29 @@
     "docs/site_libs/selectize-0.15.2/scss/plugins/remove_button.scss": {
       "checksum": "aa98529e99aafdd7d41a9719eca1f3ad"
     },
+    "docs/site_libs/selectize-0.15.2/scss/selectize 2.scss": {
+      "checksum": "3e4231b3721f8eb39678fab2ee238e87"
+    },
+    "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap3 2.scss": {
+      "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
     "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap3.scss": {
       "checksum": "4e90880432f1122a6c4206ddfd3382fc"
+    },
+    "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap4 2.scss": {
+      "checksum": "184afc969e37336892a848f03f38e815"
     },
     "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap4.scss": {
       "checksum": "184afc969e37336892a848f03f38e815"
     },
+    "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap5 2.scss": {
+      "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
     "docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap5.scss": {
       "checksum": "1ef58775fe8985bc0b211ffb242cfbff"
+    },
+    "docs/site_libs/selectize-0.15.2/scss/selectize.default 2.scss": {
+      "checksum": "e6ea8f222779de308176c27443a0487f"
     },
     "docs/site_libs/selectize-0.15.2/scss/selectize.default.scss": {
       "checksum": "e6ea8f222779de308176c27443a0487f"
@@ -6322,16 +6679,13 @@
       "checksum": "3e4231b3721f8eb39678fab2ee238e87"
     },
     "docs/sitemap.xml": {
-      "checksum": "29be86b2593ec6f93f10501ee2ae3bf3"
+      "checksum": "84921c8d195da25127e8a5339a236379"
     },
     "docs/styles.css": {
       "checksum": "a8b9e8be65aecba6cba736e5c45e28fa"
     },
     "docs/walkthrough.html": {
-      "checksum": "d64ec14bb2ade84280cf57ff4e7dbfb3"
-    },
-    "gitignore": {
-      "checksum": "fbb4ef07e511d7f0a25201b9f01807ae"
+      "checksum": "e15a7b46eadc690c8591b792bd77dc3a"
     },
     "godata_look.jpg": {
       "checksum": "5dd780c5b177af107c7b425f6729d729"
@@ -6352,121 +6706,295 @@
       "checksum": "041a6d6b496668ebc1d18f31749a3da8"
     },
     "index.qmd": {
-      "checksum": "0a996a390cbd8292fdd5bed30938a9e5"
+      "checksum": "877eb3fa3994099f105e5003fe7d2a9b"
     },
     "Makefile": {
-      "checksum": "ff83ee7f92d65024cc6d8a281e6ea12c"
+      "checksum": "12bb4b5a7b937fac9954068bc96ce0fc"
     },
     "persist/my_vector_store.duckdb": {
-      "checksum": "377a5c3f394c9c88627610756ba19e08"
+      "checksum": "1bcdea9a3d495d50abdea53201ca7922"
     },
     "posts/_metadata.yml": {
-      "checksum": "6ed8826cbf6dae43f3528a2d293c6bc1"
-    },
-    "posts/Chatlas/chatlas.qmd": {
-      "checksum": "29a56957b8fa9d74ac689aa21dc5333e"
-    },
-    "posts/LLM_api/index_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css": {
-      "checksum": "973236bd072d72a04ee9cd82dcc9cb29"
-    },
-    "posts/LLM_api/index_files/libs/bootstrap/bootstrap-icons.css": {
-      "checksum": "2318f137d201fbf51601fa0faba6bef7"
-    },
-    "posts/LLM_api/index_files/libs/bootstrap/bootstrap-icons.woff": {
-      "checksum": "1a51dfbe5467607389d603c02a77cd10"
-    },
-    "posts/LLM_api/index_files/libs/bootstrap/bootstrap.min.js": {
-      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
-    },
-    "posts/LLM_api/index_files/libs/clipboard/clipboard.min.js": {
-      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/anchor.min.js": {
-      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/popper.min.js": {
-      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css": {
-      "checksum": "e26003cea8cd680ca0c55a263523d882"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/quarto.js": {
-      "checksum": "b2cce65711e74956eb7b7aa2f4d3943f"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/tippy.css": {
-      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
-    },
-    "posts/LLM_api/index_files/libs/quarto-html/tippy.umd.min.js": {
-      "checksum": "d828775275749701b48bd9d958814111"
-    },
-    "posts/LLM_api/index.knit.md": {
-      "checksum": "f21a03f8549a0586ec202a4f99307432"
-    },
-    "posts/LLM_api/index.qmd": {
-      "checksum": "6e333ed72cba29d2a07f20a32b4dc1c3"
-    },
-    "posts/LLM_api/index0.rmarkdown0": {
-      "checksum": "e726486a978a9ea21716eb11e2587703"
-    },
-    "posts/LLM_api/secrets/.env": {
-      "checksum": "0739f6d82f7c85adde0598014e67a0ef"
+      "checksum": "aa64acf005db4bd80edfe9a5b774df06"
     },
     "posts/LLM_Demo/.gradio/certificate.pem": {
       "checksum": "118ecd744d864b32ffdb48b2e29f1d7f"
     },
     "posts/LLM_Demo/.gradio/flagged/dataset1.csv": {
-      "checksum": "11a8147e218dc9f42a853e529b92d0b9"
+      "checksum": "59a5c58f8b794d27c2ba7f7acf577e02"
     },
-    "posts/LLM_Demo/dog_on_laptop.jpg": {
-      "checksum": "4d0300fe9e37854a296e0d3305c32841"
+    "posts/LLM_Demo/BBB/61422-Reconciliation-Distributional-Analysis.pdf": {
+      "checksum": "291615ba8c96f8a6c62fabe1cd864b98"
+    },
+    "posts/LLM_Demo/BBB/OBBBA-Summary-and-Analysis.pdf": {
+      "checksum": "e24b17ed96011e85a0eefedd5c1a9f09"
+    },
+    "posts/LLM_Demo/BBB/One Big Beautiful Bill Act Tax Changes FAQ _ Tax Foundation.pdf": {
+      "checksum": "7e76b275add156834bae605ab507abc3"
+    },
+    "posts/LLM_Demo/BBB/onebigbeautifulbillcomprehensiveanalysis.pdf": {
+      "checksum": "db47701133f8ca77107249befee74df5"
+    },
+    "posts/LLM_Demo/BBB/The-One-Big-Beautiful-Bill-Section-by-Section.pdf": {
+      "checksum": "ff3b4d5cba36f51cd3969a8449687006"
+    },
+    "posts/LLM_Demo/BBB/usa-public-finance-one-big-beautiful-bill-act-13-june-2025.pdf": {
+      "checksum": "a11d55d6350e468e6a14c132ecf295b1"
+    },
+    "posts/LLM_Demo/gradio-screen-recording-2025-07-31T21-14-31.mp4": {
+      "checksum": "a85545791b52ef204e2d5530e5e28fc9"
     },
     "posts/LLM_Demo/images/LLM_Fables.jpg": {
       "checksum": "f249342312a2ef7ad9bba837bff940fc"
     },
-    "posts/LLM_Demo/index.qmd": {
-      "checksum": "4b48f03d34005d7595b66268e98f3527"
+    "posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css": {
+      "checksum": "81267100e462c21b3d6c0d5bf76a3417"
     },
-    "posts/LLM_Demo/non-binary_toronto.jpg": {
-      "checksum": "d359f4e21f0cd26a236ebb5252543098"
+    "posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-icons.css": {
+      "checksum": "2318f137d201fbf51601fa0faba6bef7"
     },
-    "posts/LLM_Demo/openart-image_HGe37x2u_1748901195742_raw.jpg": {
-      "checksum": "4d0300fe9e37854a296e0d3305c32841"
+    "posts/LLM_Demo/index_files/libs/bootstrap/bootstrap-icons.woff": {
+      "checksum": "1a51dfbe5467607389d603c02a77cd10"
+    },
+    "posts/LLM_Demo/index_files/libs/bootstrap/bootstrap.min.js": {
+      "checksum": "e2b09c06f0e714b6144a6788a28e3950"
+    },
+    "posts/LLM_Demo/index_files/libs/clipboard/clipboard.min.js": {
+      "checksum": "15f52a1ee547f2bdd46e56747332ca2d"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/anchor.min.js": {
+      "checksum": "91bcf6cd1fd88fec3f109811e5fc3546"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/popper.min.js": {
+      "checksum": "3a4a291ccf3f1ea0f82b641542fd3827"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css": {
+      "checksum": "37eea08aefeeee20ff55810ff984fec1"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/quarto.js": {
+      "checksum": "6f4245742deb3cc92337dbe2701ccfe1"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/tabsets/tabsets.js": {
+      "checksum": "e8d6a8862b33ccc461f8fd532e05b365"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/tippy.css": {
+      "checksum": "ebd6f8ce46a677e1a4f5f8a8317109a9"
+    },
+    "posts/LLM_Demo/index_files/libs/quarto-html/tippy.umd.min.js": {
+      "checksum": "d828775275749701b48bd9d958814111"
+    },
+    "posts/LLM_Demo/index.ipynb": {
+      "checksum": "efbfed47e4b489356bac514c5d3498f8"
+    },
+    "posts/LLM_Demo/index0.ipynb0": {
+      "checksum": "3efa500a98923fc44c526e1ef3188039"
+    },
+    "posts/LLM_Demo/index0.qmdbak": {
+      "checksum": "9ac9f4c2a2f72fcff0dc9fec2941260c"
+    },
+    "posts/LLM_Demo/index00.qmd00": {
+      "checksum": "5870df991a01a57366ac6e03481af74e"
+    },
+    "posts/LLM_Demo/llm_photo.png": {
+      "checksum": "e2dbc0d27aee76735e2bc6dc4fa2ef0e"
+    },
+    "posts/LLM_Demo/LLM.quarto_ipynb0": {
+      "checksum": "70e9ccbb8f3b2b80b685e00e3590fa6c"
+    },
+    "posts/LLM_Demo/OBBBA/H.R.1 - 119th Congress (2025-2026)_ One Big Beautiful Bill Act _ Congress.gov _ Library of Congress.pdf": {
+      "checksum": "a7bdd1869842848319e381f94f058640"
+    },
+    "posts/LLM_Demo/OBBBA/Text - H.R.1 - 119th Congress (2025-2026)_ One Big Beautiful Bill Act _ Congress.gov _ Library of Congress.pdf": {
+      "checksum": "7c72161cf2f1a5be985067d2cc0c6c96"
+    },
+    "posts/LLM_Demo/PDFs/African Tales.pdf": {
+      "checksum": "883f54677680e8214ee579a2d7f9affe"
+    },
+    "posts/LLM_Demo/PDFs/analysis_folklore.pdf": {
+      "checksum": "ae059401a294074bdc239f6b3582220c"
+    },
+    "posts/LLM_Demo/PDFs/berry-west_african_folktales_1.pdf": {
+      "checksum": "ab0d17109b5a3eb1b3a508b296ef191f"
+    },
+    "posts/LLM_Demo/PDFs/france_rames-2007-3-3.pdf": {
+      "checksum": "e1725a0ec7f454cf4a6ba19778f0082f"
     },
     "posts/LLM_Demo/PDFs/gutenberg.org_Iroquois_22096_pg22096.txt.pdf": {
       "checksum": "3faa89fb2a0817e88c3545240066cb37"
     },
-    "posts/LLM_Demo/persist/my_vector_store.duckdb": {
-      "checksum": "b523e33b559508a75441d32e7c2a3cec"
+    "posts/LLM_Demo/PDFs/Iona and Peter Opie - Wikipedia.pdf": {
+      "checksum": "d4c45afaf062c93323d86b9bfbbe9cd9"
     },
-    "posts/LLM_Demo/requirements.txt": {
-      "checksum": "afae0b5d6b839ea996621825e85c7c2f"
+    "posts/LLM_Demo/PDFs/Lafontaine-fables-1.pdf": {
+      "checksum": "15cbfabc2abc079375939ede52c9292e"
+    },
+    "posts/LLM_Demo/PDFs/opie_iona_peter_beginnings.pdf": {
+      "checksum": "1b788f055f5842a87f561cdf575fac40"
+    },
+    "posts/LLM_Demo/PDFs/South_africa_spider_ContinentsCountriesMaps_FE3_Anansi_FOR-PDF.pdf": {
+      "checksum": "485fe03b1df10ffbb9bb05053de2f115"
+    },
+    "posts/LLM_Demo/persist/my_vector_store.duckdb": {
+      "checksum": "a25f8b209ab983cf03cf0606272d347d"
     },
     "posts/LLM_Demo/secrets/.env": {
       "checksum": "0739f6d82f7c85adde0598014e67a0ef"
     },
-    "posts/LLM_Demo/secrets/.env.swp": {
-      "checksum": "56ca619c799652fc07c05b742240792a"
+    "posts/pyspark/.vscode/settings.json": {
+      "checksum": "636f71286f913761302f1ba239f8bb8d"
     },
-    "posts/LLM_Demo/young_man.jpg": {
-      "checksum": "7c50172e8da705182204981d4e06288c"
+    "posts/pyspark/34100140-eng.zip": {
+      "checksum": "c4a70e5ef9d7209d93b08cba4f93d22e"
+    },
+    "posts/pyspark/cafc_quarterly_fraud_data_pipeline.py": {
+      "checksum": "5af348ee84c0db967bd4f14800518210"
+    },
+    "posts/pyspark/cafc_quarterly_fraud_pipeline.py": {
+      "checksum": "fd90236fb9e863c1ff955a39ba7d5819"
+    },
+    "posts/pyspark/cafc.tsv": {
+      "checksum": "6228a48d5e3b3a07df217f1ce281b47a"
+    },
+    "posts/pyspark/clean_cafc_en_write.csv": {
+      "checksum": "607ffec31875c73534ba815c39248473"
+    },
+    "posts/pyspark/clean_cafc_en.csv": {
+      "checksum": "607ffec31875c73534ba815c39248473"
+    },
+    "posts/pyspark/clean_cafc_en.tsv": {
+      "checksum": "ecb5cc139be11627dee42ad5d5a956bc"
+    },
+    "posts/pyspark/fraud_report.py": {
+      "checksum": "6723f243998b79690ce8fa0d70450f90"
+    },
+    "posts/pyspark/index.qmd": {
+      "checksum": "a8f4f73510aa427c0eb3a79346714b43"
+    },
+    "posts/pyspark/index0.ipynb0": {
+      "checksum": "0b985a44a876bf54054304fb9fec51cd"
+    },
+    "posts/pyspark/Makefile": {
+      "checksum": "1cfe1194eeeaecf23d8716f205b010b2"
+    },
+    "posts/pyspark/open_art_pipelines.png": {
+      "checksum": "904877d287bd805bcbac74a8cc52ac74"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/_SUCCESS": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/._SUCCESS.crc": {
+      "checksum": "9dfecc15c928c9274ad273719aa7a3c0"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00000-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "0c11d641f0781165442a39aff9130795"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00001-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "dc54950e04b5ff75215c9e117e69cdf1"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00002-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "e778450b16ef80a9af87ab6c166c2858"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00003-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "c185fdd6b42b4d6e5acd6b5f79a6ca2b"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00004-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "2c07316cd276fd17e58087ab10215341"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00005-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "1e54f4a12a26ead3130f0d88b260ce0f"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00006-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "35fae161b509f967933976ae37f162c7"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/.part-00007-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv.crc": {
+      "checksum": "995ec3ad1f0e42417a05e360a92fbe7c"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00000-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "5d5b6a20acaf2b148fd8a9e2e0f804f1"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00001-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "ab6875f2da42171af3fd24c627e57408"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00002-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "4b855089522f8aa7132deeee657df324"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00003-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "c81414f84ef0f390154f4435dd2615f0"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00004-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "c8652b3a68efef5eca4380eb71c6dcef"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00005-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "c6faa80ac30173806285084b4b478e86"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00006-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "36cac8a735c269e380fd8c2dad26b33f"
+    },
+    "posts/pyspark/outputs_2025_Q2/cleaned_cafc/part-00007-b9ce166a-69b6-41ae-b68c-17dc6f4c3e5f-c000.csv": {
+      "checksum": "0205b86192a6c048fb2fcf6cb0421ad9"
+    },
+    "posts/pyspark/outputs_2025_Q2/fraud_bulletin_2025_Q2.pdf": {
+      "checksum": "ed6d4c5f6cf4ad9df666bdd55fad005f"
+    },
+    "posts/pyspark/outputs_2025_Q2/fraud_trends_2025_Q2.png": {
+      "checksum": "e2c1a2dfcbf2c00768d2492b6ef6a62b"
+    },
+    "posts/pyspark/outputs_2025_Q2/monthly_summary/_SUCCESS": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "posts/pyspark/outputs_2025_Q2/monthly_summary/._SUCCESS.crc": {
+      "checksum": "9dfecc15c928c9274ad273719aa7a3c0"
+    },
+    "posts/pyspark/outputs_2025_Q2/monthly_summary/.part-00000-bb97576f-ce4a-400a-91ef-d8af632d0b57-c000.csv.crc": {
+      "checksum": "7b2aecdb387571eeeea6025b89e62846"
+    },
+    "posts/pyspark/outputs_2025_Q2/monthly_summary/part-00000-bb97576f-ce4a-400a-91ef-d8af632d0b57-c000.csv": {
+      "checksum": "50877368a8c76537efd295d5bf237105"
+    },
+    "posts/pyspark/outputs_2025_Q2/top3_fraud_categories_2025_Q2.png": {
+      "checksum": "2eef97d4616413b14668bcc2d97f8168"
+    },
+    "posts/pyspark/outputs_2025_Q2/top3_fraud_categories_stacked_2025_Q2.png": {
+      "checksum": "e0f780b80327d77ee8ebcb19ce1947ee"
+    },
+    "posts/pyspark/outputs_2025_Q2/yearly_summary/_SUCCESS": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "posts/pyspark/outputs_2025_Q2/yearly_summary/._SUCCESS.crc": {
+      "checksum": "9dfecc15c928c9274ad273719aa7a3c0"
+    },
+    "posts/pyspark/outputs_2025_Q2/yearly_summary/.part-00000-1ce6d64d-3176-4cbd-8fb9-7dd33486ba65-c000.csv.crc": {
+      "checksum": "d5ab3a6e709166a052b962bdfe2554b6"
+    },
+    "posts/pyspark/outputs_2025_Q2/yearly_summary/part-00000-1ce6d64d-3176-4cbd-8fb9-7dd33486ba65-c000.csv": {
+      "checksum": "3856537f8ccca1cb5a10f2dd6f95f0c8"
+    },
+    "posts/pyspark/u.data": {
+      "checksum": "6e47046882bad158b0efbb84cd5cb987"
     },
     "posts/RSS_Reader/.RData": {
       "checksum": "a6e13000ffa0e7bd2dfd214ecbd2a320"
     },
     "posts/RSS_Reader/cron_test.log": {
-      "checksum": "52ff2a60812e9fe5f9c2bbb5a0d37aa6"
+      "checksum": "00ea5e7dc15c009971cfce887b7ae7f9"
     },
     "posts/RSS_Reader/crontab": {
       "checksum": "e98924dcdd9651cc3228dc2a1005d7cb"
     },
     "posts/RSS_Reader/index.qmd": {
-      "checksum": "0571414995e4252a38e6427f0580ed26"
+      "checksum": "257918f5c4fee0d2849612b4fad5a8a8"
+    },
+    "posts/RSS_Reader/index0.qmd0": {
+      "checksum": "99b865630ac6efbf4dcd0e0cbe6d2ccc"
     },
     "posts/RSS_Reader/Makefile": {
       "checksum": "e7a59b7b17e18d97a2698ab66126ccf0"
     },
     "posts/RSS_Reader/Most_Recent_Papers.qmd": {
-      "checksum": "dc40b23ffae4744f1d9235a868d84e58"
+      "checksum": "74e80835e96ea74c83a2eab277be7d60"
+    },
+    "posts/RSS_Reader/Most_Recent_Papers0.qmd0": {
+      "checksum": "116a914344e2ee7aea69cc4552b06403"
     },
     "posts/RSS_Reader/References/export.bib": {
       "checksum": "1df164780a57587ac62a0d30f5ea0f1c"
@@ -6480,17 +7008,20 @@
     "posts/RSS_Reader/requirements.txt": {
       "checksum": "6755f3d3a34b9fc809a6321664afee3b"
     },
-    "posts/RSS_Reader/rss_reader_table.qmd": {
+    "posts/RSS_Reader/RSS_functins.R": {
+      "checksum": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "posts/RSS_Reader/RSS_functions.R": {
+      "checksum": "9ccec1fd9c69af2a6588adf0d4493fe9"
+    },
+    "posts/RSS_Reader/rss_reader_table.qmd0": {
       "checksum": "7394ff3fccab672958da7a9036f7e21f"
     },
     "posts/RSS_Reader/RssReader.jpg": {
       "checksum": "4958969444461931a6bac796299d1b72"
     },
-    "posts/Shinylive/_quarto.yml0": {
-      "checksum": "7ec2b68c6fe6e57419eef39f86ac0f1b"
-    },
     "posts/Shinylive/index.qmd": {
-      "checksum": "b2d715649c6df2f86ed9885647d69ea8"
+      "checksum": "c42cd46f33ed56667145c9f971d62e2a"
     },
     "posts/Shinylive/openart-image_shinylive.png": {
       "checksum": "82b09ae5cbc0a5be95d216725c6a48e4"
@@ -6501,8 +7032,38 @@
     "posts/Shinylive/requirements.txt": {
       "checksum": "aa87c8832efc5b90176c56bdf9207f0b"
     },
+    "posts/test_gradio/.gradio/certificate.pem": {
+      "checksum": "118ecd744d864b32ffdb48b2e29f1d7f"
+    },
+    "posts/test_gradio/.jupyter_cache/__version__.txt": {
+      "checksum": "3accddf64b1dd03abeb9b0b3e5a7ba44"
+    },
+    "posts/test_gradio/.jupyter_cache/executed/2e302955d57b8cce18c9d734b6eef22f/base.ipynb": {
+      "checksum": "4222d279575b835b28b95ee5dd9f743b"
+    },
+    "posts/test_gradio/.jupyter_cache/executed/4a149ed2bea9c78ce22d6d573c9cf625/base.ipynb": {
+      "checksum": "97f6e8058d8be69f5b3285246d94b6d4"
+    },
+    "posts/test_gradio/.jupyter_cache/executed/7374bfbe836f4365446e3c91873a3581/base.ipynb": {
+      "checksum": "a8a9e4118b211ff5d95e2957f9360fb5"
+    },
+    "posts/test_gradio/.jupyter_cache/executed/8d80dd711ee9baf8d91fd9992408714e/base.ipynb": {
+      "checksum": "e480f6b672c8e56e269519fb0c36d3a6"
+    },
+    "posts/test_gradio/.jupyter_cache/global.db": {
+      "checksum": "9d83d186d0c519c5ecbe832d510634a5"
+    },
+    "posts/test_gradio/experi_gradio.qmd0": {
+      "checksum": "514cfbf69b523e22a0569b563b6eafe4"
+    },
+    "posts/test_gradio/test_engine.qmd0": {
+      "checksum": "e01d6a8ed46b165271a56ffb9ee180da"
+    },
+    "posts/test_gradio/test_gradio.qmd0": {
+      "checksum": "483bf2a749552cbef386dc0521f54ef7"
+    },
     "posts/Welcome/index.qmd": {
-      "checksum": "21e3397abf254824813e5ed043c60964"
+      "checksum": "fb7ddb978e63c0998c430b6f2a205c9d"
     },
     "posts/Welcome/welcome.jpg": {
       "checksum": "378b0b736b319ba8bb26c9a62ad9b134"
@@ -6511,7 +7072,7 @@
       "checksum": "d3d7f79095c5b9894979c52de5d3077f"
     },
     "renv.lock": {
-      "checksum": "be4511532a76549d51849966be69e23c"
+      "checksum": "e8a065186e98b5aa8cf8ec37ad32649b"
     },
     "requirements.txt": {
       "checksum": "0ac789c2b4a6c7ae46c81ba57f61589a"
@@ -6522,9 +7083,6 @@
     "runthis/app.R": {
       "checksum": "5ca37c17b10ef232812ec7a99cf7309d"
     },
-    "shinylive.qmd0": {
-      "checksum": "95c430efff976afddd101585ff12f8fd"
-    },
     "storage/my_vector_store.duckdb": {
       "checksum": "d0c5ceb94a630e38252017e6de487a5f"
     },
@@ -6533,9 +7091,6 @@
     },
     "walkthrough.qmd": {
       "checksum": "fe5f021bc1df978c129dce32c7c51425"
-    },
-    "walkthrough.quarto_ipynb": {
-      "checksum": "318d1200dfd7507fecc28b58bbb39d9a"
     },
     "welcome_yaml.txt": {
       "checksum": "78fca3e4b3456bbd049e846655965fce"
