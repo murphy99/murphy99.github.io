@@ -30,7 +30,7 @@ In this exercise, we are going to use the Canadian Anti-Fraud Centre Reporting D
 
 ```{.python}
 #| echo: true
-#%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
+%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
 ```
 
 This outputs the script used in pyspark to clean the data downloaded from: 
