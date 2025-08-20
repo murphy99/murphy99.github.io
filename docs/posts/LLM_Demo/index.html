@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>One of the use cases for localized LLMs is to help digest new bills, policies, and or court decisions in an efficient and expedient manner. Journalists frequently encounter brand new material before it becomes public and cannot store the document on any server.</p>
+<p>One of the use cases for localized LLMs is to help digest new bills, policies, and/or court decisions in an efficient and expedient manner. Journalists frequently encounter brand new material before it becomes public and cannot store the document on any server.</p>
 <p>In this model, you need to add a complex, detailed, and involved document, in this case it’s the summary of the “One Big Beautiful Bill Act” or some might call the “One Big Bad Bill Act.” Whatever you call it, we’ll refer to it as the OBBBA. It does a pretty good job and you can see how you structure your query makes a difference on the response. Some prompts will be better than others.</p>
 <p>For best results, I have found that adding other analysis improves the responses and contexts, but here we are just going to have the OBBA summary and text from the government website as a demonstration on how this can be used and test it to see if it would be comprehensive enough for journalists to use.</p>
 <p>This model uses minimally trained model from OPENAI, and fairly inexpensive of all the models to do the query. Since the subject matter is so narrow - we do not need a big model - just big enough to be fairly responsive to our queries.</p>
@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Next we find the OPENAI key and set up the environment so that we are able to use its index capability and using llama indexing provided by Meta’s open source</p>
-<div id="63a6ebe9" class="cell" data-execution_count="3">
+<div id="63a6ebe9" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#load_dotenv()</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
