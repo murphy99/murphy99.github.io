@@ -1,0 +1,171 @@
+---
+title: "Data Pipelines with Pyspark"
+subtitle: "Using Canadian Anti-Fraud Centre Open Data"
+date: "2025-08-15"
+format: html
+image: open_art_pipelines.png
+html:
+    code-fold: true
+    include-after-body: add_button.html
+categories: [Pyspark, Python, R, CAFC, Downloads]
+draft: False
+
+---
+## Introduction 
+
+***Warning - it takes up to a minute to load***. 
+Pyspark is an invaluable tool to process datasets in parallel partitions for processing efficiency. The data can be written and merged to another file with many different options in format, such as csv, tsv, json, parquet, and xml. 
+
+The structured pipeline once written will always be reproducible and easy to maintain.
+
+The Canadian Anti-Fraud Centre updates their dataset every quarter and maintains their dataset on the CKAN platform. The CKAN platform allows federal and muncipal governments as well as companies to maintain their catalog of datasets in a consistent and transparent way, whether it's public or private to all their users.
+
+In this exercise, we are going to use the Canadian Anti-Fraud Centre Reporting Dataset on the CKAN platform and do the following:  
+1. Extract english and french field names into 2 datasets to represent English and French distinct but replicated datasets (in progress).  
+2. Change date type to date and change fields to numeric that we want to aggregate.  
+3. Include monthly and yearly aggregate datasets.  
+4. Filter out invalid records that have invalid Country names.  
+5. Streamlined access to new generated datasets.  
+
+
+```{.python}
+#| echo: true
+#%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
+```
+
+This outputs the script used in pyspark to clean the data downloaded from: 
+
+```{r}
+# get path to script
+pathway <- here::here("posts","pyspark","cafc_quarterly_fraud_data_pipeline.py")
+
+pathway
+
+# generate output of lines from script
+
+lines <- readLines(pathway, warn=FALSE)
+cat(lines, sep = "\n")
+```
+
+Required Libraries
+
+```{r}
+# Load necessary libraries
+# install.packages("tidyverse")
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+
+This is where the new files will be stored
+
+```{r}
+# Set the directory where your partitioned CSV files are located
+data_directory <- "outputs_2025_Q2/cleaned_cafc"
+data_directory
+```
+
+When files are outputed there will be several files from different partitions
+
+```{r}
+# Get a list of all CSV file paths
+file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+file_paths
+```
+
+Merge the partitions to one file
+
+```{r}
+# Read and combine all CSV files into a single data frame
+merged_df <- file_paths %>%
+  map_dfr(read_csv, show_col_types = FALSE)
+```
+
+Show records of merged file
+```{r}
+# View the first few rows of the merged data frame
+head(merged_df)
+```
+
+
+```{r}
+data_directory <- "outputs_2025_Q2/monthly_summary"
+file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+file_paths
+monthly_summary_df <- file_paths %>%
+  map_dfr(read_csv, show_col_types = FALSE)
+```
+
+```{r}
+head(monthly_summary_df)
+```
+
+```{r}
+data_directory <- "outputs_2025_Q2/yearly_summary"
+file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+file_paths
+yearly_summary_df <- file_paths %>%
+  map_dfr(read_csv, show_col_types = FALSE)
+```
+
+
+```{r}
+head(yearly_summary_df)
+```
+
+
+## Deployment
+
+```{r}
+#| echo: true
+
+library(downloadthis)
+
+merged_df %>%
+  download_this(
+    output_name = "clean_cafc_en.csv",
+    output_extension = ".csv",
+    button_label = "Download clean_cafc_en.csv",
+    button_type = "default",
+    self_contained = TRUE,
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    id = "cafc-btn"
+  )
+```
+
+```{r}
+#| echo: true
+
+library(downloadthis)
+
+monthly_summary_df %>%
+  download_this(
+    output_name = "cafc_monthly_summary_en",
+    output_extension = ".csv",
+    button_label = "Download cafc_monthly_summary_en.csv",
+    button_type = "default",
+    self_contained = TRUE,
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    id = "cafc-btn"
+  )
+```
+
+
+```{r}
+#| echo: true
+
+library(downloadthis)
+
+yearly_summary_df %>%
+  download_this(
+    output_name = "cafc_yearly_summary_en",
+    output_extension = ".csv",
+    button_label = "Download cafc_yearly_summary_en.csv",
+    button_type = "default",
+    self_contained = TRUE,
+    has_icon = TRUE,
+    icon = "fa fa-save",
+    id = "cafc-btn"
+  )
+```
