@@ -24,7 +24,23 @@ id_rsa.pub
 venv/
 posts/LLM_Demo/.env
 posts/LLM_Demo/venv
-
-
-
+docs/posts/LLM_Demo/index_files/
+docs/posts/Shinylive/index.knit.md
+posts/LLM_Demo/.gradio/certificate.pem
+posts/LLM_Demo/BBB/
+posts/LLM_Demo/gradio-screen-recording-2025-07-31T21-14-31.mp4
+posts/LLM_Demo/index0.ipynb0
+posts/LLM_Demo/LLM.quarto_ipynb0
+posts/LLM_Demo/index0.qmdbak
+posts/LLM_Demo/index00.qmd00
+posts/pyspark/clean_cafc_en.csv
+posts/pyspark/clean_cafc_en.tsv
+posts/pyspark/clean_cafc_en_write.csv
+posts/pyspark/fraud_report.py
+posts/pyspark/index0.ipynb0
+posts/pyspark/outputs_2025_Q2/
+posts/pyspark/u.data
+posts/test_gradio/
+welcome_yaml.txt
+posts/pyspark/34100140-eng.zip
 
