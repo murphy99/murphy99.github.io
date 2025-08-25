@@ -98,14 +98,24 @@ We can take a shiny app and convert it to shiny live that enables the applicatio
 
 ### YAML (Remove comments and add to your Yaml) :
 
+```{r}
+# ---  
+# format:   
+#   html:  
+#     embed-resources: false  
+#   filters:  
+#     - shinylive  
+# ---  
+```
 
-#---
-#format: 
-  #html:
-    #embed-resources: false
-#filters:
-  #- shinylive
-#---
+
+---  
+# format:   
+  # html:  
+    # embed-resources: false  
+  #filters:  
+  # - shinylive  
+# ---  
 
 
 

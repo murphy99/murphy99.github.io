@@ -6,7 +6,7 @@
   </url>
   <url>
     <loc>Godata.ca/index.html</loc>
-    <lastmod>2025-07-27T18:33:07.355Z</lastmod>
+    <lastmod>2025-08-23T15:04:57.308Z</lastmod>
   </url>
   <url>
     <loc>Godata.ca/posts/RSS_Reader/index0.html</loc>
@@ -55,5 +55,9 @@
   <url>
     <loc>Godata.ca/posts/pyspark/index.html</loc>
     <lastmod>2025-08-20T18:18:30.889Z</lastmod>
+  </url>
+  <url>
+    <loc>Godata.ca/posts/test/testplot.html</loc>
+    <lastmod>2025-08-23T18:10:29.901Z</lastmod>
   </url>
 </urlset>

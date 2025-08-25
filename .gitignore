@@ -1,4 +1,5 @@
 persist/
+.Renviron
 storage/
 Blog.Rproj
 .Rhistory

@@ -1,39 +1,50 @@
 git status
 On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	deleted:    ../../.Renviron
+
 Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
+  (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
+	modified:   ../../.gitignore
 	modified:   ../../docs/index.html
-	modified:   ../../docs/index.xml
-	modified:   ../../docs/listings.json
+	modified:   ../../docs/posts/Shinylive/index.html
+	modified:   ../../docs/posts/pyspark/index.html
 	modified:   ../../docs/search.json
-	deleted:    ../../gitignore
+	modified:   ../../docs/sitemap.xml
+	modified:   ../../index.qmd
 	modified:   cron_test.log
+	modified:   ../Shinylive/index.qmd
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 	../../.Rprofile.bak
 	../../.vscode/
-	../../_freeze/posts/LLM_Demo/index/
-	../../_freeze/posts/RSS_Reader/
-	../../_freeze/posts/Shinylive/
-	../../_freeze/walkthrough/
-	../LLM_Demo/.gradio/certificate.pem
-	../LLM_Demo/BBB/
-	../LLM_Demo/LLM.quarto_ipynb0
-	../LLM_Demo/gradio-screen-recording-2025-07-31T21-14-31.mp4
-	../LLM_Demo/index0.ipynb0
-	../LLM_Demo/index0.qmdbak
-	../LLM_Demo/index00.qmd00
+	../../cafc_en/
+	../../docs/posts/test/
+	../../docs/site_libs/dt-core-1.13.6 2/
+	../../docs/site_libs/font-awesome-6.7.2 2/
+	../../docs/site_libs/font-awesome-6.7.2/
+	../../docs/site_libs/quarto-html 2/
+	../../docs/site_libs/selectize-0.15.2 2/
+	../../docs/site_libs/selectize-0.15.2/css/selectize.bootstrap3 2.css
+	../../docs/site_libs/selectize-0.15.2/js/selectize 2.js
+	../../docs/site_libs/selectize-0.15.2/js/selectize.min 2.js
+	../../docs/site_libs/selectize-0.15.2/scss/selectize 2.scss
+	../../docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap3 2.scss
+	../../docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap4 2.scss
+	../../docs/site_libs/selectize-0.15.2/scss/selectize.bootstrap5 2.scss
+	../../docs/site_libs/selectize-0.15.2/scss/selectize.default 2.scss
+	../LLM_Demo/LLM_Demo.py
 	../LLM_Demo/index_files/
-	../pyspark/
-	../test_gradio/
-	../../welcome_yaml.txt
+	../pyspark/.vscode/
+	../pyspark/Makefile
+	../pyspark/cafc.tsv
+	../../walkthrough.quarto_ipynb
 
-no changes added to commit (use "git add" and/or "git commit -a")
 /usr/local/bin/quarto render index.qmd
 [1m[34m[1/2] posts/RSS_Reader/index.qmd[39m[22m
-- The project is out-of-sync -- use `renv::status()` for details.
 [31m
 
 processing file: index.qmd
@@ -49,14 +60,10 @@ processing file: index.qmd
 [31moutput file: index.knit.md
 
 [39m[1m[34m[2/2] index.qmd[39m[22m
-[33mWARN: File /Users/Eileen/Desktop/GoData/Blog/posts/pyspark/index.ipynb in the listing 'listing' contains no metadata.[39m
 
-[33mWARN: Unable to read listing item description from posts/pyspark/index.html[39m
-[33mWARN: Unable to read listing preview image from posts/pyspark/index.html[39m
 Output created: ../../docs/posts/RSS_Reader/index.html
 
 /usr/local/bin/quarto render Most_Recent_Papers.qmd
-- The project is out-of-sync -- use `renv::status()` for details.
 [31m
 
 processing file: Most_Recent_Papers.qmd
@@ -81,6 +88,7 @@ processing file: Most_Recent_Papers.qmd
   default-image-extension: png
   css:
     - ../../styles.css
+  toc: true
   variables: {}
   
 [1mmetadata[22m
@@ -107,9 +115,44 @@ Output created: ../../docs/posts/RSS_Reader/Most_Recent_Papers.html
 git add ../../docs/posts/RSS_Reader/index.html
 git add ../../docs/posts/RSS_Reader/Most_Recent_Papers.html 
 git commit -m "Automated RSS Feed Update"
-[main 1e4b107] Automated RSS Feed Update
- 2 files changed, 1256 insertions(+), 1260 deletions(-)
+[main 7a7199c] Automated RSS Feed Update
+ 3 files changed, 1335 insertions(+), 1333 deletions(-)
+ delete mode 100644 .Renviron
 git push origin main
 failed to store: -61
+remote: error: GH013: Repository rule violations found for refs/heads/main.        
+remote: 
+remote: - GITHUB PUSH PROTECTION        
+remote:   —————————————————————————————————————————        
+remote:     Resolve the following violations before pushing again        
+remote: 
+remote:     - Push cannot contain secrets        
+remote: 
+remote:             
+remote:      (?) Learn how to resolve a blocked push        
+remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push        
+remote:             
+remote:             
+remote:       —— OpenAI API Key ————————————————————————————————————        
+remote:        locations:        
+remote:          - commit: 84bb6d6048d36ad1b671ed549dacf396754fbf66        
+remote:            path: .Renviron:1        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/murphy99/murphy99.github.io/security/secret-scanning/unblock-secret/31mQiwbJIC9zGp8bQLULQphCFpk        
+remote:             
+remote:             
+remote:       —— GitHub Personal Access Token ——————————————————————        
+remote:        locations:        
+remote:          - commit: 84bb6d6048d36ad1b671ed549dacf396754fbf66        
+remote:            path: .Renviron:3        
+remote:             
+remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.        
+remote:        https://github.com/murphy99/murphy99.github.io/security/secret-scanning/unblock-secret/31mQixXra3pTGyeCOSRHutj2Idd        
+remote:             
+remote: 
+remote: 
 To https://github.com/murphy99/murphy99.github.io.git
-   cbe2b24..1e4b107  main -> main
+ ! [remote rejected] main -> main (push declined due to repository rule violations)
+error: failed to push some refs to 'https://github.com/murphy99/murphy99.github.io.git'
+make: *** [push] Error 1
