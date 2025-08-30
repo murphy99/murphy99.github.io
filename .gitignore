@@ -22,7 +22,6 @@ cron_test.log
 .Renviron
 id_rsa
 id_rsa.pub
-venv/
 posts/LLM_Demo/.env
 posts/LLM_Demo/venv
 docs/posts/LLM_Demo/index_files/
