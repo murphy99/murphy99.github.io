@@ -7,7 +7,7 @@ suppressPackageStartupMessages(library(dplyr))
 library(DT)
 library(tidyRSS)
 
-most_recent <- function(source) {
+most_recent_test <- function(source) {
   
   site=source
   
@@ -30,8 +30,32 @@ most_recent <- function(source) {
   return(my_rss_feed_table)  
 }
 
-
-tryCatch <- function(my_rss_feed_table) {
-  result <- paste(nrow(my_rss_feed_table),"\n")
-  print(result)
+most_recent <- function(source) {
+  tryCatch({
+    site <- source
+    my_feed_data <- tidyfeed(site) |>
+      select(feed_pub_date, item_title, item_link, item_description)
+    
+    my_feed_data_summary <- my_feed_data |>
+      select(item_title, feed_pub_date, item_link, item_description) 
+    
+    my_rss_feed <- my_feed_data_summary |> mutate(
+      item_title = str_glue("<a target='_blank' title='{item_title}' href='{item_link}' rel='noopener'>{item_title}</a>")
+    )
+    
+    # Return only the most recent record
+    my_rss_feed_table <- my_rss_feed |> 
+      arrange(desc(feed_pub_date)) |> 
+      #slice(1) |>
+      select(-item_link)
+    
+    return(my_rss_feed_table)
+  }, error = function(e) {
+    message("Error fetching or parsing feed: ", e$message)
+    return(NA)
+  })
 }
+
+
+
+

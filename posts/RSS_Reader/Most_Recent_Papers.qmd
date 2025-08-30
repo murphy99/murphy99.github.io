@@ -14,22 +14,30 @@ source("RSS_functions.R")
 
 
 
-```{r, include=FALSE}
-flag=0
+```{r, include=TRUE, echo=FALSE}
+flag=0 #Set Error flag to False
+
+# Call functins in RSS_functions.R
 
 my_feed <- "https://rss.arxiv.org/rss/cs.LG"
 
-initial_results <- most_recent(my_feed)
-result <- tryCatch(initial_results) # Catch error when no results
+recent_records<-most_recent(my_feed)
 
-paste("tryCatch: ", result) #Shows result of retrieval
+
+#print (result_output)
 
 # Sets flag = 1 when no records retrieved
 
-if (is.null(result)) {
-  flag=1
-  cat("Sorry, no papers published today\n")
-} else {paste("Records Retrieved:", result)}
+if (is.null(recent_records) || (length(recent_records) == 1 && is.na(recent_records))) {
+  flag <- 1
+  output <- cat("Sorry, no papers published today\n")
+  cat(output)
+  
+} else {
+  cat("Records Retrieved:", nrow(recent_records), "\n")
+  flag <- 0
+}
+
 
 
 ```
@@ -38,17 +46,15 @@ if (is.null(result)) {
 ::: column-page
 
 ```{r, echo=FALSE}
-## Call function most_recent from loaded functions in setup
- ## Call function most_recent from loaded functions in setup
 if (!flag) {
-  DT::datatable(suppressMessages(initial_results), filter = 'top', escape = FALSE, rownames = FALSE,
+  DT::datatable(records_retrieved, filter = 'top', escape = FALSE, rownames = FALSE,
     options = list(
-   search = list(regex = TRUE, caseInsensitive = TRUE),  
-   pageLength = 10,
+    search = list(regex = TRUE, caseInsensitive = TRUE),  
+    pageLength = 10,
     lengthMenu = c(10, 25, 50, 100, 200),
     autowidth = TRUE,
-    columnDefs = list(list(width = '80%', targets = list(2)))
-   )
+   columnDefs = list(list(width = '80%', targets = list(2)))
+    )
   )}
 ```
 

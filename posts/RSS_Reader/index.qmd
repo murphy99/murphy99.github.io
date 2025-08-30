@@ -65,21 +65,30 @@ Getting feed for arXiv and checking the number of results. There are no papers o
 
 flag=0 #Set Error flag to False
 
+# Call functins in RSS_functions.R
+
 my_feed <- "https://rss.arxiv.org/rss/cs.LG"
 
+recent_records<-most_recent(my_feed)
 
-# Call functins in RSS_functions.R
-initial_results <- most_recent(my_feed) # Records Retreived
-result <- tryCatch(initial_results) # Catch error if no results
+paste("recent records: ", recent_records)
 
-#paste("tryCatch: ", result) #Shows result of retrieval
+
+#print (result_output)
 
 # Sets flag = 1 when no records retrieved
 
-if (is.null(result)) {
-  flag=1 # Sets Error flag = True
-  cat("Sorry, no papers published today\n") 
-} else {paste("Records Retrieved:", result)}
+if (is.null(recent_records) || (length(recent_records) == 1 && is.na(recent_records))) {
+  flag <- 1
+  cat("Sorry, no papers published today\n")
+} else {
+  cat("Records Retrieved:", nrow(recent_records), "\n")
+  flag <- 0
+}
+
+
+cat("flag:", flag, "\n")
+
 
 
 ```
@@ -90,8 +99,8 @@ if (is.null(result)) {
 ### Creating output using DT library
 
 ```{r}
-if (! flag) {
-  DT::datatable(initial_results, filter = 'top', escape = FALSE, rownames = FALSE,
+if (!flag) {
+  DT::datatable(records_retrieved, filter = 'top', escape = FALSE, rownames = FALSE,
     options = list(
     search = list(regex = TRUE, caseInsensitive = TRUE),  
     pageLength = 10,
