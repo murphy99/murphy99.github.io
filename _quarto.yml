@@ -15,8 +15,8 @@ website:
        # href: #
   title: "GoData.ca"
   site-url: Godata.ca
-  #feed: true
-  #description: "GoData Blog"
+#  feed: true
+#  description: "GoData Blog"
   navbar:
 #   logo: "avatar-chien01-clipart-md.png"
     
@@ -43,9 +43,9 @@ format:
     theme: flatly
     footer: dark
     css: styles.css
-    include-in-header: gtm_code_head.html
-    #include-before-body: gtm_code_body.html
-    #include-after-body: Comments.html
+#    include-in-header: gtm_code_head.html
+#    include-before-body: gtm_code_body.html
+#    include-after-body: Comments.html
     comments:
       utterances:
          repo: "murphy99/murphy99.github.io"
@@ -56,8 +56,8 @@ output:
     self_contained: true
     
          
-#listing:
-  #contents: "posts/*/index.*"         
+listing:
+  contents: "posts/*/index.*"         
     
 
 editor: source
