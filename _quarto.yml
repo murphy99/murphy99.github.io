@@ -1,7 +1,7 @@
 project:
   type: website
   output-dir: docs
-freeze: auto
+freeze: True
 filters:
   - shinylive
 website:
@@ -32,8 +32,8 @@ website:
         href: https://github.com/murphy99
       #- icon: bluesky
       #  href: https://bsky.app/profile/godata.bsky.social
-      - icon: huggingface
-        href: https://godata-fables-beta.hf.space/
+      #- icon: huggingface
+      #  href: https://godata-fables-beta.hf.space/
       - icon: rss
         href: index.xml
     
@@ -55,7 +55,6 @@ output:
   html_document:
     self_contained: true
     
-         
 listing:
   contents: "posts/*/index.*"         
     
