@@ -5,7 +5,20 @@
       "/posts/pyspark/index.html",
       "/posts/LLM_Demo/index.html",
       "/posts/Shinylive/index.html",
-      "/posts/RSS_Reader/index.html"
+      "/posts/RSS_Reader/index.html",
+      "/posts/Welcome/index.html"
     ]
+  },
+  {
+    "listing": "/posts/LLM_Demo/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/pyspark/index.html",
+    "items": []
+  },
+  {
+    "listing": "/posts/Shinylive/index.html",
+    "items": []
   }
 ]

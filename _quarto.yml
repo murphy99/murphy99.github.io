@@ -55,8 +55,12 @@ output:
   html_document:
     self_contained: true
     
-listing:
-  contents: "posts/*/index.*"         
+#listing:
+  #type: default
+  #contents:
+   # - posts/*/index.qmd
+   # - posts/*/index.ipynb
+    
     
 
 editor: source
