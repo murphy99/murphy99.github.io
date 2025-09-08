@@ -71,7 +71,7 @@ my_feed <- "https://rss.arxiv.org/rss/cs.LG"
 
 recent_records<-most_recent(my_feed)
 
-paste("recent records: ", recent_records)
+#paste("recent records: ", recent_records)
 
 
 #print (result_output)
@@ -100,7 +100,7 @@ cat("flag:", flag, "\n")
 
 ```{r}
 if (!flag) {
-  DT::datatable(records_retrieved, filter = 'top', escape = FALSE, rownames = FALSE,
+  DT::datatable(recent_records, filter = 'top', escape = FALSE, rownames = FALSE,
     options = list(
     search = list(regex = TRUE, caseInsensitive = TRUE),  
     pageLength = 10,

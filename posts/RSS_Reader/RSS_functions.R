@@ -52,10 +52,10 @@ most_recent <- function(source) {
     return(my_rss_feed_table)
   }, error = function(e) {
     message("Error fetching or parsing feed: ", e$message)
-    return(NA)
+    #return(NA)
   })
 }
 
 
-
+#my_rss_feed_table
 

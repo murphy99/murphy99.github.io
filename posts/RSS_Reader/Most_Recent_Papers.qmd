@@ -47,7 +47,7 @@ if (is.null(recent_records) || (length(recent_records) == 1 && is.na(recent_reco
 
 ```{r, echo=FALSE}
 if (!flag) {
-  DT::datatable(records_retrieved, filter = 'top', escape = FALSE, rownames = FALSE,
+  DT::datatable(recent_records, filter = 'top', escape = FALSE, rownames = FALSE,
     options = list(
     search = list(regex = TRUE, caseInsensitive = TRUE),  
     pageLength = 10,
