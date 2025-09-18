@@ -1,1 +1,1 @@
-Sitemap: murphy99.github.io/sitemap.xml
+Sitemap: https://murphy99.github.io/sitemap.xml
