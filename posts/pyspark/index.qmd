@@ -13,7 +13,6 @@ draft: False
 ---
 ## Introduction 
 
-***Warning - it takes up to a minute to load***. 
 Pyspark is an invaluable tool to process datasets in parallel partitions for processing efficiency. The data can be written and merged to another file with many different options in format, such as csv, tsv, json, parquet, and xml. 
 
 The structured pipeline once written will always be reproducible and easy to maintain.
