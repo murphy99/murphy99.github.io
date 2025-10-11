@@ -162,6 +162,17 @@ div.csl-indent {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-llm-demos" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">LLM Demos</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-llm-demos">    
+        <li>
+    <a class="dropdown-item" href="../../posts/LLM_Demo/LLM_Demo_OBBBA.html">
+ <span class="dropdown-text">Dig into the One Big Beautiful (Bad) Bill</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -200,7 +211,6 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#yaml-remove-comments-and-add-to-your-yaml" id="toc-yaml-remove-comments-and-add-to-your-yaml" class="nav-link" data-scroll-target="#yaml-remove-comments-and-add-to-your-yaml">YAML (Remove comments and add to your Yaml) :</a></li>
   </ul></li>
-  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">format:</a></li>
   </ul>
 </nav>
     </div>
@@ -335,19 +345,10 @@ shinyApp(ui = ui, server = server)</code></pre>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     - shinylive  </span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ---  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<hr>
+
+
+
 </section>
-</section>
-<section id="format" class="level1">
-<h1>format:</h1>
-<p># html:<br>
-# embed-resources: false<br>
-#filters:<br>
-# - shinylive<br>
-# —</p>
-
-
-
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
@@ -427,7 +428,7 @@ Posit. 2014. <span>“Kmeans-Example.”</span> <em>Https://Shiny.posit.co/r/Gal
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("Godata\.ca");
+        var filterRegex = new RegExp("https:\/\/murphy99\.github\.io\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
