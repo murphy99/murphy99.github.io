@@ -25,6 +25,10 @@ website:
         menu:
           - text: "arXiv"
             href: posts/RSS_Reader/Most_Recent_Papers.qmd
+      - text: "LLM Demos"
+        menu:
+          - text: "Dig into the One Big Beautiful (Bad) Bill"
+            href: posts/LLM_Demo/LLM_Demo_OBBBA.ipynb
           
     right:
       - about.qmd

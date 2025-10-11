@@ -66,15 +66,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<!-- Google tag (gtag.js) -->
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GXSZ4CKR04"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-GXSZ4CKR04');
-</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -108,6 +99,17 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-llm-demos" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">LLM Demos</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-llm-demos">    
+        <li>
+    <a class="dropdown-item" href="./posts/LLM_Demo/LLM_Demo_OBBBA.html">
+ <span class="dropdown-text">Dig into the One Big Beautiful (Bad) Bill</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -116,11 +118,6 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/murphy99"> <i class="bi bi-github" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://godata-fables-beta.hf.space/"> <i class="bi bi-huggingface" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -248,7 +245,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("Godata\.ca");
+        var filterRegex = new RegExp("https:\/\/murphy99\.github\.io\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
