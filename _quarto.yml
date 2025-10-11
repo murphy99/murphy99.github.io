@@ -15,6 +15,9 @@ website:
        # href: #
   title: "GoData.ca"
   site-url: https://murphy99.github.io/
+  drafts:
+  - posts/Welcome/index.qmd
+  draft-mode: gone
 #  feed: true
 #  description: "GoData Blog"
   navbar:
