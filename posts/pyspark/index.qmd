@@ -2,6 +2,7 @@
 title: "Data Pipelines with Pyspark"
 subtitle: "Using Canadian Anti-Fraud Centre Open Data"
 date: "2025-08-15"
+updated: "2025-10-15"
 format: html
 image: open_art_pipelines.png
 html:
@@ -11,30 +12,41 @@ categories: [Pyspark, Python, R, CAFC, Downloads]
 draft: False
 
 ---
+
+::: {.callout-note}
+Updated 2025-10-15 Updated CAFC data with Q3 data published Oct 2, 2025.  
+Improved automation to process files.
+:::
+
 ## Introduction 
 
 Pyspark is an invaluable tool to process datasets in parallel partitions for processing efficiency. The data can be written and merged to another file with many different options in format, such as csv, tsv, json, parquet, and xml. 
 
 The structured pipeline once written will always be reproducible and easy to maintain.
 
-The Canadian Anti-Fraud Centre updates their dataset every quarter and maintains their dataset on the CKAN platform. The CKAN platform allows federal and muncipal governments as well as companies to maintain their catalog of datasets in a consistent and transparent way, whether it's public or private to all their users.
+The Canadian Anti-Fraud Centre updates and its data dictionary are available and updated every quarter on the CKAN platform on the [Open Government Portal](https://open.canada.ca/data/en/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f/resource/43c67af5-e598-4a9b-a484-fe1cb5d775b5). The CKAN platform allows federal and municipal governments as well as companies to maintain their catalog of datasets in a consistent and transparent way, whether it's public or private to all their users.
+
+## Process
 
 In this exercise, we are going to use the Canadian Anti-Fraud Centre Reporting Dataset on the CKAN platform and do the following:  
 1. Extract english and french field names into 2 datasets to represent English and French distinct but replicated datasets (in progress).  
 2. Change date type to date and change fields to numeric that we want to aggregate.  
 3. Include monthly and yearly aggregate datasets.  
 4. Filter out invalid records that have invalid Country names.  
-5. Streamlined access to new generated datasets.  
+5. Streamline access to new generated datasets by downloading csv files to local drive.
 
 
-```{.python}
+```{python}
 #| echo: true
-%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
+# Don't run this here - put this in cronjob or github actions to update cafc dataset every quarter
+#%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
 ```
+
 
 This outputs the script used in pyspark to clean the data downloaded from: 
 
-```{r}
+```{r include=FALSE} 
+#remove include (above) to generate lines of code used to extact cafc data
 # get path to script
 pathway <- here::here("posts","pyspark","cafc_quarterly_fraud_data_pipeline.py")
 
@@ -54,66 +66,88 @@ Required Libraries
 suppressPackageStartupMessages(library(tidyverse))
 ```
 
-
-This is where the new files will be stored
-
-```{r}
-# Set the directory where your partitioned CSV files are located
-data_directory <- "outputs_2025_Q2/cleaned_cafc"
-data_directory
-```
-
-When files are outputed there will be several files from different partitions
+### Find latest extracted cleaned cafc file
 
 ```{r}
-# Get a list of all CSV file paths
-file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
-file_paths
+# Clean (base) directory for posts
+cafc_clean <- here::here("posts", "pyspark")
+
+# Get a list of all output directories matching the pattern
+csv_dir <- list.files(path = cafc_clean, pattern = "outputs_*", all.files = TRUE, full.names = TRUE)
+
+# Get the most recent output directory (assuming sorted filenames)
+extract_dir <- max(csv_dir)
+
+
+# Concatenate the extracted directory and "cleaned_cafc" subdirectory correctly
+cleaned_cafc_path <- file.path(extract_dir, "cleaned_cafc")
+
+# Get all CSVs
+file_paths <- list.files(path = cleaned_cafc_path, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+
+
+
 ```
 
-Merge the partitions to one file
+### Merge the partitions to one file
 
 ```{r}
 # Read and combine all CSV files into a single data frame
-merged_df <- file_paths %>%
+merged_df <- file_paths |>
   map_dfr(read_csv, show_col_types = FALSE)
 ```
 
-Show records of merged file
+### Show sample records of merged CAFC dataset
 ```{r}
 # View the first few rows of the merged data frame
 head(merged_df)
 ```
 
-
+### Retrieve monthly summaries
 ```{r}
-data_directory <- "outputs_2025_Q2/monthly_summary"
-file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
-file_paths
+
+# Concatenate the extracted directory and "cleaned_cafc" subdirectory correctly
+cleaned_monthly_summary_path <- file.path(extract_dir, "monthly_summary")
+
+file_paths <- list.files(path = cleaned_monthly_summary_path, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+
 monthly_summary_df <- file_paths %>%
   map_dfr(read_csv, show_col_types = FALSE)
 ```
 
+### Show sample of monthly summary of victims
 ```{r}
 head(monthly_summary_df)
 ```
 
+### Retrieve yearly summaries of victims
 ```{r}
-data_directory <- "outputs_2025_Q2/yearly_summary"
-file_paths <- list.files(path = data_directory, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
-file_paths
+cleaned_yearly_summary_path <- file.path(extract_dir, "yearly_summary")
+
+
+file_paths <- list.files(path = cleaned_yearly_summary_path, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
+
 yearly_summary_df <- file_paths %>%
   map_dfr(read_csv, show_col_types = FALSE)
 ```
 
 
+### Show sample records of yearly summaries of victims
 ```{r}
 head(yearly_summary_df)
 ```
 
 
-## Deployment
+## Deployment 
 
+```{r}
+library(stringr)
+
+CAFC_latest_update <- str_sub(extract_dir, -7)
+paste("CAFC Latest Update", CAFC_latest_update, sep= " : ")
+```
+
+### Download CSV files directly
 ```{r}
 #| echo: true
 
@@ -130,7 +164,9 @@ merged_df %>%
     icon = "fa fa-save",
     id = "cafc-btn"
   )
+
 ```
+
 
 ```{r}
 #| echo: true

@@ -1,18 +1,35 @@
 import os
-#import pandas as pd
-#import matplotlib.pyplot as plt
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, regexp_replace, to_date, trim, when, year, month, sum as _sum
-#from datetime import datetime
-#from reportlab.lib.pagesizes import letter
-#from reportlab.lib import colors
-#from reportlab.pdfgen import canvas
 
 # ------------ 1: START SPARK SESSION ------------
 spark = SparkSession.builder.appName("CAFC_Quarterly_Refinery_Pipeline").getOrCreate()
 
 # ------------ 2: READ & CLEAN DATA ------------
-df = spark.read.option("header", "true").option("delimiter", "\t").csv("cafc.tsv")
+# This requires manual download of the yyyy_QQ_cafc.tsv file from cafc open data portal
+
+#import glob
+
+#csv_files = glob.glob("posts/pyspark/data/*.tsv", recursive=True)
+
+import os
+from pathlib import Path
+
+# List all csv files recursively
+tsv_files = list(Path("data").rglob("*.tsv"))
+
+# Get the file with the latest modification time
+
+tsv_files = list(Path("data/").rglob("*.tsv"))
+
+if tsv_files:
+    recent_file = max(tsv_files, key=lambda f: os.path.getmtime(f))
+    recent_file = str(recent_file)
+    print(recent_file)
+    df = spark.read.option("header", "true").option("delimiter", "\t").csv(recent_file)
+else:
+    print("No TSV files found.")
+
 
 french_cols = [
     "Type de plainte recue", "Pays", "Province/Etat",
@@ -78,4 +95,5 @@ yearly_summary = df.groupBy(year("date").alias("year")).agg(
 yearly_summary.write.mode("overwrite").option("header", True).csv(f"{out_dir}/yearly_summary")
 
 
-print(f"CAFC_Quarterly_Refinery_Pipeline script complete: {out_dir}")
+print(f"cafc_quarterly_fraud_data_pipeline.py script complete: {out_dir}")
+
