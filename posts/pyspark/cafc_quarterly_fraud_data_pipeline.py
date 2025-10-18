@@ -19,6 +19,7 @@ from pathlib import Path
 tsv_files = list(Path("data").rglob("*.tsv"))
 
 # Get the file with the latest modification time
+# Place downloaded file from cafc website in data directory. 
 
 tsv_files = list(Path("data/").rglob("*.tsv"))
 
@@ -79,7 +80,12 @@ out_dir = f"outputs_{label}"
 os.makedirs(out_dir, exist_ok=True)
 
 # ------------ 4: SAVE CLEANED DATA ------------
-df.write.mode("overwrite").option("header", True).csv(f"{out_dir}/cleaned_cafc")
+#df.write.mode("overwrite").option("header", True,"locale", "en-US").csv(f"{out_dir}/cleaned_cafc")
+
+df.write.mode("overwrite") \
+    .option("header", True) \
+    .option("locale", "en-US") \
+    .csv(f"{out_dir}/cleaned_cafc")
 
 # ------------ 5: SUMMARIES ------------
 monthly_summary = df.groupBy(year("date").alias("year"), month("date").alias("month")).agg(

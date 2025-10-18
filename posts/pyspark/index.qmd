@@ -3,7 +3,10 @@ title: "Data Pipelines with Pyspark"
 subtitle: "Using Canadian Anti-Fraud Centre Open Data"
 date: "2025-08-15"
 updated: "2025-10-15"
-format: html
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
 image: open_art_pipelines.png
 html:
     code-fold: true
@@ -36,21 +39,20 @@ In this exercise, we are going to use the Canadian Anti-Fraud Centre Reporting D
 5. Streamline access to new generated datasets by downloading csv files to local drive.
 
 
+### Function to run script to update datasets every quarter
+
 ```{python}
 #| echo: true
 # Don't run this here - put this in cronjob or github actions to update cafc dataset every quarter
 #%run cafc_quarterly_fraud_data_pipeline.py #Set up on cronjob to run each quarter
 ```
 
+### Contents of script to run to update datasets - only to be run once every quarter
 
-This outputs the script used in pyspark to clean the data downloaded from: 
-
-```{r include=FALSE} 
+```{r} 
 #remove include (above) to generate lines of code used to extact cafc data
 # get path to script
 pathway <- here::here("posts","pyspark","cafc_quarterly_fraud_data_pipeline.py")
-
-pathway
 
 # generate output of lines from script
 
@@ -58,7 +60,7 @@ lines <- readLines(pathway, warn=FALSE)
 cat(lines, sep = "\n")
 ```
 
-Required Libraries
+### Required Libraries
 
 ```{r}
 # Load necessary libraries
@@ -78,14 +80,11 @@ csv_dir <- list.files(path = cafc_clean, pattern = "outputs_*", all.files = TRUE
 # Get the most recent output directory (assuming sorted filenames)
 extract_dir <- max(csv_dir)
 
-
 # Concatenate the extracted directory and "cleaned_cafc" subdirectory correctly
 cleaned_cafc_path <- file.path(extract_dir, "cleaned_cafc")
 
 # Get all CSVs
 file_paths <- list.files(path = cleaned_cafc_path, pattern = "\\.csv$", all.files = TRUE, full.names = TRUE)
-
-
 
 ```
 
@@ -96,6 +95,7 @@ file_paths <- list.files(path = cleaned_cafc_path, pattern = "\\.csv$", all.file
 merged_df <- file_paths |>
   map_dfr(read_csv, show_col_types = FALSE)
 ```
+
 
 ### Show sample records of merged CAFC dataset
 ```{r}
@@ -153,16 +153,20 @@ paste("CAFC Latest Update", CAFC_latest_update, sep= " : ")
 
 library(downloadthis)
 
-merged_df %>%
+#Sys.setlocale("LC_NUMERIC", "C")
+#options(OutDec = ".")
+
+merged_df |>
   download_this(
-    output_name = "clean_cafc_en.csv",
+    output_name = "clean_cafc_en",
     output_extension = ".csv",
-    button_label = "Download clean_cafc_en.csv",
+    button_label = "Download clean_cafc_en",
     button_type = "default",
     self_contained = TRUE,
     has_icon = TRUE,
     icon = "fa fa-save",
-    id = "cafc-btn"
+    id = "cafc-btn",
+    csv2 = FALSE      # Use write_csv(), dot decimal, comma separator
   )
 
 ```
@@ -182,7 +186,8 @@ monthly_summary_df %>%
     self_contained = TRUE,
     has_icon = TRUE,
     icon = "fa fa-save",
-    id = "cafc-btn"
+    id = "cafc-btn",
+    csv2 = FALSE 
   )
 ```
 
@@ -201,6 +206,7 @@ yearly_summary_df %>%
     self_contained = TRUE,
     has_icon = TRUE,
     icon = "fa fa-save",
-    id = "cafc-btn"
+    id = "cafc-btn",
+    csv2 = FALSE 
   )
 ```
