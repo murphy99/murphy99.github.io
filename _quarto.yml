@@ -50,6 +50,9 @@ format:
     theme: flatly
     footer: dark
     css: styles.css
+    code-fold: true
+    code-summary: "Show the code"
+    
 #    include-in-header: gtm_code_head.html
 #    include-before-body: gtm_code_body.html
 #    include-after-body: Comments.html

@@ -146,7 +146,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-llm-demos">    
         <li>
-    <a class="dropdown-item" href="../../posts/LLM_Demo/index.html">
+    <a class="dropdown-item" href="../../posts/LLM_Demo/LLM_Demo_OBBBA.html">
  <span class="dropdown-text">Dig into the One Big Beautiful (Bad) Bill</span></a>
   </li>  
     </ul>
@@ -186,6 +186,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
   <li><a href="#python-packages-required" id="toc-python-packages-required" class="nav-link" data-scroll-target="#python-packages-required">Python Packages Required</a></li>
+  <li><a href="#the-llm-creates-a-vector-store-everytime-it-runs.-so-we-delete-it-before-storing-the-new-vector" id="toc-the-llm-creates-a-vector-store-everytime-it-runs.-so-we-delete-it-before-storing-the-new-vector" class="nav-link" data-scroll-target="#the-llm-creates-a-vector-store-everytime-it-runs.-so-we-delete-it-before-storing-the-new-vector">The LLM creates a vector store everytime it runs. So we delete it before storing the new vector</a></li>
+  <li><a href="#load-openai-key" id="toc-load-openai-key" class="nav-link" data-scroll-target="#load-openai-key">Load OpenAI Key</a></li>
+  <li><a href="#import-the-indexing-packages-to-store-the-indexing-in-duckdb" id="toc-import-the-indexing-packages-to-store-the-indexing-in-duckdb" class="nav-link" data-scroll-target="#import-the-indexing-packages-to-store-the-indexing-in-duckdb">Import the indexing packages to store the indexing in DuckDB</a></li>
+  <li><a href="#index-being-created-on-pdfs" id="toc-index-being-created-on-pdfs" class="nav-link" data-scroll-target="#index-being-created-on-pdfs">Index being created on PDFs</a></li>
   </ul></li>
   <li><a href="#deployment" id="toc-deployment" class="nav-link" data-scroll-target="#deployment">Deployment</a></li>
   </ul>
@@ -242,6 +246,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="python-packages-required" class="level3">
 <h3 class="anchored" data-anchor-id="python-packages-required">Python Packages Required</h3>
 <div id="f802c1af" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Install in packages (pip) in terminal - if missing</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install python-dotenv</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
@@ -262,9 +268,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_index.llms.openai <span class="im">import</span> OpenAI</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#pip install gradio</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> gradio <span class="im">as</span> gr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>The LLM creates a vector store everytime it runs. So we delete it before storing the new vector</p>
+</section>
+<section id="the-llm-creates-a-vector-store-everytime-it-runs.-so-we-delete-it-before-storing-the-new-vector" class="level3">
+<h3 class="anchored" data-anchor-id="the-llm-creates-a-vector-store-everytime-it-runs.-so-we-delete-it-before-storing-the-new-vector">The LLM creates a vector store everytime it runs. So we delete it before storing the new vector</h3>
 <div id="b3698a48" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="op">=</span> <span class="st">'persist/my_vector_store.duckdb'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if file exists</span></span>
@@ -274,12 +285,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"File deleted successfully"</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"File doesn't exist - first run - it's all good"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>File deleted successfully</code></pre>
 </div>
 </div>
-<p>Next we find the OPENAI key and set up the environment so that we are able to use its index capability and using llama indexing provided by Meta’s open source</p>
+</section>
+<section id="load-openai-key" class="level3">
+<h3 class="anchored" data-anchor-id="load-openai-key">Load OpenAI Key</h3>
 <div id="63a6ebe9" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#load_dotenv()</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -289,70 +305,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>client <span class="op">=</span> OpenAI(api_key<span class="op">=</span>api_key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>Here we import the indexing packages to store the indexing in DuckDB.</p>
+</section>
+<section id="import-the-indexing-packages-to-store-the-indexing-in-duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="import-the-indexing-packages-to-store-the-indexing-in-duckdb">Import the indexing packages to store the indexing in DuckDB</h3>
 <div id="ed50eaee" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_index.core <span class="im">import</span> VectorStoreIndex, SimpleDirectoryReader</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_index.vector_stores.duckdb <span class="im">import</span> DuckDBVectorStore</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_index.core <span class="im">import</span> StorageContext</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vector_store <span class="op">=</span> DuckDBVectorStore(<span class="st">"my_vector_store.duckdb"</span>, persist_dir<span class="op">=</span><span class="st">"persist/"</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>documents <span class="op">=</span> SimpleDirectoryReader(<span class="st">"/Users/Eileen/Desktop/GoData/Blog/posts/LLM_Demo/OBBBA/"</span>).load_data()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<p>This is where storage_context points to your indexed PDFs in the storage you specified above</p>
+</section>
+<section id="index-being-created-on-pdfs" class="level3">
+<h3 class="anchored" data-anchor-id="index-being-created-on-pdfs">Index being created on PDFs</h3>
 <div id="05d50ea6" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>storage_context <span class="op">=</span> StorageContext.from_defaults(vector_store<span class="op">=</span>vector_store)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>index <span class="op">=</span> VectorStoreIndex.from_documents(documents, storage_context<span class="op">=</span>storage_context)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 </section>
 <section id="deployment" class="level2">
 <h2 class="anchored" data-anchor-id="deployment">Deployment</h2>
-<p>This is a basic interface so that you can query anything about the PDF(s) you stored. In this case we stored two documents from <a href="https://www.congress.gov/">https://www.congress.gov/</a>:</p>
-<p><a href="https://www.congress.gov/bill/119th-congress/house-bill/1/text">https://www.congress.gov/bill/119th-congress/house-bill/1/text</a></p>
-<p><a href="https://www.congress.gov/bill/119th-congress/house-bill/1%5D">https://www.congress.gov/bill/119th-congress/house-bill/1</a></p>
-<p>We printed them to PDFs and stored them under the OBBBA directory.</p>
-<p>Some responses will not be what you expect and even provide inaccurate in incomplete responses. The reponses have limited output, so it’s best to narrow your questions as much as possible and to provide the sections and provisions for verifications. The prompts below have been tested and can be verified with the above documents. The prompt area is live, so have fun and dig in.</p>
-<p>This is a basic interface so that you can query anything about the PDF(s) stored.</p>
-<p><strong>Suggested prompts for potential stories:</strong></p>
-<p>What is OBBBA?</p>
-<p>How are Medicaid programs affected? List provision or section number for verification. Output in list.</p>
-<p>How are SNAP programs affected? List provision or section number for verification. Output list.</p>
-<p>What are all the environmental reductions, rescinds, and rescissions? List provisions and section number for verification. Output to list.</p>
-<p>What are all the environmental increases, and or establishment appropriations (not rescissions)? List provisions and section number for verification. Output to list.</p>
-<p>What are all the welfare reductions, and rescissions. List provisions and section number for verification. Output to list.</p>
-<p>What are all the law enforcement reductions, and rescissions. List provisions and section number for verification. Output to list.</p>
-<p>What are all the law enforcement increases and or appropriations? List provisions and section number for verification. Output to list.</p>
-<p>What are all the welfare appropriations, and increases?. List provisions and section number for verification. Output to list.</p>
-<p>What is the DOJ fund named ”BIDEN.” What is it used for? list by item. What provision is it under? How much is being appropriated for it?</p>
-<p>How is FEMA being appropriated? List the provision or section number along with description for verification. Is FEMA still going to be used for disaster recovery?</p>
-<div id="227d5db7" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># import gradio as gr</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># def greet(query):</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     query_engine = index.as_query_engine()</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     response = query_engine.query(query)</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#     return str(response)</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># gr.Interface(</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   fn=greet,</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   inputs=gr.Textbox(lines=1, placeholder="Enter your query here...",</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   label="Your Query"),</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   outputs=gr.Textbox(label="Response")</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   ).launch(share=True, pwa=True)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="5f9e3c7a" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an IFrame object</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters: url, width, height</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>iframe <span class="op">=</span> IFrame(<span class="st">'https://godata-obbba.hf.space'</span>, width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">600</span>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the iframe</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>iframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>LLM_Demo is deployed here: <a href="https://huggingface.co/spaces/GoData/LLM_Demo"></a></p>
+<p>Or scroll below and try it out!</p>
+<div id="5f9e3c7a" class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> IFrame</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an IFrame object</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters: url, width, height</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>iframe <span class="op">=</span> IFrame(src<span class="op">=</span><span class="st">"https://godata-llm-demo.hf.space"</span>, width<span class="op">=</span><span class="dv">1000</span>, height<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the iframe</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>iframe</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 
-        <iframe width="800" height="600" src="https://godata-obbba.hf.space" frameborder="0" allowfullscreen=""></iframe>
+        <iframe width="800" height="600" src="https://godata-llm-demo.hf.space" frameborder="0" allowfullscreen=""></iframe>
         
 </div>
 </div>
