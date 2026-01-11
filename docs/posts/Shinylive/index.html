@@ -263,11 +263,14 @@ div.csl-indent {
 <p>KMeans is an unsupervised machine learning algorithm used to group similar data together without already predefined classifications. All the points are clustered around a centroid that represents the mean of all points within the cluster. The number of centroids are referred to as “K values” and represents the number groups within all the data ponts. The goal is to minimize the euclidean distance between the data point and the its centroid mean, maximize the separation between clusters, and minimize total squared distance between each point and it’s assigned centriod.</p>
 <p>In order to find the optimal K values, you need to run through and iterative process. This KMeans model uses Shinylive to be able to iterate quickly between K values to visually see the best grouping or at least to narrow down the K values to calculate the optimal number of categories.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("shiny")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("shinylive")</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinylive)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bslib)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'bslib'</code></pre>
@@ -331,12 +334,17 @@ shinyApp(ui = ui, server = server)</code></pre>
 <section id="verify-you-can-retrieve-the-shinylive-assets" class="level4">
 <h4 class="anchored" data-anchor-id="verify-you-can-retrieve-the-shinylive-assets">Verify you can retrieve the shinylive assets</h4>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#shinylive::assets_info()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
 <section id="yaml-remove-comments-and-add-to-your-yaml" class="level3">
 <h3 class="anchored" data-anchor-id="yaml-remove-comments-and-add-to-your-yaml">YAML (Remove comments and add to your Yaml) :</h3>
 <div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ---  </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># format:   </span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   html:  </span></span>
@@ -344,6 +352,7 @@ shinyApp(ui = ui, server = server)</code></pre>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   filters:  </span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#     - shinylive  </span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ---  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 
 

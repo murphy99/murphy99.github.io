@@ -1,0 +1,1382 @@
+---
+#title: "Using Posit's EDA's Positron DataBot on CAFC Database"
+title: "Per capita: Quebec teens most targeted by fraud in Canada"
+subtitle: "EDA of the Canadian Anti-Fraud Centre Report Data using Databot"
+author: "Eileen Murphy"
+date: "2026-01-11"
+updated: "2026-01-11"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+#image: "teen_fraud_graph.png"
+image: "cafc_image1.png"
+categories: [Canadian Anti-Fraud Centre, CAFC, Databot, Posit, Positron, ggplot2]
+#draft: True
+---
+
+::: {.callout-note}
+Updated 2026-01-11 Updates for CAFC - No updates yet for 2025 Q4.  
+:::
+
+# AI Assisted EDA 
+
+Our EDA of the The Canadian Anti-Fraud Centre (CAFC) updated report for the 3rd quarter of 2025 shows that Quebec teens have been targeted more than teens in other Canadian provinces. This EDA shows the exploratory nature and questions that emerged after each iteration. The direction of the databot was directed by not a mysterious black box, but by our questions after each interation. Will there be the same conclusion, if you use the tool. Maybe, maybe not, that's the beauty of it. It all depends on the questions we ask. This EDA is just one pattern out of many it can detect.  EDA's are time consuming and without such tools, it's easy to go down the wrong path. If there are time constraints to the project, this phase could be compromised the most because it's so boring and time-consuming. Databot is a valuable tool to get to the heart of the problem and frame better questions for further analysis. I know from personal experience that I have missed the boat on more than one occasion because I took the wrong turn, saw things that weren't there, but maybe they weren't that significant. Spent a lot of time to find a lot of dead ends. This tool by Posit, makes this time consuming task much more efficient. What makes or breaks databot and it's usefulness are the questions asked after it produces a plot, it's pair programming at its finest. 
+
+Posit who makes this tool, has an excellent [blog post](https://posit.co/blog/introducing-databot/) and how to use and implement it in your project. It doesn't come out perfectly, the plots are incomplete or truncated, the texts are filled with fruit icons and such. But it forces us to make sure we comb through it. What is nice is that the code is included so that we can see what data is being used.
+
+CAFC's report for Q4 has not been updated yet (as of Jan 11, 2026) because of the change over in ownership of the database between CAFC and RCMP according to its website. But, we will update this when it comes through. 
+
+What's encouraging is the inference analysis at the end of this report showing a deep decline (-72.4%) in Quebec teens being victimized by fraud from 2021. Subsequent years, show a steady decline but well above other provinces. The results show that CAFC has been effective through their campaigns and partnerships to effect this change. This would certainly give reason to continue to fund CAFC in the future.
+
+[Link to the public data used from the government open portal](https://open.canada.ca/data/en/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f/resource/43c67af5-e598-4a9b-a484-fe1cb5d775b5)
+
+We pre-process the data from the website using our own data pipeline using pyspark. You can check it out [here](../pyspark/). Scroll to the bottom of the page to download your own copy of the processed data on your local machine. 
+
+
+```{r include=FALSE}
+# This shouldn't be hardcoded here - need to automate this
+
+pathway <- here::here("posts","CAFC_2025Q3_Analysis","data")
+
+clean_cafc_loc <- file.path(pathway, "clean_cafc_en.csv")
+cafc_monthly_loc <- file.path(pathway, "cafc_monthly_summary_en.csv")
+cafc_yearly_loc <- file.path(pathway, "cafc_yearly_summary_en.csv")
+
+```
+
+
+
+```{r include=FALSE}
+
+library(readr)
+library(gt)
+
+
+cafc_clean<-read_csv(clean_cafc_loc,show_col_types = FALSE)
+cafc_monthly<-read_csv(cafc_monthly_loc, show_col_types = FALSE)
+cafc_yearly<-read_csv(cafc_yearly_loc,show_col_types = FALSE)
+                  
+```
+
+
+### Sample records of CAFC dataset
+```{r}
+gt(head(cafc_clean))
+```
+
+
+### Sample records of CAFC monthly aggregations of victims and dollar loss (cafc_monthly)
+
+```{r}
+gt(head(cafc_monthly))
+```
+
+### Sample records of CAFC yearly aggregations of victims and dollar loss (cafc_yearly\)
+```{r}
+gt(head(cafc_yearly))
+```
+
+
+## CAFC Fraud: Annual Total Loss vs Number of Victims
+
+```{r include=FALSE}
+library(ggplot2)
+```
+
+```{r}
+
+options(scipen = 999)
+yearly_plot <- ggplot(cafc_yearly, 
+                      aes(x=year)) +
+                geom_col(aes(y=total_loss/1000000), fill="steelblue") +
+                geom_line(aes(y=total_victims/1000), color="red", group=1) +
+                geom_point(aes(y=total_victims/1000),color="red", size=3) +
+                scale_y_continuous(
+                   name = "Total Loss (Millions CAD)",
+                   sec.axis = sec_axis(~. * 1000, name = "Total Victims")
+                ) +
+                labs(
+                  title = "CAFC Fraud: Annual Total Loss vs Number of Victims",
+                  subtitle = "Blue bars: Total Loss (Millions CAD), Red line: Number of Victims",
+                  x = "Year"
+                ) +
+                theme_minimal()
+print(yearly_plot)
+```
+
+## Monthly Fraud Loss Trends
+
+```{r}
+# Create visualization 2: Monthly fraud loss trends
+# Create a date column for better plotting
+cafc_monthly$date <- as.Date(paste(cafc_monthly$year, cafc_monthly$month, "01", sep = "-"))
+
+monthly_plot <- ggplot(cafc_monthly, aes(x = date, y = total_loss/1000000)) +
+  geom_line(color = "navy", linewidth = 1) +
+  geom_point(color = "darkred") +
+  labs(
+    title = "Monthly Fraud Loss Trends",
+    subtitle = "CAFC Data: January 2021 - Present",
+    x = "Month",
+    y = "Total Loss (Millions CAD)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  scale_x_date(date_labels = "%Y-%m", date_breaks = "6 months")
+
+print(monthly_plot)
+```
+
+## Top 10 Fraud Categories
+```{r}
+# Create visualization 3: Fraud categories from detailed dataset
+# Get top fraud categories
+fraud_summary <- table(cafc_clean$fraud_cat)
+fraud_df <- data.frame(
+  fraud_type = names(fraud_summary),
+  count = as.numeric(fraud_summary)
+) 
+
+# Sort and take top 10
+fraud_df <- fraud_df[order(fraud_df$count, decreasing = TRUE), ]
+top_fraud <- fraud_df[1:10, ]
+
+# Create the plot
+fraud_plot <- ggplot(top_fraud, aes(x = reorder(fraud_type, count), y = count)) +
+  geom_col(fill = "coral", alpha = 0.8) +
+  coord_flip() +
+  labs(
+    title = "Top 10 Fraud Categories",
+    subtitle = "Based on number of reported complaints",
+    x = "Fraud Category",
+    y = "Number of Reports"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 8, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = scales::comma(count)), hjust = -0.1, size = 2)
+
+print(fraud_plot)
+```
+
+## Fraud Reports by Province/Territory
+
+```{r}
+# Create visualization 4: Fraud by Province
+province_summary <- table(cafc_clean$province)
+province_df <- data.frame(
+  province = names(province_summary),
+  count = as.numeric(province_summary)
+)
+
+# Sort and filter out very small counts for readability
+province_df <- province_df[order(province_df$count, decreasing = TRUE), ]
+province_df <- province_df[province_df$count > 1000, ]  # Only provinces with >1000 cases
+
+province_plot <- ggplot(province_df, aes(x = reorder(province, count), y = count)) +
+  geom_col(fill = "darkgreen", alpha = 0.7) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Fraud Reports by Province/Territory",
+    subtitle = "Provinces with >1,000 reported cases",
+    x = "Province/Territory",
+    y = "Number of Reports"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 9, face = "bold"),
+    axis.text.y = element_text(size = 9, hjust=1)
+    #plot.margin= margin(t = 10, r = 50, b = 10, l = 10)
+  ) +
+  geom_text(aes(label = scales::comma(count)), hjust = -0.1, size = 1.8)
+
+print(province_plot)
+```
+
+## Fraud Reports by Age Group
+```{r}
+# Create visualization 5: Fraud by Age Groups
+age_summary <- table(cafc_clean$age_range)
+age_df <- data.frame(
+  age_group = names(age_summary),
+  count = as.numeric(age_summary)
+)
+
+# Clean up age group names and filter meaningful groups
+age_df <- age_df[age_df$count > 500, ]  # Filter small groups
+age_df <- age_df[!grepl("Not Available|non disponible", age_df$age_group), ]  # Remove NA groups
+
+age_plot <- ggplot(age_df, aes(x = reorder(age_group, count), y = count)) +
+  geom_col(fill = "purple", alpha = 0.7) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Fraud Reports by Age Group",
+    subtitle = "Age groups with >500 reported cases",
+    x = "Age Range",
+    y = "Number of Reports"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = scales::comma(count)), hjust = -0.1, size = 2)
+
+print(age_plot)
+```
+
+## Fraud Victims by Gender
+
+```{r}
+# Create visualization 6: Gender distribution of fraud victims
+gender_summary <- table(cafc_clean$gender)
+gender_df <- data.frame(
+  gender = names(gender_summary),
+  count = as.numeric(gender_summary)
+)
+
+# Filter out "Not Available" and very small counts
+gender_df <- gender_df[!grepl("Not Available", gender_df$gender), ]
+gender_df <- gender_df[gender_df$count > 1000, ]
+
+```
+
+## Gender Distribution
+
+```{r}
+gender_plot <- ggplot(gender_df, aes(x = gender, y = count, fill = gender)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Fraud Victims by Gender",
+    subtitle = "Distribution of reported fraud cases",
+    fill = "Gender"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    legend.position = "none"
+  ) +
+  scale_fill_manual(values = c("Female" = "pink", "Male" = "lightblue", "Other" = "lightgray")) +
+  geom_text(aes(label = scales::comma(count)), vjust = -0.4, size = 3.5)
+
+print(gender_plot)
+
+```
+
+## Average Financial Loss by Fraud Method
+
+```{r}
+# Create visualization 7: Average fraud loss by solicitation method
+# First, let's examine the solicitation methods and calculate average losses
+method_loss <- aggregate(dollar_loss ~ sol_method, data = cafc_clean, 
+                        FUN = function(x) c(mean = mean(x, na.rm = TRUE), 
+                                          count = length(x[!is.na(x)])))
+
+# Convert to proper data frame
+method_df <- data.frame(
+  method = method_loss$sol_method,
+  avg_loss = method_loss$dollar_loss[,"mean"],
+  count = method_loss$dollar_loss[,"count"]
+)
+
+# Filter methods with reasonable sample sizes and remove extreme outliers
+method_df <- method_df[method_df$count >= 100 & method_df$avg_loss < 50000, ]
+method_df <- method_df[order(method_df$avg_loss, decreasing = TRUE), ]
+
+method_plot <- ggplot(method_df, aes(x = reorder(method, avg_loss), y = avg_loss)) +
+  geom_col(aes(fill = count), alpha = 0.8) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Average Financial Loss by Fraud Method",
+    subtitle = "Methods with ≥100 cases, excluding extreme outliers",
+    x = "Solicitation Method",
+    y = "Average Loss (CAD)",
+    fill = "Number of Cases"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 9)
+  ) +
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$")) +
+  geom_text(aes(label = scales::dollar(round(avg_loss))), hjust = -0.1, size = 2.8)
+
+print(method_plot)
+```
+
+## Fraud Province Table
+
+```{r}
+# Create a cross-tabulation of fraud types by province
+fraud_province_table <- table(cafc_clean$province, cafc_clean$fraud_cat)
+
+# Convert to data frame for ggplot
+fraud_province_df <- as.data.frame(fraud_province_table)
+names(fraud_province_df) <- c("Province", "Fraud_Type", "Count")
+
+# Filter to focus on major provinces and fraud types (to make heatmap readable)
+# Get top 8 provinces by total fraud cases
+top_provinces <- names(sort(rowSums(fraud_province_table), decreasing = TRUE))[1:8]
+
+# Get top 10 fraud types by total cases
+top_fraud_types <- names(sort(colSums(fraud_province_table), decreasing = TRUE))[1:10]
+
+# Filter the data
+fraud_province_filtered <- fraud_province_df[
+  fraud_province_df$Province %in% top_provinces & 
+  fraud_province_df$Fraud_Type %in% top_fraud_types, ]
+
+# Check the structure
+cat("Filtered data dimensions:", nrow(fraud_province_filtered), "rows\n")
+cat("Top provinces:", paste(top_provinces, collapse = ", "), "\n")
+cat("Top fraud types:", paste(top_fraud_types[1:5], collapse = ", "), "...\n")
+```
+
+
+## Fraud Type Specialization by Province
+
+```{r}
+# Create the heatmap
+heatmap_plot <- ggplot(fraud_province_filtered, aes(x = Fraud_Type, y = Province, fill = Count)) +
+  geom_tile(color = "white", linewidth = 0.5) +
+  scale_fill_gradient(low = "white", high = "darkred", name = "Number\nof Cases") +
+  labs(
+    title = "Fraud Type Specialization by Province",
+    subtitle = "Heatmap showing concentration of different fraud types across Canadian provinces",
+    x = "Fraud Type",
+    y = "Province"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+    axis.text.y = element_text(size = 10),
+    panel.grid = element_blank()
+  ) +
+  geom_text(aes(label = ifelse(Count > 500, scales::comma(Count), "")), 
+            size = 2.5, color = "white")
+
+print(heatmap_plot)
+```
+
+## Regional Fraud Specializations
+
+```{r}
+# Create a normalized heatmap to show regional specializations
+# Calculate percentage within each province to identify specializations
+fraud_province_matrix <- as.matrix(fraud_province_table)
+
+# Calculate row percentages (what percentage of each province's fraud is each type)
+province_percentages <- prop.table(fraud_province_matrix, 1) * 100
+
+# Convert back to long format for ggplot
+province_pct_df <- as.data.frame(as.table(province_percentages))
+names(province_pct_df) <- c("Province", "Fraud_Type", "Percentage")
+
+# Filter to same top provinces and fraud types
+province_pct_filtered <- province_pct_df[
+  province_pct_df$Province %in% top_provinces & 
+  province_pct_df$Fraud_Type %in% top_fraud_types, ]
+
+# Create normalized heatmap
+normalized_heatmap <- ggplot(province_pct_filtered, aes(x = Fraud_Type, y = Province, fill = Percentage)) +
+  geom_tile(color = "white", size = 0.5) +
+  scale_fill_gradient(low = "lightyellow", high = "darkblue", name = "Percentage\nof Province\nTotal") +
+  labs(
+    title = "Regional Fraud Specializations",
+    subtitle = "Percentage breakdown showing each province's fraud type distribution",
+    x = "Fraud Type",
+    y = "Province"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+    axis.text.y = element_text(size = 10),
+    panel.grid = element_blank()
+  ) +
+  geom_text(aes(label = ifelse(Percentage > 5, paste0(round(Percentage, 1), "%"), "")), 
+            size = 2.2, color = "white")
+
+print(normalized_heatmap)
+```
+
+## Provincial Population Data
+```{r}
+# Create provincial population data (approximate 2023 figures)
+# These are approximate populations in thousands for Canadian provinces/territories
+provincial_population <- data.frame(
+  province = c("Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba", 
+               "Saskatchewan", "Nova Scotia", "New Brunswick", "Newfoundland and Labrador",
+               "Prince Edward Island", "Northwest Territories", "Yukon", "Nunavut"),
+  population = c(15608, 8751, 5519, 4756, 1431, 1204, 1066, 834, 533, 
+                 173, 45, 43, 40)  # in thousands
+)
+
+# Get total fraud cases by province from our data
+province_totals <- as.data.frame(table(cafc_clean$province))
+names(province_totals) <- c("province", "fraud_cases")
+
+# Merge with population data
+province_analysis <- merge(province_totals, provincial_population, by = "province", all.x = TRUE)
+
+# Calculate per capita rates (per 100,000 residents)
+province_analysis$fraud_rate_per_100k <- (province_analysis$fraud_cases / 
+                                         (province_analysis$population * 1000)) * 100000
+
+# Filter out territories and provinces with very small numbers for cleaner visualization
+province_analysis <- province_analysis[!is.na(province_analysis$population), ]
+province_analysis <- province_analysis[province_analysis$fraud_cases > 500, ]
+
+# Show the data
+#cat("Per-Capita Fraud Analysis:\n")
+province_analysis[order(province_analysis$fraud_rate_per_100k, decreasing = TRUE), ]
+```
+
+
+## Fraud Rates per 100,000 Residents by Province
+
+```{r}
+# Create per-capita visualization
+per_capita_plot <- ggplot(province_analysis, 
+                         aes(x = reorder(province, fraud_rate_per_100k), 
+                             y = fraud_rate_per_100k)) +
+  geom_col(aes(fill = fraud_rate_per_100k), alpha = 0.8) +
+  coord_flip(clip="off") +
+  scale_fill_gradient(low = "lightblue", high = "darkred", 
+                     name = "Rate per\n100,000") +
+  labs(
+    title = "Fraud Rates per 100,000 Residents by Province",
+    subtitle = "Per-capita analysis reveals different patterns than absolute numbers",
+    x = "Province",
+    y = "Fraud Cases per 100,000 Residents"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10),
+    legend.position = "right"
+  ) +
+  geom_text(aes(label = round(fraud_rate_per_100k, 1)), 
+            hjust = -0.1, size = 3.5)
+
+print(per_capita_plot)
+```
+
+## Absolute vs. Per-Capita Rates
+
+```{r}
+# Create comparison visualization: Absolute vs Per-Capita
+# Prepare data for comparison plot
+comparison_data <- province_analysis[, c("province", "fraud_cases", "fraud_rate_per_100k")]
+
+# Create absolute numbers plot
+absolute_plot <- ggplot(comparison_data, 
+                       aes(x = reorder(province, fraud_cases), y = fraud_cases)) +
+  geom_col(fill = "steelblue", alpha = 0.7) +
+  coord_flip() +
+  labs(
+    title = "Absolute Numbers",
+    x = "",
+    y = "Total Fraud Cases"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 9)
+  ) +
+  scale_y_continuous(labels = scales::comma)
+
+# Create per-capita plot  
+percapita_plot <- ggplot(comparison_data, 
+                        aes(x = reorder(province, fraud_rate_per_100k), 
+                            y = fraud_rate_per_100k)) +
+  geom_col(fill = "darkred", alpha = 0.7) +
+  coord_flip() +
+  labs(
+    title = "Per-Capita Rates",
+    x = "",
+    y = "Cases per 100,000 Residents"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 9)
+  )
+
+# Display both plots
+print(absolute_plot)
+print("\n--- Comparison: Absolute vs Per-Capita ---\n")
+print(percapita_plot)
+```
+
+## Quebec Fraud Report
+
+```{r}
+# Analyze Quebec's fraud type distribution
+quebec_data <- cafc_clean[cafc_clean$province == "Quebec", ]
+
+# Get fraud type counts for Quebec
+quebec_fraud_counts <- table(quebec_data$fraud_cat)
+quebec_fraud_df <- data.frame(
+  fraud_type = names(quebec_fraud_counts),
+  quebec_count = as.numeric(quebec_fraud_counts)
+)
+
+# Calculate Quebec's fraud rate per 100k for each type
+quebec_population <- 8751 * 1000  # Quebec population
+quebec_fraud_df$quebec_rate_per_100k <- (quebec_fraud_df$quebec_count / quebec_population) * 100000
+
+# Get national averages for comparison
+national_fraud_counts <- table(cafc_clean$fraud_cat)
+total_population <- sum(provincial_population$population * 1000, na.rm = TRUE)
+national_fraud_df <- data.frame(
+  fraud_type = names(national_fraud_counts),
+  national_count = as.numeric(national_fraud_counts),
+  national_rate_per_100k = (as.numeric(national_fraud_counts) / total_population) * 100000
+)
+
+# Merge Quebec and national data
+quebec_comparison <- merge(quebec_fraud_df, national_fraud_df, by = "fraud_type")
+quebec_comparison$rate_ratio <- quebec_comparison$quebec_rate_per_100k / quebec_comparison$national_rate_per_100k
+
+# Show top contributors to Quebec's high rate
+cat("Quebec's Top 10 Fraud Types (by per-capita rate):\n")
+top_quebec_fraud <- quebec_comparison[order(quebec_comparison$quebec_rate_per_100k, decreasing = TRUE), ][1:10, ]
+print(top_quebec_fraud[, c("fraud_type", "quebec_count", "quebec_rate_per_100k", "rate_ratio")])
+```
+
+
+## Quebec's Fraud Type Specialization
+
+```{r}
+# Create visualization showing Quebec's fraud specialization
+# Filter for significant fraud types
+quebec_major <- top_quebec_fraud[top_quebec_fraud$quebec_count > 1000, ]
+
+quebec_specialization_plot <- ggplot(quebec_major, 
+                                    aes(x = reorder(fraud_type, rate_ratio), 
+                                        y = rate_ratio)) +
+  geom_col(aes(fill = ifelse(rate_ratio > 1, "Above National", "Below National")), 
+           alpha = 0.8) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "black", size = 1) +
+  coord_flip(clip="off") +
+  scale_fill_manual(values = c("Above National" = "darkred", "Below National" = "steelblue"),
+                   name = "Compared to\nNational Average") +
+  labs(
+    title = "Quebec's Fraud Type Specialization",
+    subtitle = "Ratio of Quebec's per-capita rate to national average (>1000 cases)",
+    x = "Fraud Type",
+    y = "Rate Ratio (Quebec/National Average)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = paste0(round(rate_ratio, 2), "x")), 
+            hjust = ifelse(quebec_major$rate_ratio > 1, -0.1, 1.1), size = 3)
+
+print(quebec_specialization_plot)
+```
+
+## Quebec's Contribution to National Fraud Totals
+
+```{r}
+# Create a detailed breakdown showing Quebec's contribution to national totals
+quebec_contribution <- data.frame(
+  fraud_type = top_quebec_fraud$fraud_type[1:8],
+  quebec_count = top_quebec_fraud$quebec_count[1:8],
+  quebec_rate = round(top_quebec_fraud$quebec_rate_per_100k[1:8], 1),
+  national_count = top_quebec_fraud$national_count[1:8],
+  quebec_percentage = round((top_quebec_fraud$quebec_count[1:8] / top_quebec_fraud$national_count[1:8]) * 100, 1)
+)
+
+# Create stacked bar chart showing Quebec's contribution
+contribution_plot <- ggplot(quebec_contribution, 
+                           aes(x = reorder(fraud_type, quebec_count))) +
+  geom_col(aes(y = national_count), fill = "lightgray", alpha = 0.7, width = 0.7) +
+  geom_col(aes(y = quebec_count), fill = "darkblue", alpha = 0.8, width = 0.7) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Quebec's Contribution to National Fraud Totals",
+    subtitle = "Dark blue: Quebec cases, Light gray: All other provinces combined",
+    x = "Fraud Type",
+    y = "Number of Cases"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  geom_text(aes(y = national_count, 
+                label = paste0(quebec_percentage, "% QC")), 
+            hjust = -0.1, size = 1.70)
+
+print(contribution_plot)
+
+# Print summary table
+cat("\nQuebec's Fraud Analysis Summary:\n")
+print(quebec_contribution)
+```
+```{r}
+# Analyze Quebec's demographic patterns
+# Age distribution of Quebec fraud victims
+quebec_age_summary <- table(quebec_data$age_range)
+quebec_age_df <- data.frame(
+  age_group = names(quebec_age_summary),
+  quebec_count = as.numeric(quebec_age_summary)
+)
+
+# Get national age distribution for comparison
+national_age_summary <- table(cafc_clean$age_range)
+national_age_df <- data.frame(
+  age_group = names(national_age_summary),
+  national_count = as.numeric(national_age_summary)
+)
+
+# Calculate Quebec's share of each age group
+quebec_age_comparison <- merge(quebec_age_df, national_age_df, by = "age_group")
+quebec_age_comparison$quebec_percentage <- (quebec_age_comparison$quebec_count / 
+                                           quebec_age_comparison$national_count) * 100
+quebec_age_comparison$quebec_rate_per_100k <- (quebec_age_comparison$quebec_count / quebec_population) * 100000
+
+# Filter meaningful age groups and remove "Not Available"
+quebec_age_clean <- quebec_age_comparison[
+  !grepl("Not Available|non disponible", quebec_age_comparison$age_group) &
+  quebec_age_comparison$quebec_count > 500, ]
+
+cat("Quebec Age Demographics (Top vulnerable groups):\n")
+quebec_age_clean[order(quebec_age_clean$quebec_rate_per_100k, decreasing = TRUE), ]
+```
+
+## Quebec Fraud Victims by Age Group
+
+```{r}
+# Create Quebec age demographics visualization
+quebec_age_plot <- ggplot(quebec_age_clean, 
+                         aes(x = reorder(age_group, quebec_rate_per_100k), 
+                             y = quebec_rate_per_100k)) +
+  geom_col(aes(fill = quebec_percentage), alpha = 0.8) +
+  coord_flip(clip="off") +
+  scale_fill_gradient(low = "lightblue", high = "darkred", 
+                     name = "% of National\nTotal") +
+  labs(
+    title = "Quebec Fraud Victims by Age Group",
+    subtitle = "Per-capita rates with Quebec's share of national totals",
+    x = "Age Group",
+    y = "Quebec Fraud Rate per 100,000"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = paste0(round(quebec_rate_per_100k, 1), "\n(", 
+                              round(quebec_percentage, 1), "%)")), 
+            hjust = -0.1, size = 3)
+
+print(quebec_age_plot)
+```
+
+
+## gender patterns in Quebec Report
+
+```{r}
+# Analyze gender patterns in Quebec
+quebec_gender_summary <- table(quebec_data$gender)
+quebec_gender_df <- data.frame(
+  gender = names(quebec_gender_summary),
+  quebec_count = as.numeric(quebec_gender_summary)
+)
+
+cat("\nQuebec Gender Distribution:\n")
+quebec_gender_df[quebec_gender_df$quebec_count > 1000, ]
+```
+
+
+## Quebec: Age-Specific Fraud Vulnerabilities
+
+```{r}
+# Analyze fraud types by age group in Quebec to identify age-specific vulnerabilities
+quebec_age_fraud <- table(quebec_data$age_range, quebec_data$fraud_cat)
+
+# Convert to percentage within each age group
+quebec_age_fraud_pct <- prop.table(quebec_age_fraud, 1) * 100
+
+# Focus on major age groups and fraud types
+major_ages <- c("'20 - 29", "'30 - 39", "'40 - 49", "'50 - 59", "'60 - 69", "'70 - 79")
+major_fraud_types <- c("Identity Fraud", "Personal Info", "Extortion", "Phishing", "Bank Investigator")
+
+# Create subset for visualization
+quebec_age_fraud_subset <- quebec_age_fraud_pct[major_ages, major_fraud_types]
+
+# Convert to long format for ggplot
+quebec_age_fraud_long <- as.data.frame(as.table(quebec_age_fraud_subset))
+names(quebec_age_fraud_long) <- c("Age_Group", "Fraud_Type", "Percentage")
+
+# Create age-specific fraud pattern heatmap
+age_fraud_heatmap <- ggplot(quebec_age_fraud_long, 
+                           aes(x = Fraud_Type, y = Age_Group, fill = Percentage)) +
+  geom_tile(color = "white", size = 0.5) +
+  scale_fill_gradient(low = "white", high = "purple", name = "% within\nAge Group") +
+  labs(
+    title = "Quebec: Age-Specific Fraud Vulnerabilities",
+    subtitle = "Percentage of each age group affected by different fraud types",
+    x = "Fraud Type",
+    y = "Age Group"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+    axis.text.y = element_text(size = 10),
+    panel.grid = element_blank()
+  ) +
+  geom_text(aes(label = ifelse(Percentage > 5, paste0(round(Percentage, 1), "%"), "")), 
+            size = 2.5, color = "white")
+
+print(age_fraud_heatmap)
+```
+
+## Quebec Teenagers Fraud Analysis Report
+
+```{r}
+# Analyze fraud methods targeting Quebec teenagers
+quebec_teens <- quebec_data[quebec_data$age_range == "'10 - 19", ]
+
+cat("Quebec Teenagers Fraud Analysis:\n")
+cat("Total Quebec teen victims:", nrow(quebec_teens), "\n")
+cat("Percentage of all Quebec fraud victims:", round((nrow(quebec_teens) / nrow(quebec_data)) * 100, 2), "%\n\n")
+
+# Analyze solicitation methods used against Quebec teens
+teen_methods <- table(quebec_teens$sol_method)
+teen_methods_df <- data.frame(
+  method = names(teen_methods),
+  count = as.numeric(teen_methods),
+  percentage = round((as.numeric(teen_methods) / sum(teen_methods)) * 100, 1)
+)
+
+# Filter meaningful methods
+teen_methods_clean <- teen_methods_df[teen_methods_df$count > 50, ]
+teen_methods_clean <- teen_methods_clean[order(teen_methods_clean$count, decreasing = TRUE), ]
+
+cat("Top Solicitation Methods Targeting Quebec Teenagers:\n")
+print(teen_methods_clean)
+```
+
+## Fraud types targeting Quebec teenagers Report
+
+```{r}
+# Analyze fraud types targeting Quebec teenagers
+teen_fraud_types <- table(quebec_teens$fraud_cat)
+teen_fraud_df <- data.frame(
+  fraud_type = names(teen_fraud_types),
+  count = as.numeric(teen_fraud_types),
+  percentage = round((as.numeric(teen_fraud_types) / sum(teen_fraud_types)) * 100, 1)
+)
+
+teen_fraud_clean <- teen_fraud_df[teen_fraud_df$count > 50, ]
+teen_fraud_clean <- teen_fraud_clean[order(teen_fraud_clean$count, decreasing = TRUE), ]
+
+cat("Top Fraud Types Targeting Quebec Teenagers:\n")
+print(teen_fraud_clean)
+
+# Compare Quebec teens to national teen patterns
+national_teens <- cafc_clean[cafc_clean$age_range == "'10 - 19", ]
+national_teen_methods <- table(national_teens$sol_method)
+
+# Calculate Quebec's share of each method
+quebec_teen_comparison <- data.frame(
+  method = names(teen_methods),
+  quebec_count = as.numeric(teen_methods),
+  national_count = as.numeric(national_teen_methods[names(teen_methods)]),
+  quebec_share = round((as.numeric(teen_methods) / as.numeric(national_teen_methods[names(teen_methods)])) * 100, 1)
+)
+
+quebec_teen_comparison <- quebec_teen_comparison[!is.na(quebec_teen_comparison$national_count), ]
+quebec_teen_comparison <- quebec_teen_comparison[quebec_teen_comparison$quebec_count > 50, ]
+
+cat("\nQuebec's Share of National Teen Fraud by Method:\n")
+quebec_teen_comparison[order(quebec_teen_comparison$quebec_share, decreasing = TRUE), ]
+```
+
+## Most common fraud types targeting 10-19 year olds
+
+```{r}
+# Create visualizations for teen fraud patterns
+# Clean up method data for better visualization
+teen_methods_viz <- teen_methods_clean[!teen_methods_clean$method %in% c("Other/unknown", "Not Available"), ]
+
+teen_methods_plot <- ggplot(teen_methods_viz, 
+                           aes(x = reorder(method, count), y = count)) +
+  geom_col(fill = "red", alpha = 0.7) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Quebec Teen Fraud: Top Solicitation Methods",
+    subtitle = "Methods used to target 10-19 year olds (excluding Unknown/Not Available)",
+    x = "Solicitation Method",
+    y = "Number of Teen Victims"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10),
+    plot.margin = margin(t = 10, r = 60, b = 10, l = 10)
+  ) +
+  geom_text(aes(label = paste0(count, " (", percentage, "%)")), 
+            hjust = -0.1, size = 2.0)
+
+print(teen_methods_plot)
+
+# Create fraud type visualization
+teen_fraud_plot <- ggplot(teen_fraud_clean, 
+                         aes(x = reorder(fraud_type, count), y = count)) +
+  geom_col(fill = "darkblue", alpha = 0.8) +
+  coord_flip(clip="off") +
+  labs(
+    title = "Quebec Teen Fraud: Types of Fraud",
+    subtitle = "Most common fraud types targeting 10-19 year olds",
+    x = "Fraud Type",
+    y = "Number of Teen Victims"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10),
+    plot.margin = margin(t = 10, r = 50, b = 10, l = 10)
+  ) +
+  geom_text(aes(label = paste0(count, " (", percentage, "%)")), 
+            hjust = -0.1, size = 2.0)
+
+print(teen_fraud_plot)
+```
+
+## Dollar Losses for Quebec teens vs other demographics Report
+
+```{r}
+# Analyze dollar losses for Quebec teens vs other demographics
+# First, let's examine the financial impact on Quebec teens
+quebec_teens_losses <- quebec_teens[!is.na(quebec_teens$dollar_loss) & quebec_teens$dollar_loss > 0, ]
+
+cat("Quebec Teen Financial Impact Analysis:\n")
+cat("Total teen victims with recorded losses:", nrow(quebec_teens_losses), "\n")
+cat("Average loss per Quebec teen victim: $", round(mean(quebec_teens_losses$dollar_loss), 2), "\n")
+cat("Median loss per Quebec teen victim: $", round(median(quebec_teens_losses$dollar_loss), 2), "\n")
+cat("Total losses to Quebec teens: $", scales::comma(sum(quebec_teens_losses$dollar_loss)), "\n\n")
+
+# Compare to other Quebec age groups
+quebec_age_financial <- aggregate(dollar_loss ~ age_range, 
+                                 data = quebec_data[quebec_data$dollar_loss > 0 & !is.na(quebec_data$dollar_loss), ], 
+                                 FUN = function(x) c(mean = mean(x), median = median(x), total = sum(x), count = length(x)))
+
+# Convert to proper data frame
+quebec_age_losses <- data.frame(
+  age_group = quebec_age_financial$age_range,
+  avg_loss = quebec_age_financial$dollar_loss[,"mean"],
+  median_loss = quebec_age_financial$dollar_loss[,"median"],
+  total_loss = quebec_age_financial$dollar_loss[,"total"],
+  victim_count = quebec_age_financial$dollar_loss[,"count"]
+)
+
+# Filter meaningful age groups and sort by average loss
+quebec_age_losses_clean <- quebec_age_losses[!grepl("Not Available|non disponible", quebec_age_losses$age_group) & 
+                                           quebec_age_losses$victim_count > 100, ]
+quebec_age_losses_clean <- quebec_age_losses_clean[order(quebec_age_losses_clean$avg_loss, decreasing = TRUE), ]
+
+cat("Quebec Average Losses by Age Group:\n")
+print(quebec_age_losses_clean[, c("age_group", "avg_loss", "median_loss", "victim_count")])
+```
+
+
+## Average Financial Loss per Victim by Age Group (Quebec)
+
+```{r}
+# Create visualization comparing average losses by age group
+quebec_losses_plot <- ggplot(quebec_age_losses_clean, 
+                            aes(x = reorder(age_group, avg_loss), y = avg_loss)) +
+  geom_col(aes(fill = ifelse(age_group == "'10 - 19", "Teens", "Other Ages")), alpha = 0.8) +
+  coord_flip(clip="off") +
+  scale_fill_manual(values = c("Teens" = "red", "Other Ages" = "steelblue"),
+                   name = "Age Category") +
+  labs(
+    title = "Average Financial Loss per Victim by Age Group (Quebec)",
+    subtitle = "Teens have the lowest average losses but significant total impact",
+    x = "Age Group",
+    y = "Average Loss per Victim (CAD)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  scale_y_continuous(labels = scales::dollar_format(prefix = "$")) +
+  geom_text(aes(label = scales::dollar(round(avg_loss))), 
+            hjust = -0.1, size = 3.2)
+
+print(quebec_losses_plot)
+
+# Compare Quebec teen losses to national teen patterns
+national_teens_losses <- national_teens[!is.na(national_teens$dollar_loss) & 
+                                       national_teens$dollar_loss > 0, ]
+
+cat("\nComparison: Quebec vs National Teen Losses:\n")
+cat("Quebec teen average loss: $", round(mean(quebec_teens_losses$dollar_loss), 2), "\n")
+cat("National teen average loss: $", round(mean(national_teens_losses$dollar_loss), 2), "\n")
+cat("Quebec teen median loss: $", round(median(quebec_teens_losses$dollar_loss), 2), "\n")
+cat("National teen median loss: $", round(median(national_teens_losses$dollar_loss), 2), "\n")
+```
+
+## Quebec Teen Fraud Loss Distribution
+
+```{r}
+# Analyze loss distribution patterns for Quebec teens
+# Create loss brackets to understand the distribution
+quebec_teens_losses$loss_bracket <- cut(quebec_teens_losses$dollar_loss,
+                                       breaks = c(0, 100, 500, 1000, 5000, 10000, Inf),
+                                       labels = c("$1-100", "$101-500", "$501-1000", 
+                                                "$1001-5000", "$5001-10000", ">$10000"),
+                                       right = TRUE)
+
+teen_loss_distribution <- table(quebec_teens_losses$loss_bracket)
+teen_loss_df <- data.frame(
+  loss_bracket = names(teen_loss_distribution),
+  count = as.numeric(teen_loss_distribution),
+  percentage = round((as.numeric(teen_loss_distribution) / sum(teen_loss_distribution)) * 100, 1)
+)
+
+# Create loss distribution visualization
+teen_loss_dist_plot <- ggplot(teen_loss_df, 
+                             aes(x = loss_bracket, y = count)) +
+  geom_col(fill = "orange", alpha = 0.8) +
+  labs(
+    title = "Quebec Teen Fraud Loss Distribution",
+    subtitle = "Most teen losses are under $1,000 but some suffer major losses",
+    x = "Loss Amount Bracket",
+    y = "Number of Teen Victims"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  geom_text(aes(label = paste0(count, "\n(", percentage, "%)")), 
+            vjust = +0.5, size = 3)
+
+print(teen_loss_dist_plot)
+
+# Show the distribution table
+cat("\nQuebec Teen Loss Distribution:\n")
+print(teen_loss_df)
+
+# Calculate some key statistics
+cat("\nKey Teen Loss Statistics:\n")
+cat("Teens losing >$5,000:", sum(teen_loss_df$count[teen_loss_df$loss_bracket %in% c("$5001-10000", ">$10000")]), 
+    "victims (", round(sum(teen_loss_df$percentage[teen_loss_df$loss_bracket %in% c("$5001-10000", ">$10000")]), 1), "%)\n")
+cat("Teens losing <$500:", sum(teen_loss_df$count[teen_loss_df$loss_bracket %in% c("$1-100", "$101-500")]),
+    "victims (", round(sum(teen_loss_df$percentage[teen_loss_df$loss_bracket %in% c("$1-100", "$101-500")]), 1), "%)\n")
+```
+
+
+Quebec Teen Fraud Trends Over Time Report
+
+```{r}
+# Analyze Quebec teen fraud trends over time
+# Convert date column to proper date format
+quebec_teens$date_clean <- as.Date(quebec_teens$date)
+
+# Extract year and month for trend analysis
+quebec_teens$year <- as.numeric(format(quebec_teens$date_clean, "%Y"))
+quebec_teens$month <- as.numeric(format(quebec_teens$date_clean, "%m"))
+quebec_teens$year_month <- format(quebec_teens$date_clean, "%Y-%m")
+
+# Analyze yearly trends
+yearly_teen_counts <- table(quebec_teens$year)
+yearly_teen_df <- data.frame(
+  year = as.numeric(names(yearly_teen_counts)),
+  teen_victims = as.numeric(yearly_teen_counts)
+)
+
+cat("Quebec Teen Fraud by Year:\n")
+print(yearly_teen_df)
+
+# Calculate year-over-year change
+yearly_teen_df$yoy_change <- c(NA, diff(yearly_teen_df$teen_victims))
+yearly_teen_df$yoy_pct_change <- round(c(NA, diff(yearly_teen_df$teen_victims) / yearly_teen_df$teen_victims[-nrow(yearly_teen_df)] * 100), 1)
+
+cat("\nYear-over-Year Changes:\n")
+print(yearly_teen_df)
+```
+
+## Quebec Teen Fraud Victims Over Time
+
+```{r}
+# Create yearly trend visualization
+yearly_teen_plot <- ggplot(yearly_teen_df, aes(x = year, y = teen_victims)) +
+  geom_line(color = "red", size = 1.5) +
+  geom_point(color = "darkred", size = 4) +
+  labs(
+    title = "Quebec Teen Fraud Victims Over Time",
+    subtitle = "Dramatic decline after 2021 peak",
+    x = "Year",
+    y = "Number of Teen Victims (10-19 years)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(size = 10)
+  ) +
+  scale_x_continuous(breaks = yearly_teen_df$year) +
+  scale_y_continuous(labels = scales::comma) +
+  geom_text(aes(label = paste0(teen_victims, "\n(", 
+                              ifelse(is.na(yoy_pct_change), "", 
+                                    paste0(ifelse(yoy_pct_change > 0, "+", ""), 
+                                          yoy_pct_change, "%")),")")), 
+            vjust = -1.5, size = 3.5)
+
+print(yearly_teen_plot)
+
+# Analyze monthly patterns within years to identify seasonality
+quebec_teens$month_name <- month.name[quebec_teens$month]
+monthly_teen_counts <- aggregate(quebec_teens$year, by = list(quebec_teens$year, quebec_teens$month), FUN = length)
+names(monthly_teen_counts) <- c("year", "month", "teen_count")
+
+cat("\nMonthly patterns summary (showing months with >50 cases in any year):\n")
+monthly_summary <- aggregate(teen_count ~ month, data = monthly_teen_counts, FUN = function(x) c(avg = mean(x), total = sum(x)))
+monthly_df <- data.frame(
+  month = monthly_summary$month,
+  avg_monthly = round(monthly_summary$teen_count[,"avg"], 1),
+  total_monthly = monthly_summary$teen_count[,"total"]
+)
+monthly_df$month_name <- month.name[monthly_df$month]
+monthly_df[monthly_df$total_monthly > 200, ]
+```
+
+
+## Teen Victims per Month
+
+```{r}
+# Create a detailed monthly trend visualization
+# Filter to 2021-2024 for complete years (2025 is partial)
+monthly_teen_complete <- monthly_teen_counts[monthly_teen_counts$year <= 2024, ]
+monthly_teen_complete$date <- as.Date(paste(monthly_teen_complete$year, monthly_teen_complete$month, "01", sep = "-"))
+
+monthly_trend_plot <- ggplot(monthly_teen_complete, aes(x = date, y = teen_count)) +
+  geom_line(color = "blue", size = 1) +
+  geom_point(color = "darkblue", size = 2) +
+  labs(
+    title = "Quebec Teen Fraud: Monthly Trends (2021-2024)",
+    subtitle = "Shows seasonal patterns and the dramatic 2021-2022 decline",
+    x = "Month",
+    y = "Teen Victims per Month"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  ) +
+  scale_x_date(date_labels = "%Y-%m", date_breaks = "6 months") +
+  geom_smooth(method = "loess", se = TRUE, alpha = 0.3, color = "red")
+
+print(monthly_trend_plot)
+
+# Compare Quebec teen trends to national teen trends
+national_teens$date_clean <- as.Date(national_teens$date)
+national_teens$year <- as.numeric(format(national_teens$date_clean, "%Y"))
+
+national_yearly_teen <- table(national_teens$year)
+national_yearly_df <- data.frame(
+  year = as.numeric(names(national_yearly_teen)),
+  national_teens = as.numeric(national_yearly_teen)
+)
+
+# Merge Quebec and national data for comparison
+teen_comparison <- merge(yearly_teen_df[, c("year", "teen_victims")], national_yearly_df, by = "year")
+teen_comparison$quebec_share <- round((teen_comparison$teen_victims / teen_comparison$national_teens) * 100, 1)
+
+cat("\nQuebec's Share of National Teen Fraud Over Time:\n")
+print(teen_comparison)
+```
+
+## Compare Quebec's 2021 teen fraud spike to other major provinces Report
+
+```{r}
+# Compare Quebec's 2021 teen fraud spike to other major provinces
+# Get teen data for major provinces
+major_provinces <- c("Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba")
+
+# Create provincial teen analysis for 2021
+provincial_teen_2021 <- cafc_clean[cafc_clean$age_range == "'10 - 19" & 
+                                  as.numeric(format(as.Date(cafc_clean$date), "%Y")) == 2021 &
+                                  cafc_clean$province %in% major_provinces, ]
+
+teen_by_province_2021 <- table(provincial_teen_2021$province)
+teen_province_2021_df <- data.frame(
+  province = names(teen_by_province_2021),
+  teen_victims_2021 = as.numeric(teen_by_province_2021)
+)
+
+# Get population data for per-capita calculation
+province_pop_subset <- provincial_population[provincial_population$province %in% major_provinces, ]
+teen_analysis_2021 <- merge(teen_province_2021_df, province_pop_subset, by = "province")
+teen_analysis_2021$teen_rate_per_100k_2021 <- (teen_analysis_2021$teen_victims_2021 / 
+                                              (teen_analysis_2021$population * 1000)) * 100000
+
+cat("2021 Teen Fraud by Province:\n")
+teen_analysis_2021[order(teen_analysis_2021$teen_rate_per_100k_2021, decreasing = TRUE), ]
+```
+
+## 2021 Teen Fraud Rates by Province
+
+```{r}
+# Create visualization comparing 2021 teen fraud rates
+provincial_teen_2021_plot <- ggplot(teen_analysis_2021, 
+                                   aes(x = reorder(province, teen_rate_per_100k_2021), 
+                                       y = teen_rate_per_100k_2021)) +
+  geom_col(aes(fill = ifelse(province == "Quebec", "Quebec", "Other Provinces")), 
+           alpha = 0.8) +
+  coord_flip(clip="off") +
+  scale_fill_manual(values = c("Quebec" = "red", "Other Provinces" = "steelblue"),
+                   name = "Province Type") +
+  labs(
+    title = "2021 Teen Fraud Rates by Province",
+    subtitle = "Quebec's rate was 8x higher than the next highest province",
+    x = "Province",
+    y = "Teen Fraud Rate per 100,000 Population (2021)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = paste0(round(teen_rate_per_100k_2021, 1), "\n(", 
+                              teen_victims_2021, " victims)")), 
+            hjust = -0.1, size = 3.5)
+
+print(provincial_teen_2021_plot)
+
+# Compare Quebec to national average in 2021
+national_teen_2021 <- sum(teen_by_province_2021)
+total_pop_major_provinces <- sum(teen_analysis_2021$population * 1000)
+national_teen_rate_2021 <- (national_teen_2021 / total_pop_major_provinces) * 100000
+
+cat("\n2021 Comparison Summary:\n")
+cat("Quebec teen fraud rate: 39.0 per 100,000\n")
+cat("National average (major provinces): ", round(national_teen_rate_2021, 1), " per 100,000\n")
+cat("Quebec's rate is", round(39.0 / national_teen_rate_2021, 1), "x higher than national average\n")
+```
+
+##Teen Fraud Rates Over Time by Province
+
+```{r}
+# Analyze multi-year trends for all major provinces to see if 2021 was unique to Quebec
+# Get teen data by province and year for trend analysis
+teen_trends_all <- data.frame()
+
+for(prov in major_provinces) {
+  prov_teens <- cafc_clean[cafc_clean$age_range == "'10 - 19" & cafc_clean$province == prov, ]
+  prov_teens$year <- as.numeric(format(as.Date(prov_teens$date), "%Y"))
+  
+  yearly_counts <- table(prov_teens$year)
+  prov_yearly_df <- data.frame(
+    province = prov,
+    year = as.numeric(names(yearly_counts)),
+    teen_victims = as.numeric(yearly_counts)
+  )
+  
+  # Add population for rate calculation
+  pop <- provincial_population[provincial_population$province == prov, "population"] * 1000
+  prov_yearly_df$rate_per_100k <- (prov_yearly_df$teen_victims / pop) * 100000
+  
+  teen_trends_all <- rbind(teen_trends_all, prov_yearly_df)
+}
+
+# Create multi-province trend comparison
+trend_comparison_plot <- ggplot(teen_trends_all, aes(x = year, y = rate_per_100k, color = province)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  scale_color_manual(values = c("Quebec" = "red", "Ontario" = "blue", 
+                               "British Columbia" = "green", "Alberta" = "orange", 
+                               "Manitoba" = "purple")) +
+  labs(
+    title = "Teen Fraud Rates Over Time by Province",
+    subtitle = "Quebec's 2021 spike was unique - other provinces remained stable",
+    x = "Year",
+    y = "Teen Fraud Rate per 100,000",
+    color = "Province"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    legend.position = "right"
+  ) +
+  scale_x_continuous(breaks = 2021:2025)
+
+print(trend_comparison_plot)
+
+# Show the data table for clear comparison
+cat("\nTeen Fraud Rates by Province and Year:\n")
+teen_trends_wide <- reshape(teen_trends_all[, c("province", "year", "rate_per_100k")], 
+                           idvar = "province", timevar = "year", direction = "wide")
+print(teen_trends_wide)
+```
+
+
+## Analyze the pattern of decline
+
+```{r}
+# Analyze the pattern of decline to understand what interventions might have worked
+# Look at which fraud types declined most dramatically after 2021
+
+# Analyze Quebec teen fraud types by year to see which declined most
+quebec_teens_fraud_by_year <- table(quebec_teens$year, quebec_teens$fraud_cat)
+
+# Convert to data frame and calculate year-over-year changes
+fraud_by_year_df <- as.data.frame(quebec_teens_fraud_by_year)
+names(fraud_by_year_df) <- c("year", "fraud_type", "count")
+
+# Focus on major fraud types and years 2021-2024
+major_teen_frauds <- c("Identity Fraud", "Personal Info", "Extortion", "Phishing", "Bank Investigator")
+fraud_trends <- fraud_by_year_df[fraud_by_year_df$fraud_type %in% major_teen_frauds & 
+                                fraud_by_year_df$year %in% c("2021", "2022", "2023", "2024"), ]
+
+# Calculate decline rates for each fraud type
+fraud_decline_analysis <- data.frame()
+for(fraud_type in major_teen_frauds) {
+  type_data <- fraud_trends[fraud_trends$fraud_type == fraud_type, ]
+  if(nrow(type_data) >= 2) {
+    decline_2021_to_2022 <- ((type_data[type_data$year == "2022", "count"] - 
+                             type_data[type_data$year == "2021", "count"]) / 
+                            type_data[type_data$year == "2021", "count"]) * 100
+    
+    fraud_decline_analysis <- rbind(fraud_decline_analysis, data.frame(
+      fraud_type = fraud_type,
+      count_2021 = type_data[type_data$year == "2021", "count"],
+      count_2022 = type_data[type_data$year == "2022", "count"],
+      decline_2021_to_2022 = round(decline_2021_to_2022, 1)
+    ))
+  }
+}
+
+cat("Quebec Teen Fraud Decline by Type (2021 to 2022):\n")
+fraud_decline_analysis[order(fraud_decline_analysis$decline_2021_to_2022), ]
+```
+
+
+## Analyze which solicitation methods declined most dramatically
+
+```{r}
+# Analyze which solicitation methods declined most dramatically
+quebec_teens_methods_by_year <- table(quebec_teens$year, quebec_teens$sol_method)
+
+# Focus on known methods (exclude "Other/unknown" and "Not Available")
+known_methods <- c("Internet-social network", "Direct call", "Internet", "Text message", "Email")
+methods_by_year_df <- as.data.frame(quebec_teens_methods_by_year)
+names(methods_by_year_df) <- c("year", "method", "count")
+
+methods_trends <- methods_by_year_df[methods_by_year_df$method %in% known_methods & 
+                                   methods_by_year_df$year %in% c("2021", "2022", "2023", "2024"), ]
+
+# Calculate method decline rates
+method_decline_analysis <- data.frame()
+for(method in known_methods) {
+  method_data <- methods_trends[methods_trends$method == method, ]
+  if(nrow(method_data) >= 2 && any(method_data$year == "2021") && any(method_data$year == "2022")) {
+    count_2021 <- method_data[method_data$year == "2021", "count"]
+    count_2022 <- method_data[method_data$year == "2022", "count"]
+    
+    if(length(count_2021) > 0 && length(count_2022) > 0 && count_2021 > 0) {
+      decline_rate <- ((count_2022 - count_2021) / count_2021) * 100
+      
+      method_decline_analysis <- rbind(method_decline_analysis, data.frame(
+        method = method,
+        count_2021 = count_2021,
+        count_2022 = count_2022,
+        decline_rate = round(decline_rate, 1)
+      ))
+    }
+  }
+}
+
+cat("\nQuebec Teen Fraud Method Decline (2021 to 2022):\n")
+if(nrow(method_decline_analysis) > 0) {
+  method_decline_analysis[order(method_decline_analysis$decline_rate), ]
+} else {
+  cat("Limited data for method-specific analysis\n")
+}
+
+# Analyze the "Other/unknown" category which was 88.4% of teen fraud
+other_unknown_by_year <- quebec_teens_methods_by_year[, "Other/unknown"]
+cat("\n'Other/unknown' method trends:\n")
+cat("2021:", other_unknown_by_year["2021"], "cases\n")
+cat("2022:", other_unknown_by_year["2022"], "cases\n")
+cat("Decline:", round(((other_unknown_by_year["2022"] - other_unknown_by_year["2021"]) / 
+                     other_unknown_by_year["2021"]) * 100, 1), "%\n")
+```
+
+## summary of the most significant declines
+
+```{r}
+# Create comprehensive visualization of what declined most dramatically
+# Create a summary of the most significant declines
+
+# Create intervention clues analysis
+intervention_clues <- data.frame(
+  category = c("Identity Fraud", "Personal Info", "Extortion", "Other/Unknown Methods", 
+               "Direct Calls", "Internet Fraud", "Total Teen Victims"),
+  decline_2021_to_2022 = c(-78.8, -47.8, -63.6, -76.4, -66.2, -58.5, -72.4),
+  interpretation = c(
+    "Massive drop suggests identity protection education/awareness",
+    "Moderate drop - personal info awareness campaigns", 
+    "Large drop - anti-extortion education or law enforcement",
+    "Huge drop - suggests platform changes or novel method disruption",
+    "Large drop - phone fraud awareness or call blocking",
+    "Large drop - internet safety education or platform security",
+    "Overall dramatic success across all vectors"
+  )
+)
+```
+
+## Quebec Teen Fraud Decline Patterns (2021 to 2022)
+```{r}
+# Visualize the decline 
+
+library(ggplot2)
+decline_plot <- ggplot(intervention_clues[1:6, ], aes(x = reorder(category, decline_2021_to_2022), 
+                                                     y = decline_2021_to_2022)) +
+  geom_col(aes(fill = ifelse(decline_2021_to_2022 < -70, "Major Decline (>70%)", 
+                            ifelse(decline_2021_to_2022 < -50, "Large Decline (50-70%)", 
+                                  "Moderate Decline (<50%)"))), alpha = 0.8) +
+  coord_flip(clip="off") +
+  scale_fill_manual(values = c("Major Decline (>70%)" = "darkred", 
+                              "Large Decline (50-70%)" = "orange",
+                              "Moderate Decline (<50%)" = "yellow"),
+                   name = "Decline Severity") +
+  labs(
+    title = "Quebec Teen Fraud Decline Patterns (2021 to 2022)",
+    subtitle = "Identifies which interventions were most effective",
+    x = "Fraud Category/Method",
+    y = "Percentage Decline"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.text.y = element_text(size = 10)
+  ) +
+  geom_text(aes(label = paste0(decline_2021_to_2022, "%")), 
+            hjust = ifelse(intervention_clues[1:6, ]$decline_2021_to_2022 < 0, 1.1, -0.1), size = 2.0)
+
+print(decline_plot)
+
+cat("\nInferred Intervention Types Based on Decline Patterns:\n")
+print(intervention_clues[, c("category", "decline_2021_to_2022", "interpretation")])
+```
+

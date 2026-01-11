@@ -57,7 +57,10 @@ pathway <- here::here("posts","pyspark","cafc_quarterly_fraud_data_pipeline.py")
 # generate output of lines from script
 
 lines <- readLines(pathway, warn=FALSE)
-cat(lines, sep = "\n")
+
+#Uncomment next line for code source
+
+#cat(lines, sep = "\n")
 ```
 
 ### Required Libraries

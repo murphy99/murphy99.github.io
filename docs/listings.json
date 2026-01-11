@@ -2,10 +2,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/CAFC_2025Q3_Analysis/index.html",
       "/posts/pyspark/index.html",
       "/posts/LLM_Demo/index.html",
       "/posts/Shinylive/index.html",
-      "/posts/RSS_Reader/index.html"
+      "/posts/RSS_Reader/index.html",
+      "/posts/Welcome/index.html"
     ]
   },
   {
