@@ -43,4 +43,8 @@ posts/pyspark/u.data
 posts/test_gradio/
 welcome_yaml.txt
 posts/pyspark/34100140-eng.zip
-
+posts/RSS_Reader/index_ver*.qmd
+posts/RSS_Reader/index_ver*.html
+posts/RSS_Reader/arxiv_cache_bulk.rds
+posts/RSS_Reader/arxiv_cach.rds
+posts/arxiv/arxiv_cache_bulk.rds

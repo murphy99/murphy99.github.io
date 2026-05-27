@@ -27,7 +27,7 @@ website:
       - text: "Recent Pubs"
         menu:
           - text: "arXiv"
-            href: posts/RSS_Reader/Most_Recent_Papers.qmd
+            href: posts/arXiv/Recent_arxiv.qmd
       - text: "LLM Demos"
         menu:
           - text: "Dig into the One Big Beautiful (Bad) Bill"
@@ -50,7 +50,7 @@ format:
     theme: flatly
     footer: dark
     css: styles.css
-    code-fold: true
+    code-fold: false
     code-summary: "Show the code"
     
 #    include-in-header: gtm_code_head.html

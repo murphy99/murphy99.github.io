@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/arXiv/index.html",
       "/posts/CAFC_2025Q3_Analysis/index.html",
       "/posts/pyspark/index.html",
       "/posts/LLM_Demo/index.html",

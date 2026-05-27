@@ -1,0 +1,65 @@
+
+---
+title: "Recent arXiv Research Papers (Updated M-F)"
+format: html
+embed-resources: true
+draft: False
+---
+
+
+```{r setup, include=FALSE}
+
+source("RSS_functions.R")
+```
+
+
+
+```{r, include=TRUE, echo=FALSE}
+flag=0 #Set Error flag to False
+
+# Call functins in RSS_functions.R
+
+my_feed <- "https://rss.arxiv.org/rss/cs.LG"
+
+recent_records<-most_recent(my_feed)
+
+
+#print (result_output)
+
+# Sets flag = 1 when no records retrieved
+
+if (is.null(recent_records) || (length(recent_records) == 1 && is.na(recent_records))) {
+  flag <- 1
+  output <- cat("Sorry, no papers published today\n")
+  cat(output)
+  
+} else {
+  cat("Records Retrieved:", nrow(recent_records), "\n")
+  flag <- 0
+}
+
+
+
+```
+
+
+::: column-page
+
+```{r, echo=FALSE}
+if (!flag) {
+  DT::datatable(recent_records, filter = 'top', escape = FALSE, rownames = FALSE,
+    options = list(
+    search = list(regex = TRUE, caseInsensitive = TRUE),  
+    pageLength = 10,
+    lengthMenu = c(10, 25, 50, 100, 200),
+    autowidth = TRUE,
+   columnDefs = list(list(width = '80%', targets = list(2)))
+    )
+  )}
+```
+
+
+
+
+
+:::

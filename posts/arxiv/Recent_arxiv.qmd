@@ -1,0 +1,300 @@
+---
+title: "Recent arXiv Research Papers (Updated M-F)"
+format: html
+embed-resources: true
+draft: False
+params:
+  dev_mode: false
+execute: 
+  echo: false
+  warning: false
+  message: false
+---
+
+::: columns
+
+::: {.column width="30%"}
+
+
+:::
+
+
+::: {.column width="2%"}
+
+:::
+
+::: {.column width="100%"}
+
+
+
+:::
+:::
+
+
+
+
+
+
+```{r, echo=FALSE}
+
+# Use development mode parameter
+if (params$dev_mode) {
+ # cat("⚠️  DEVELOPMENT MODE - Using cache only\n")
+  
+  if (file.exists("arxiv_cache_bulk.rds")) {
+    all_records <- readRDS("arxiv_cache_bulk.rds")
+    flag <- 0
+  } else {
+    flag <- 1
+  }
+} else {
+  #cat("📡 PRODUCTION MODE\n")
+  # API code here
+#}
+
+# ============================================
+# Bulk load using API with smart retry logic
+# ============================================
+
+library(httr)
+library(xml2)
+
+#| warning: false
+#| message: false
+#| 
+cache_file <- "arxiv_cache_bulk.rds"
+
+end_date <- format(Sys.Date(), "%Y%m%d")
+start_date <- format(Sys.Date() - 30, "%Y%m%d")  # Last 30 days
+
+search_query <- paste0(
+  "(cat:cs.lg+OR+cat:cs.ai)+AND+submittedDate:[",
+  start_date, "0000+TO+",
+  end_date, "2359]"
+)
+
+
+all_records <- data.frame()
+
+# Fetch multiple pages with smart retry logic
+for (start in seq(0, 500, 50)) {
+  
+  cat("Fetching records", start, "to", start + 50, "...\n")
+  
+  api_url <- paste0(
+    "http://export.arxiv.org/api/query?search_query=",
+    URLencode(search_query),
+    "&start=", start,
+    "&max_results=50&sortBy=submittedDate&sortOrder=descending"
+  )
+  
+  # Long wait between requests
+  Sys.sleep(15)
+  
+  # Retry logic for 429 and 503 errors
+  max_retries <- 3
+  retry_count <- 0
+  response <- NULL
+  
+  while (retry_count < max_retries && is.null(response)) {
+    retry_count <- retry_count + 1
+    
+    tryCatch({
+      response <- GET(api_url, timeout(120))
+      
+      status <- status_code(response)
+      #cat("Status:", status, "\n")
+      
+      if (status == 200) {
+        # Success!
+        #cat("✓ Request successful\n")
+        
+      } else if (status == 429 || status == 503) {
+        # Get wait time from Retry-After header
+        retry_after <- headers(response)$`retry-after`
+        
+        if (!is.null(retry_after)) {
+          # Try to parse as seconds
+          wait_time <- as.numeric(retry_after)
+          
+          if (is.na(wait_time)) {
+            # If not a number, it might be an HTTP date
+            #cat("Retry-After header:", retry_after, "\n")
+            wait_time <- 120  # Default to 2 minutes
+          }
+        } else {
+          # No Retry-After header, use exponential backoff
+          wait_time <- 30 * (2 ^ (retry_count - 1))  # 30, 60, 120 seconds
+        }
+        
+        #cat("Rate limited (", status, "). Waiting", wait_time, "seconds...\n")
+        Sys.sleep(wait_time)
+        response <- NULL  # Reset to trigger retry
+        
+      } else {
+        cat("Error: Status", status, "\n")
+        response <- NULL
+      }
+      
+    }, error = function(e) {
+      cat("Request error:", conditionMessage(e), "\n")
+    })
+  }
+  
+  # Process response if successful
+  if (!is.null(response) && status_code(response) == 200) {
+    
+    tryCatch({
+      content <- content(response, as = "text")
+      xml_data <- read_xml(content)
+      
+      ns <- c(atom = "http://www.w3.org/2005/Atom",
+              arxiv = "http://arxiv.org/schemas/atom")
+      
+      entries <- xml_find_all(xml_data, "//atom:entry", ns = ns)
+      
+      if (length(entries) == 0) {
+        cat("No more records. Stopping.\n")
+        break
+      }
+      
+      
+      # Extract authors - collapse multiple authors per entry
+      authors <- sapply(entries, function(entry) {
+      author_names <- xml_text(xml_find_all(entry, "atom:author/atom:name", ns = ns))
+      paste(author_names, collapse = "; ")  # Join multiple authors with semicolon
+})
+
+      
+      batch <- data.frame(
+        title = xml_text(xml_find_all(entries, "atom:title", ns = ns)),
+        author = authors,
+        arxiv_id = sub("http://arxiv.org/abs/", "", 
+                       xml_text(xml_find_all(entries, "atom:id", ns = ns))),
+        primary_category = xml_attr(xml_find_all(entries, "arxiv:primary_category", ns = ns), "term"),
+        arxiv_url = xml_text(xml_find_all(entries, "atom:id", ns = ns)),
+        pdf_url = xml_attr(xml_find_all(entries, "atom:link[@title='pdf']", ns = ns), "href"),
+        published = xml_text(xml_find_all(entries, "atom:published", ns = ns)),
+        summary = xml_text(xml_find_all(entries, "atom:summary", ns = ns)),
+        stringsAsFactors = FALSE
+      )
+      
+      all_records <- rbind(all_records, batch)
+      cat("✓ Total records so far:", nrow(all_records), "\n\n")
+      
+    }, error = function(e) {
+      cat("Error parsing response:", conditionMessage(e), "\n")
+    })
+    
+  } else {
+    cat("Failed to get successful response after", max_retries, "retries. Stopping.\n")
+    break
+  }
+}
+
+# Filter and save
+if (nrow(all_records) > 0) {
+  #all_records <- all_records[all_records$primary_category == "cs.LG", ]
+  saveRDS(all_records, cache_file)
+  cat("\n✓ Bulk cache saved with", nrow(all_records), "records\n")
+} else {
+  cat("No records retrieved\n")
+}
+
+ # API code here
+}
+```
+
+
+
+
+```{r, echo=FALSE}
+flag <- 0
+if (!flag) {
+  # Create a display dataframe with hyperlinked URLs
+ #display_records <- recent_records
+  display_records <- all_records
+  
+  # Make the title clickable and bold
+  display_records$title <- paste0(
+    '<a href="', all_records$arxiv_url, '" target="_blank" style="text-decoration: none; color: #0066cc;"><strong>', 
+    all_records$title, 
+    '</strong></a>'
+  )
+  
+  # Create a styled tooltip for summary
+  display_records$summary_tooltip <- paste0(
+    '<span style="',
+    'cursor: help; ',
+    'border-bottom: 2px dotted #0066cc; ',
+    'color: #0066cc; ',
+    'font-weight: bold; ',
+    'padding: 2px 4px; ',
+    'border-radius: 3px; ',
+    'background-color: #f0f0f0;" ',
+    'title="', 
+    gsub('"', '&quot;', all_records$summary),
+    '">',
+    #'📄 Abstract',
+    'Abstract',
+    '</span>'
+  )
+  
+  # Style the category with a badge
+  display_records$primary_category <- paste0(
+    '<span style="',
+    'background-color: #28a745; ',
+    'color: white; ',
+    'padding: 4px 8px; ',
+    'border-radius: 3px; ',
+    'font-weight: bold; ',
+    'display: inline-block;">',
+    all_records$primary_category,
+    '</span>'
+  )
+  
+    
+  # Select and reorder columns
+  display_records <- display_records[, c("published","title", "author" , "primary_category", "summary", "summary_tooltip")]
+  
+  # Rename columns for display
+  colnames(display_records) <- c("Date","Title", "Author(s)", "Category", "Summary", "Abstract")
+  
+  DT::datatable(display_records, filter = 'top',
+    escape = FALSE, 
+    rownames = FALSE,
+    #caption = 'Most Recent and Searchable arXiv papers ',  
+    #caption = htmltools::tags$caption(
+      #style = 'caption-side: top; text-align: center; font-weight: bold;',
+      #'Most Recent arXiv Searchable Published Papers'
+    #),
+    options = list(
+    search = list(regex = TRUE, caseInsensitive = TRUE),  
+    pageLength = 10,
+    lengthMenu = c(10, 25, 50, 100, 200, 300, 500),
+    autoWidth = TRUE,
+    columnDefs = list(
+      list(width = '10%', targets = 0),  # Date
+      list(width = '35%', targets = 1),  # Title
+      list(width = '25%', targets = 2),   # author
+      list(width = '8%', targets = 3),   # Category
+      list(visible = FALSE, targets = 4),  # Summary (hidden but searchable)
+      list(width = '8%', targets = 5)  # Details (tooltip)
+    )
+    )
+  )
+}
+
+```
+
+
+
+
+:::{.column-page}
+
+
+
+
+
+
+
