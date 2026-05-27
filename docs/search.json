@@ -32,7 +32,7 @@
     "href": "index.html",
     "title": "GoData.ca",
     "section": "",
-    "text": "Recent arXiv Searchable Published Research Engine\n\n\n\n\n\n\n\n\nMay 23, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPer capita: Quebec teens most targeted by fraud in Canada\n\n\n\nCanadian Anti-Fraud Centre\n\nCAFC\n\nDatabot\n\nPosit\n\nPositron\n\nggplot2\n\n\n\n\n\n\n\n\n\nJan 11, 2026\n\n43 min\n\n\n\n\n\n\n\n\n\n\n\nData Pipelines with Pyspark\n\n\n\nPyspark\n\nPython\n\nR\n\nCAFC\n\nDownloads\n\n\n\n\n\n\n\n\n\nAug 15, 2025\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nEasily Build Customized LLMs\n\n\n\nPython\n\nOPENAI\n\nLLMs\n\nJupyter\n\nOBBBA\n\n\n\n\n\n\n\n\n\nJul 15, 2025\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\nConverting Shiny Apps to ShinyLive\n\n\n\nR\n\nShinylive\n\nKMeans\n\n\n\n\n\n\n\n\n\nJun 30, 2025\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nRSS Feeds\n\n\n\nR\n\nJavascript\n\ntidyRSS\n\n\n\n\n\n\n\n\n\nJun 15, 2025\n\n2 min\n\n\n\n\nNo matching items"
+    "text": "Recent arXiv Searchable Published Research Engine\n\n\n\n\n\n\n\n\nMay 23, 2026\n\n8 min\n\n\n\n\n\n\n\n\n\n\n\nPer capita: Quebec teens most targeted by fraud in Canada\n\n\n\nCanadian Anti-Fraud Centre\n\nCAFC\n\nDatabot\n\nPosit\n\nPositron\n\nggplot2\n\n\n\n\n\n\n\n\n\nJan 11, 2026\n\n43 min\n\n\n\n\n\n\n\n\n\n\n\nData Pipelines with Pyspark\n\n\n\nPyspark\n\nPython\n\nR\n\nCAFC\n\nDownloads\n\n\n\n\n\n\n\n\n\nAug 15, 2025\n\n4 min\n\n\n\n\n\n\n\n\n\n\n\nEasily Build Customized LLMs\n\n\n\nPython\n\nOPENAI\n\nLLMs\n\nJupyter\n\nOBBBA\n\n\n\n\n\n\n\n\n\nJul 15, 2025\n\n2 min\n\n\n\n\n\n\n\n\n\n\n\nConverting Shiny Apps to ShinyLive\n\n\n\nR\n\nShinylive\n\nKMeans\n\n\n\n\n\n\n\n\n\nJun 30, 2025\n\n4 min\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/RSS_Reader/index0.html",
@@ -515,6 +515,6 @@
     "href": "posts/arXiv/Recent_arxiv.html",
     "title": "Recent arXiv Research Papers (Updated M-F)",
     "section": "",
-    "text": "Fetching records 0 to 50 ...\n✓ Total records so far: 50 \n\nFetching records 50 to 100 ...\n✓ Total records so far: 100 \n\nFetching records 100 to 150 ...\n✓ Total records so far: 150 \n\nFetching records 150 to 200 ...\n✓ Total records so far: 200 \n\nFetching records 200 to 250 ...\n✓ Total records so far: 250 \n\nFetching records 250 to 300 ...\n✓ Total records so far: 300 \n\nFetching records 300 to 350 ...\n✓ Total records so far: 350 \n\nFetching records 350 to 400 ...\n✓ Total records so far: 400 \n\nFetching records 400 to 450 ...\n✓ Total records so far: 450 \n\nFetching records 450 to 500 ...\n✓ Total records so far: 500 \n\nFetching records 500 to 550 ...\n✓ Total records so far: 550 \n\n\n✓ Bulk cache saved with 550 records"
+    "text": "Fetching records 0 to 50 ...\n✓ Total records so far: 50 \n\nFetching records 50 to 100 ...\n✓ Total records so far: 100 \n\nFetching records 100 to 150 ...\n✓ Total records so far: 150 \n\nFetching records 150 to 200 ...\n✓ Total records so far: 200 \n\nFetching records 200 to 250 ...\nFailed to get successful response after 3 retries. Stopping.\n\n✓ Bulk cache saved with 200 records"
   }
 ]
